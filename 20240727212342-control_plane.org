@@ -1,0 +1,58 @@
+:PROPERTIES:
+:ID:       4B823ACB-0531-4B50-89D6-ABD7908F249F
+:END:
+#+title: Control Plane
+#+tags: [[id:FBE26796-7C93-4221-9192-CD1079C2432B][Network Layer]]
+
+* Table of Contents :toc:
+- [[#the-control-plane][The Control Plane]]
+  - [[#modeling-the-network-as-a-graph][Modeling the Network as a Graph]]
+  - [[#static-routing][Static Routing]]
+  - [[#dynamic-routing-algorithms][Dynamic Routing Algorithms]]
+
+* The Control Plane
+
+The control plane is to maintain and build routing tables. This done via a number of algorithms and protocols.
+
+** Modeling the Network as a Graph
+
+A network can be modeled as a *directed weighted graph*. Each router is a node and the links between routers are the edges in the graph. A positive weight is associated with each directed edge.
+
+Routers use the shortest path to reach each destination. In practice, different types of weights can be associated with each directed edge:
+- *Unit weight*
+  - If all links have a unit weight, shortest path routing prefers the paths with the least number of intermediate routers.
+- Weight *proportional to the propagation delay*
+  - Shortest path routing algorithms will prefer paths with the smallest propagation delay.
+  - *Propagation delay* is the amount of time it takes for a signal to travel from the sender to the receiver.
+- Weight *proportional to the available bandwidth*
+  - Shortest path routing algorithms will prefer paths with higher bandwidth.
+
+** Static Routing
+
+Manually computed routes are manually added to the routing table. This is useful if there are a *few outgoing links* from your network.
+
+*** Disadvantages
+
+- It doesn't adapt to the evolution of the network and hence *doesn't scale well*.
+  - If a new route or link is added, all routing tables must be recomputed.
+- When a link or router fails, the routing tables must be updated as well.
+
+** Dynamic Routing Algorithms
+
+Apapt routing tables with changes in the network. There are two main classes of dynamic routing algorithms: *distance vector* and *link-state routing algorithms.*
+
+*** Distance Vector Routing
+
+A simple distributed routing protocol. It allows routers to discover the destinations reachable inside the network as well as the shortest path to reach these destinations.
+
+The shortest path is computed based on the *cost* that is associated with each link.
+
+Routers running distance vector algorithms *share summarized reachability information with their neighbors.*
+
+*** Link-State Routing
+
+Works in two phases:
+- *Reliable flooding*
+  - Builds a complete picture of the whole network befor computing the shortest path to all destinations.
+- *Route calculation*
+  - Based on the learned topology, each router is able to compute its routing table by using the shortest path computation such as *Dijkstra's Algorithm.*

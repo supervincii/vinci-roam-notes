@@ -4,6 +4,16 @@
 #+title: Network Layer
 #+tags: [[id:E59543ED-E1EB-4206-9A38-0F5DE15DB819][TCP/IP Model]]
 
+* Table of Contents :toc:
+- [[#main-objectives--key-responsibilities][Main Objectives & Key Responsibilities]]
+  - [[#limitation-of-the-underlying-data-link-layer][Limitation of the Underlying Data Link Layer]]
+  - [[#principles-of-the-network-layer][Principles of the Network Layer]]
+  - [[#network-layer-services][Network Layer Services]]
+- [[#organization-of-the-network-layer][Organization of the Network Layer]]
+  - [[#datagram-organization][Datagram Organization]]
+  - [[#virtual-circuit-organization][Virtual Circuit Organization]]
+  - [[#virtual-circuit-organization-vs-datagram-organization][Virtual Circuit Organization vs Datagram Organization]]
+
 * Main Objectives & Key Responsibilities
 
 The main objective of the network layer is to allow end systems to exchange information through *routers*. The unit of information in the network layer is called a *packet*.
@@ -22,12 +32,12 @@ The network layer must cope with this /heterogeneity/ of the data link layer.
 
 1. Each network layer entity is identified by a *network layer address*. It is indenpendent of the data link addresses that the entity may use.
 2. Service provided by the network layer *does not depend* on the service or the internal organization of the *underlying data link layers*. This independence ensures:
-   1. *Adaptability*: The network layer can be used by hosts attached to different kinds of data link layers.
-   2. *Independent Evolution* for both the network layer and the data link layer.
-   3. *Forward Compatibility*: The network layer can be easily adapted to new data link layers when a new type is invented.
+   - *Adaptability*: The network layer can be used by hosts attached to different kinds of data link layers.
+   - *Independent Evolution* for both the network layer and the data link layer.
+   - *Forward Compatibility*: The network layer can be easily adapted to new data link layers when a new type is invented.
 3. Conceptually divided into two planes:
-   1. The *data plane* which contains the the protocols and mechanisms that allow hosts and routers to exchange packets.
-   2. The *control plane* which contains the protocols and mechanisms that enable routers to efficiently learn how to forward packets toward their final destination.
+   - The *data plane* which contains the the protocols and mechanisms that allow hosts and routers to exchange packets.
+   - The *control plane* which contains the protocols and mechanisms that enable routers to efficiently learn how to forward packets toward their final destination.
 
 ** Network Layer Services
 
@@ -46,3 +56,54 @@ Datagram organization is *connectionless* and hence each packet contains:
 - The network layer address of the destination host.
 - The network layer address of the sender.
 - The information to be sent.
+
+Each packet travels through different routers which contains a forwarding table on where to send the packets so that it gets delivered to its desired destination.
+
+*** Forwading Tables
+
+Routers use /hop-by-hop/ forwarding in the datagram organization. This means that when a router receives a packet that is not destined to itself, it looks up the destination address of the packet in its *forwarding table*.
+
+#+begin_quote
+A *forwading table* is a *data structure* that maps each destination address to the device. Then, a packet must be forwarded for it to reach its final destination.
+#+end_quote
+
+Forwarding tables must:
+- Allow any host in the network to reach any other host. This implies that each router must know a route towards each destination.
+- The path composed from the information stored in the forwarding tables must not contain loops. This would make some destinations unreachable.
+
+The *data plane* contains all the protocols and algorithms that are used by hosts and routers to create and process the packets that contain the user data.
+
+The *control plane* contains all the protocols and mechanisms that are used to compute, install, and maintain forwarding tables on the routers.
+
+**** Routing Tables vs Forwarding Tables
+
+*Routing tables* may have multiple paths for one source and destination pair.
+
+*Forwarding tables* is a subset of a routing table and will only have *one entry for the path for the source and destination pair*. It is usually optimized for storage and lookup.
+
+** Virtual Circuit Organization
+
+Inspired by the organization of telephone networks.
+
+In virtual circuits, all hosts are *identified with a network layer address*. A host however MUST explicitly request the establishment of a virtual circuit before being able to send packets to the destination host. This request is processed by the *control plane*, which installs state to create the virtual circuit between the source and the destination through intermediate routers.
+
+This organization is *connection-oriented* which means that system resources are reserved for every connection.
+
+It has been mainly used in public networks.
+
+** Virtual Circuit Organization vs Datagram Organization
+
+*** Advantages of Datagram Organization
+
+- Hosts can easily send packets to any number of destinations.
+  - Virtual circuit organization requires the establishment of a virtual circuit before the transmission of a data packet.
+  - This can cause high overhead for hosts that exchange small amounts of data.
+- It is resilient.
+  - If a virtual circuit organization fails, it has to go through the connection establishment phase again.
+  - Each packet in the datagram organization can be routed independently of each other so intermediate routers can divert around failures.
+
+*** Advantages of The Virtual Circuit Organization
+
+- Forwarding algorithm used by routers is simpler.
+- Utilization of virtual circuits may allow the load to be *better spread through the network*.
+- Since packets follow a dedicated path, they *reach the destination in the order they were sent*.

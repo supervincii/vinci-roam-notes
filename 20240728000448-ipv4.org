@@ -1,0 +1,51 @@
+:PROPERTIES:
+:ID:       8C39A07E-2B4A-422E-90B8-211448BECABB
+:END:
+#+title: IPv4
+#+tags: [[id:FBE26796-7C93-4221-9192-CD1079C2432B][Network Layer]]
+
+* Table of Contents :toc:
+- [[#introduction][Introduction]]
+- [[#ip-version-4][IP Version 4]]
+- [[#multihoming][Multihoming]]
+- [[#address-assignment][Address Assignment]]
+  - [[#subnetting][Subnetting]]
+
+* Introduction
+
+The *Internet Protocol (IP)* is the network layer protocol of the TCP/IP suite. The flexibility of IP and its ability to use various types of underlying data link layer technologies is one of its key advantages.
+
+* IP Version 4
+
+The design of IPv4 is based on the following assumptions:
+- IP should provide an unreliable connectionless service.
+- IP operates with the datagram transmission mode.
+- IP hosts must have fixed size 32-bit addresses.
+- IP must be compatible with a variety of data link layers.
+- IP hosts should be able to exchange variable-data length packets.
+
+IPv4 addresses are written as *32 bit numbers in dotted decimal format*, such as a sequence of four integers separated by dots (~1.2.3.4~). Every decimal in the IP address represents eight bits.
+
+* Multihoming
+
+IPv4 addresses are used to identify an *interface on a router* or an *interface on a host*.
+
+A router has thus as many IPv4 addresses as the number of interfaces that it has in the data link layer. With the growth of wireless, more and more hosts have several data link layer interfaces (for example, an Ethernet interface and a WiFi interface). These hosts are said to be *mulithomed*. A multihomed host with two interfaces has thus two IPv4 addresses.
+
+* Address Assignment
+
+Appropriate network layer address allocation is key to the efficiency and scalability of the Internet.
+
+A *naive allocation scheme* is to provide an IPv4 address to each host when the host is attached to the Internet on a first come, first serve basis. This however would force all routers to maintain a specific route to a billion or more hosts on the Internet which is *not scalable*.
+
+It is important to minimize the number of routes that are stored on each router.
+
+** Subnetting
+
+One solution is that routers only maintain routes towards *blocks of addresses* and not towards individual hosts. These blocks of addresses are assigned to ISPs where they assign *sub blocks* of the assigned address space in a hierarchical manner. *These sub blocks of IP addresses are called subnets.*
+
+A typical subnet groups all the hosts that are part of the same enterprise. An enterprise network is usually composed of several LANs interconnected by routes. A small block of addresses from the enterprise's block is usually *assigned to each LAN*. The address is composed of two parts:
+1. A *subnetwork identifier* composed of the high order bits of the address.
+2. A *host identifier* encoded in the lower order bits of the address.
+
+
