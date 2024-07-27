@@ -1,0 +1,50 @@
+:PROPERTIES:
+:ID:       50802F75-82CF-400E-B644-5451617E2DD3
+:END:
+#+title: AWS Accounts
+#+tags: [[id:CCF0A997-5D16-4F49-A032-1A1FADF9B505][Developer Associate]]
+
+* AWS Accounts Introduction
+AWS accounts is a *container for identities (users) and resources. It can contain the impact of errors or exploits.
+
+When creating an account, the following is needed:
+- Name
+- Unique email address
+- Credit card information
+
+Every AWS account has an *Account Root User* that has full control over that specific AWS account and any resource created inside it. This root user *cannot be restricted*.
+
+AWS accounts can also create *additional* identites inside an AWS account which can be restricted with a service called [[id:138A4A8A-2F4F-4F4A-B77C-E699AAE59213][IAM]]. These additional identities starts of with no permissions.
+
+By default, all access to an AWS account & resources is denied except for the root user.
+
+External access can be granted as long as it is explicitly stated.
+
+* Creating multiple AWS accounts with the same email
+
+There is a way to create multiple AWS accounts with the same email with *Gmail*. Other email providers may or may not have this capability. The trick is to add the ~+~ symbol after the username of the email address.
+
+** Example
+
+#+begin_src
+  testemail+AWSAccount1@gmail.com
+  testemail+AWSAccount2@gmail.com
+  testemail+AWSAccount3@gmail.com
+#+end_src
+
+All the email address above point to the same email which is ~testemail@gmail.com~. It is important to note that even if it all of the specified email addresses point to the same email, these are all unique email addresses, available to be used to create a new AWS account.
+
+* Multi Factor Authentication
+
+MFA is implemented within AWS to improve security of accounts/identities.
+
+** Factors
+
+Factors are different pieces of evidence which prove identity. There are 4 common factors to log in to any application namely:
+
+- Knowledge: Something that you know such as *usernames & passwords*.
+- Possession: Something that you have (physically) which includes bank card or an MFA device/app.
+- Inherent: Something that you are which most likely are biometric. So fingerprints, voice, face, or iris.
+- Location: This can be either a *physical location* or the type of network you are currently logged in to.
+
+More factors means greater security & harder to fake the identity.

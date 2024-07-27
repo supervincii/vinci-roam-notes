@@ -1,0 +1,48 @@
+:PROPERTIES:
+:ID:       FBE26796-7C93-4221-9192-CD1079C2432B
+:END:
+#+title: Network Layer
+#+tags: [[id:E59543ED-E1EB-4206-9A38-0F5DE15DB819][TCP/IP Model]]
+
+* Main Objectives & Key Responsibilities
+
+The main objective of the network layer is to allow end systems to exchange information through *routers*. The unit of information in the network layer is called a *packet*.
+
+** Limitation of the Underlying Data Link Layer
+
+Messages at the data link layer are called *frames*.
+
+1. Every data link layer technology has a limit on maximum frame size.
+2. Most of them use a different maximum frame size.
+3. Each interface on an end system in the data link layer has a link layer address. This means that the link layer has to have an addressing system of its own.
+
+The network layer must cope with this /heterogeneity/ of the data link layer.
+
+** Principles of the Network Layer
+
+1. Each network layer entity is identified by a *network layer address*. It is indenpendent of the data link addresses that the entity may use.
+2. Service provided by the network layer *does not depend* on the service or the internal organization of the *underlying data link layers*. This independence ensures:
+   1. *Adaptability*: The network layer can be used by hosts attached to different kinds of data link layers.
+   2. *Independent Evolution* for both the network layer and the data link layer.
+   3. *Forward Compatibility*: The network layer can be easily adapted to new data link layers when a new type is invented.
+3. Conceptually divided into two planes:
+   1. The *data plane* which contains the the protocols and mechanisms that allow hosts and routers to exchange packets.
+   2. The *control plane* which contains the protocols and mechanisms that enable routers to efficiently learn how to forward packets toward their final destination.
+
+** Network Layer Services
+
+- An unreliable *connectionless* service which does not ensure message delivery and involves no established connections.
+- A *connection-oriented* reliable, or unreliable, service, which establish connections and may or may not ensure that messages are delivered.
+
+Most networks nowadays use an unreliable connectionless service at the network layer.
+
+* Organization of the Network Layer
+
+There are two possible internal organizations of the network layer: *datagram* and *virtual circuits*.
+
+** Datagram Organization
+
+Datagram organization is *connectionless* and hence each packet contains:
+- The network layer address of the destination host.
+- The network layer address of the sender.
+- The information to be sent.
