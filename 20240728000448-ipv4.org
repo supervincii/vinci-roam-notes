@@ -10,6 +10,10 @@
 - [[#multihoming][Multihoming]]
 - [[#address-assignment][Address Assignment]]
   - [[#subnetting][Subnetting]]
+  - [[#address-classes][Address Classes]]
+- [[#address-allocation][Address Allocation]]
+  - [[#classless-interdomain-routing][Classless Interdomain Routing]]
+  - [[#special-ipv4-addresses][Special IPv4 Addresses]]
 
 * Introduction
 
@@ -48,4 +52,71 @@ A typical subnet groups all the hosts that are part of the same enterprise. An e
 1. A *subnetwork identifier* composed of the high order bits of the address.
 2. A *host identifier* encoded in the lower order bits of the address.
 
+Example:
+#+begin_src 
+  10001010001100000001101 000000001
+#+end_src
 
+The bits before the space is the *subnetwork ID* and the bits after the space is the *host ID*.
+
+** Address Classes
+
+When a router needs to forward a packet, it must know the subnet of the destination address to be able to consult its routing table to forward the packet. There are three definitions of classes of addresses.
+
+| *Class* | *High-order bits* | *Length of subnet id* | *Number of networks* | *Addresses per network* |
+|---------+-------------------+-----------------------+----------------------+-------------------------|
+| Class A |                 0 | 8 bits                | $128(2^7)$           | $16,777,216(2^{24})$    |
+| Class B |                10 | 16 bits               | $16,384(2^{14})$     | $65,536(2^{16})$        |
+| Class C |               110 | 24 bits               | $2,097,152(2^{21})$  | $256(2^8)$              |
+
+In this *classful address scheme*, the range of IP addresses in each class are as follows:
+- Class A: ~0.0.0.0~ to ~127.255.255.255~
+- Class B: ~128.0.0.0~ to ~191.255.255.255~
+- Class C: ~192.0.0.0~ to ~223.255.255.255~
+- Class D: ~224.0.0.0~ to ~239.255.255.255~
+- Class E: ~240.0.0.0~ to ~255.255.255.255~
+
+Class D IP addresses are used for *multicast* whereas Class E IP addresses are *reserved* and can't be used on the Internet. Classes A, B, and C are the ones used for regular purposes.
+
+*** Subnet Masks
+
+Every network that falls into one of these classes has a fixed number of bits in a network to identify the network itself. The subnet mask "masks" the network part of the IP address and leaves the host part open.
+
+For example, a subnet mask of a class C address could be ~203.128.22.0~ where the first 3 octets represent the subnet mask and the last octet can be used to identify hosts within this network. ~203.129.22.10~ can be one machine in this network.
+
+The reason why the first 3 octets in a class C address represent the subnet mask is that it is the length of the *subnet ID* for a class C address. Remember that an octet represents 8 bits, and for 24 bits in a class C address to represent the subnet ID is the first 3 octets in the address.
+
+*** Network Address
+
+It is just the address with the host bits set to ~0~. So ~203.128.22.0~ is the network address. It is just used for forwarding table entries.
+
+*** Broadcast Address
+
+Address where the host bits are all set to one. It is used to broadcast a packet to all devices in a network. In this case, ~203.128.22.255~ is the broadcast address.
+
+*** Default Subnet Masks
+
+| *Class* | *Default Subnet Mask* |
+|---------+-----------------------|
+| Class A |             255.0.0.0 |
+| Class B |           255.255.0.0 |
+| Class C |         255.255.255.0 |
+
+*** Variable-Length Subnets
+
+With variable-length subnets, the subnet identifier can be any size from 1 to 31 bits. It allows operators to use a subnet that better matches the number of expected hosts that will use the subnet.
+
+A subnet identifier or IPv4 prefix is usually represented as *A.B.C.D/p* where *A.B.C.D is the network address* and *p is the length of the subnet identifier bits*.
+
+For example, ~10.0.0.0/30~ allows for *4 addresses* in total. The calculation for this is $2^n$ where ~n~ is the number of bits available for the host address. In this case ~n = 2(32 total bits - 30 bits for the network) = 2 bits for the host~. The lowest address is ~10.0.0.0~ as the *network address*, followed by ~10.0.0.1~ and ~10.0.0.2~ for the useable IP address, and finally ~10.0.0.3~ as the *broadcast address.
+
+* Address Allocation
+
+** [[id:11CA590B-F567-44FD-BA9C-C431540ED954][Classless Interdomain Routing]]
+
+** Special IPv4 Addresses
+
+- ~0.0.0.0/8~: Reserved for self identification.
+- ~127.0.0.0/8~: Reserved for *loopback addresses*.
+- ~10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16~: Reserved for private networks that are not directly attached to the Internet. These are often called *private addresses*.
+- ~169.254.0.0/16~: Used for local link addresses. Some hosts use an address in this block when they're connected to a network that does not allocate addresses as expected.

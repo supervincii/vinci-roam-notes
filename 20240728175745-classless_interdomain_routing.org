@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       11CA590B-F567-44FD-BA9C-C431540ED954
+:END:
+#+title: Classless Interdomain Routing
+
+* CIDR
+
+CIDR is an architecture that allows IP routing to *scale better* than class-based architecture. It contains *three* important modifications over class-based architecture.
+
+1. IP address classes are deprecated. All IP equipment must use and support *variable-length subnets*.
+2. IP address blocks are no longer allocated in a first come, first serve basis. CIDR now introduces a *hierarchal address allocation scheme.*
+3. IP routers must use the *longest-prefix match* when they look up a destination address in their forwarding table.
+
+* Who Allocates What?
+
+Address blocks are allocated by *Regional IP Registries (RIR)* in an aggregatable manner. A RIR is reponsible for a large block of addresses and a region.
+
+RIR allocates smaller address blocks from its large block to ISPs, who then allocates smaller address blocks to their customers.
+
+* Why CIDR?
+
+The main advantage of this hierarchical address block allocation is that it allows routers to maintain fewer routes.
+
+* Longest Prefix Match
+
+Imagine an organization that wants to be able to connect to 2 or more ISPs. That organization's network is then said to be /multihomed/. With a multihomed network, routers in the general Internet would have *two routes* towards to the organization's network.
+
+When a router knows several routes towards the same destination, it must forward packets along the route with the *longest prefix length*. Consider the following example:
+- Destination IP address: ~193.191.245.88~ in binary is ~11000001.10111111.11110101.01011000~.
+- ISP A address: ~193.190.0.0~ in binary is ~11000001.10111110.00000000.00000000~.
+- ISP B address: ~193.191.244.0~ in binary is ~11000001.10111111.11110100.00000000~.
+- ~193.191.245.88~ & ~193.190.0.0~ have a *15 bit matching prefix*.
+- ~193.191.245.88~ & ~193.191.244.0~ have a *23 bit matching prefix*.
+- In the case of ~193.191.245.88~, the route that will be taken will be via ISP B.
+
+* Classless Interdomain Routing vs Variable-Length Subnets
+
+Variable-length subnets steal bits from the host portion of the IP address. Classless interdomain routing also allows aggregation of smaller subnets into larger ones by making less specific subnet masks. For example, ~190.10.1.0/24~, ~190.10.2.0/24~, ~190.10.3.0/24~, and ~190.10.4.0/24~ can be summarized into ~190.10.0.0/24~ which reduces the number of entries that a router advertises.
+
+Variable-length subnets default subnet mask of the classes is *strictly extended* whereas in CIDR, classes do not exist at all. So the 'default' length can be *extended or reduced*.
+
+Variable-length subnets are used if someone needs fewer addresses generally while CIDR is for reducing routing table entries.
