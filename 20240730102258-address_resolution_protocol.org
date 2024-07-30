@@ -1,0 +1,44 @@
+:PROPERTIES:
+:ID:       0C4B8A73-598A-46CF-9123-1A4AA083F39E
+:END:
+#+title: Address Resolution Protocol
+#+tags: [[id:FBE26796-7C93-4221-9192-CD1079C2432B][Network Layer]]
+
+* Table of Contents :toc:
+- [[#introduction-to-arp][Introduction to ARP]]
+  - [[#how-arp-works][How ARP Works]]
+
+* Introduction to ARP
+
+End hosts use IP addresses to communicate with each other, but the underlying data link layer uses its own naming schemes. In order to get data to a host, a mechanism for converting IP addresses to the underlying data link layer address is needed. This means that all sending hosts *must know the data link layer address of their destination hosts* in order to send them a packet.
+
+Manual configuration of the data link address of each host does not scale well so hosts and routers must be able to automatically obtain the data link layer address corresponding to any IPv4 address on the same LAN. This is the objective of the *Address Resolution Protocol*. It is a data link layer protocol that relies on the ability of the data link layer service to broadcast a frame to all devices attached to the same LAN.
+
+** How ARP Works
+
+Assuming we have the following in a LAN setup:
+- Host A
+  - IP: ~10.0.1.22/24~
+  - Data Link Address: A
+- Host B
+  - IP: ~10.0.1.11/24~
+  - Data Link Address: E
+- Host C
+  - IP: ~10.0.1.8/24~
+  - Data Link Address: C
+- Host D
+  - IP: ~10.0.1.9/24~
+  - Data Link Address: B
+
+With the following above, the process for ARP is as follows:
+- Assume Host A needs to send an IPv4 packet to Host C. To do so, A must find the data link layer address that is attached to C.
+- Each IPv4 host maintains an *ARP cache* that contains all mappings between IPv4 addresses and data link layer addresses it knows.
+- The sender (A), first consults its ARP cache. As the cache does not contain the requested mapping, *the sender sends a broadcast ARP query frame on the LAN*.
+- The frame contains:
+  - The *data link layer address* of the sender.
+  - The *IPv4 address of the destination*.
+- This broadcast frame is received by all devices on the LAN. Every host receives the ARP query and inserts an entry for the sender's IP address and the data link layer address into their ARP cache.
+- Only the host that owns the requested IPv4 address replies by returning a /unicast ARP reply frame/ with the requested mapping.
+- Upon receiving the reply, the sender updates its ARP cache and sends the IPv4 packet by using the data link layer service.
+
+To summarize, the sender sends a broadcast ARP query frame which all the hosts on that LAN receive. Each host inserts an entry from that query in their ARP cache. The host the requested the IPv4 address replies with an ARP reply frame with the requested mapping. Upon receiving that reply, the sender updates its cache and sends the packet using the data link layer service.

@@ -14,6 +14,12 @@
 - [[#address-allocation][Address Allocation]]
   - [[#classless-interdomain-routing][Classless Interdomain Routing]]
   - [[#special-ipv4-addresses][Special IPv4 Addresses]]
+- [[#ipv4-packets][IPv4 Packets]]
+  - [[#packet-header-fields][Packet Header Fields]]
+  - [[#handling-forwarding-loops-with-ttl][Handling Forwarding Loops with TTL]]
+- [[#packet-fragmentation][Packet Fragmentation]]
+  - [[#how-fragmentation-works][How Fragmentation Works]]
+  - [[#how-reassembly-works][How Reassembly Works]]
 
 * Introduction
 
@@ -120,3 +126,116 @@ For example, ~10.0.0.0/30~ allows for *4 addresses* in total. The calculation fo
 - ~127.0.0.0/8~: Reserved for *loopback addresses*.
 - ~10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16~: Reserved for private networks that are not directly attached to the Internet. These are often called *private addresses*.
 - ~169.254.0.0/16~: Used for local link addresses. Some hosts use an address in this block when they're connected to a network that does not allocate addresses as expected.
+
+* IPv4 Packets
+
+All IPv4 packets use a 20 byte header. Some contains an optional header extension.
+
+** Packet Header Fields
+
+*** Version
+- 4 bits
+- Indicates the version of the IP used to build the header.
+- Using this field allows the network layer protocol to evolve.
+
+*** IP Header Length (IHL)
+- 4 bits
+- Indicates the length of the IP header in 32-bit words.
+- Allows IPv4 to use options if required.
+- The whole header cannot be longer than 64 bytes.
+
+*** DS Field
+- 8 bits
+- Used for quality of service.
+
+*** Length Field
+- 16 bits
+- Indicates the total length of the IPv4 packet in bytes.
+- IPv4 packet cannot be longer than 65535 bytes.
+
+*** Identification
+- 16 bits
+- Identification number user for reassembling and fragmenting a packet.
+
+*** Flags
+- 3 bits
+
+*** Fragment Offset
+- 13 bits
+- Useful for reassembling a packet from its fragments.
+
+*** Time to Live
+- 8 bits
+- Decremented at each *hop*.
+- When it becomes ~0~, the packet is considered to be in the network for too long and is *dropped*.
+- The message is then sent back to the packet's source.
+
+*** Protocol Field
+- 8 bits
+- Indicates the transport layer protocol that must process the packet's payload at the destination.
+- Common values for this field are ~6~ for TCP and ~17~ for UDP.
+
+*** Checksum
+- 16 bits
+- Protects the IPv4 header against transmission errors.
+
+*** Source Address Field
+- 32 bits
+- Contains the IPv4 address of the source host.
+
+*** Destination Address Field
+- 32 bits
+- Contains the IPv4 address of the destination host.
+
+*** Options
+
+The options is not used very often. It is generally used to test out experimental features.
+
+*** IP Data
+
+This is the *payload*. It is not part of the checksum.
+
+** Handling Forwarding Loops with TTL
+
+TTL or *Time To Live* is an 8 bit field in an IPv4 packet header. This field is used by IPv4 to avoid the risk of having an IPv4 packet caught in an infinite loop due to a transient or permanent error in routing tables.
+
+The TTL field ensures that even if there are forwarding loops in the network, packets will not loop forever.
+
+* Packet Fragmentation
+
+Although IPv4 packets can be as big as 64kb, very few data link layer technologies can send a 64kb IPv4 packet inside a frame. To solve this problem, IPv4 includes a *packet fragmentation and reassembly mechanism* in both host and intermediate routers.
+
+** How Fragmentation Works
+
+The IPv4 fragmentation mechanism relies on four fields of the IPv4 header:
+- Length
+- Identification
+- Flags
+  - More fragments: Indicates that more fragments are coming. It will be set in all fragments except the last one.
+  - Don't Fragment (DF): When this flag is set, it indicates that the packet cannot be fragmented.
+- Fragment Offset
+
+*** IPv4 Basic Fragmentation Operation
+
+- A large fragment is fragmented into two or more fragments where the size of all the fragments, except the last one is equal to the *Maximum Transmission Unit* of the link used to forward the packet.
+- The *Length* field indicates the length of the payload and the header of the fragment.
+- When fragmented, the *Identification* of the large packet is copied in all fragments to allow for packet reassembly.
+- The *Fragment Offset* indicates the position of the payload of the fragment, in the payload of the original fragment.
+
+** How Reassembly Works
+
+Fragments may arrive at the destination in any order since fragments are forwarded independently in the network and may follow different paths. Some fragments might also get lost and never reach the destination.
+
+The reassembly algorithm used by the destination host is a follows:
+1. The destination can verify the packet if it is a fragment or not by checking the *flags* value in the header and the *fragment offset*.
+   - If the *Fragment Offset* is ~0~, and the *More Fragments* flag is reset, the received packet has not been fragmented.
+   - Otherwise the fragment is fragmented and needs to be assembled.
+2. Relies on the *Identification* field to associate a fragment with the corresponding packet being assembled.
+3. The *Fragment Offset* indicates the position of the fragment payload in the original unfragmented packet.
+4. The packet with the More Fragments flag reset allows the destination to determine the total length of the original unfragmented packet.
+
+*** Handling Loss and Duplicates
+
+The destination can easily identify *fragment duplication* with the *Fragment Offset*.
+
+To deal with *fragment losses*, the reassembly algorithm must bind the time during which the fragments of a packet are stored in its buffer while the packet is being assembled. This can be implemented by starting a timer when the first fragment of a packet is received. If the packet is not reassembled within the alloted time then all fragments are discarded and the packet is considered to be lost.

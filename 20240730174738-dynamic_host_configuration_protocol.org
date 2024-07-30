@@ -1,0 +1,64 @@
+:PROPERTIES:
+:ID:       D9F33362-FD15-495C-B60C-31051256F236
+:END:
+#+title: Dynamic Host Configuration Protocol
+#+tags: [[id:FBE26796-7C93-4221-9192-CD1079C2432B][Network Layer]]
+
+* Introduction
+
+In the early days of the Internet, IP addresses were *manually configured* on both hosts and routers. This can cause errors, and is complex to maintain and scale.
+
+*Dynamic Host Configuration Protocol* or *DHCP* allows a host to automatically retrieve its assigned IPv4 address. A DHCP client actually can retrieve other network parameters too including subnet masks, default gateway, and DNS server addresses from the DHCP server.
+
+* How DHCP Works
+
+- A DHCP server is associated with the subnet to which it is connected. Routers do not forward DHCP traffic from one subnet to another.
+- Each DHCP server manages a pool of IPv4 addresses assigned to the subnet.
+- When a host is first attached to the subnet, it sends a DHCP request message in a UDP segment to the DHCP server on port 67.
+  - The host doesn't know its own IPv4 address nor the DHCP IPv4 address.
+  - This UDP segment is sent inside a packet whose source is ~0.0.0.0~ and destination address of ~255.255.255.255~.
+  - The DHCP request may contain options such as the data link layer address of the host.
+- The server captures the DHCP request and *selects an unassigned address in its address pool*.
+- The server then sends the assigned IPv4 address in a *DHCP reply message* that contains:
+  - Data link layer address of the host and additional information such as:
+    - Subnet mask of the IPv4 address
+    - Address of the default router or the address of the DNS resolver
+  - DHCP reply also specifies the lifetime of the address allocation which the host renews once it expires.
+- The DHCP reply message is send in an IPv4 packet whose source is the IPv4 address of the DHCP server, and the destination of ~255.255.255.255~ broadcast address.
+- IP addresses are automatically returned to the pool of addresses when hosts dont renew their lease time/powers off.
+
+** Additional Key Points
+
+- Throughout the entire communication process of the host and DHCP server, included in the message details is the hosts *unique MAC address* which allows the server to identify the host requesting the IP.
+- The entire process for requesting an IP is as follows:
+  1. DHCP Discover
+     - Client Action: The client broadcasts a DHCP Discover message to the entire network.
+     - Message Details:
+       - Source IP address: 0.0.0.0 (since the client does not have an IP address yet)
+       - Destination IP address: 255.255.255.255 (broadcast address)
+       - Client MAC address: Included in the message
+  2. DHCP Offer:
+     - Server Action: Any DHCP server on the network that receives the Discover message can respond with a DHCP Offer message.
+     - Message Details:
+       - Source IP address: DHCP server's IP address
+       - Destination IP address: 255.255.255.255 (broadcast address, but the message includes the client's MAC address so the client knows it’s for them)
+       - Client MAC address: Included to specify which client the offer is for
+       - Proposed IP address: The IP address being offered to the client
+       - Transaction ID: Matches the ID from the DHCP Discover message
+  3. DHCP Request:
+     - Client Action: The client responds with a DHCP Request message, indicating acceptance of the offered IP address.
+     - Message Details:
+       - Source IP address: 0.0.0.0 (since the client still doesn't have an IP address)
+       - Destination IP address: 255.255.255.255 (broadcast address)
+       - Client MAC address: Included to identify itself
+       - Transaction ID: Matches the ID from the DHCP Offer message
+       - Requested IP address: The IP address offered by the server
+  4. DHCP Acknowledgment (DHCP ACK):
+     - Server Action: The DHCP server sends a DHCP Acknowledgment message to finalize the IP address assignment.
+     - Message Details:
+       - Source IP address: DHCP server's IP address
+       - Destination IP address: 255.255.255.255 (broadcast address)
+       - Client MAC address: Included to identify the specific client
+       - Assigned IP address: Confirms the IP address assigned to the client
+       - Transaction ID: Matches the ID from the DHCP Request message
+
