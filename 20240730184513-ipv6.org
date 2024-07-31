@@ -1,0 +1,80 @@
+:PROPERTIES:
+:ID:       4C7BADBC-F79E-49F8-B69D-BC4C8AB943B3
+:END:
+#+title: IPv6
+#+tags: [[id:FBE26796-7C93-4221-9192-CD1079C2432B][Network Layer]]
+
+* Table of Contents :toc:
+- [[#why-ipv6][Why IPv6?]]
+- [[#ipv6-features][IPv6 Features]]
+  - [[#pros][Pros]]
+  - [[#cons][Cons]]
+- [[#textual-representation-of-ipv6][Textual Representation of IPv6]]
+- [[#address-format--types][Address Format & Types]]
+  - [[#unicast][Unicast]]
+
+* Why IPv6?
+
+IPv4 was initially designed for a research network that would connect some research labs and universities. For this purpose, 32 bit addresses which is approx. 4.3 billion addresses seemed sufficient. 32 bits was also a convenient size for software-based routers.
+
+With the popularity of the Internet, we are running out of addresses so *IPv6 was created to tackle the limitations of IPv4*.
+
+* IPv6 Features
+
+** Pros
+
+- *Simplified Header*
+  - All IPv4 options are moved to the end of the IPv6 header.
+  - IPv6 header is twice as large as IPv4 headers but only because they are four times longer.
+- *Larger Address Space*
+  - 4 times as many bits as IPv4.
+  - 128 bits wide, approx *340 undecillion addresses*
+  
+** Cons
+
+- A complete redesign over IPv4 so *it is not backwards compatible*. This means that devices configured over IPv4 cannot acces websites on servers configured with IPv6.
+- Upgrading to IPv6 hardware is expensive for ISPs and not directly translatable in terms of profit.
+
+* Textual Representation of IPv6
+
+Format: ~x:x:x:x:x:x:x:x~, where the ~x~ represents the eight 16-bit parts of the address in *hexadecimal digits*.
+
+Examples:
+- ~ABCD:EF01:2345:6789:ABCD:EF01:2345:6789~
+- ~2001:DB8:0:0:8:800:200C:417A~
+
+In the case bits are set to ~0~, compact notation is used by using ~::~. For example:
+- ~FF01:0:0:0:0:0:0:101~ is represented as ~FF01::101~
+- ~0:0:0:0:0:0:0:1~ is represented as ~::1~
+- ~0:0:0:0:0:0:0:0~ is represented as ~::~
+
+An IPv6 prefix can also be represented as ~address/length~ where the ~length~ is the length of the prefix in bits. For example:
+- ~2001:0DB8:0000:CD30:0000:0000:0000:0000/60~
+- ~2001:0DB8::CD30:0:0:0:0/60~
+- ~2001:0DB8:0:CD30::/60~
+
+* Address Format & Types
+
+From the experience with IPv4, it has been revealed that *scalability* of a network layer protocol *heavily depends on its addressing architecture.* The designers of IPv6 therefor spent a lot of effort defining its addressing architecture.
+
+IPv6 supports *unicast*, *multicast*, and *anycast* addresses.
+
+** Unicast
+
+As with IPv4, IPv6 unicast address is used to identify one data link layer interface on a host. If a host has several data link layer interfaces (such as Ethernet and WiFi interfaces), then it needs several IPv6 addresses.
+
+An IPv6 unicast consists of three parts:
+1. *Global Routing Prefix*: Assigned to the ISP that owns this block of address.
+2. *Subnet Identifier*: Identifies a customer of the ISP.
+3. *Interface Identifier*: Identifies a particular interface on an end-system.
+   - Usually 64-bits based on the MAC (data link layer address)
+
+In general, IPv6 is structured as ~{Global Routing Prefix}:{Subnet ID}:{Interface ID}~.
+
+In today's deployment, interface identifiers are always *64 bits*, so addresses must be grouped in $2^{64}$ subnets. Using 64 bits for the host identifier allows the addresses to be auto-configured and provides security benefits.
+
+In practice, there are *several types of IPv6 multicast address*.
+
+*** Provider Independent Address
+
+

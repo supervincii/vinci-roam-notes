@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       775FB8DC-058C-4882-9477-0FC30E77A875
+:END:
+#+title: Layered Architecture
+#+tags: [[id:7DADA851-4763-423B-AD73-77164A5D1466][Networks]]
+
+* Table of Contents :toc:
+- [[#introduction][Introduction]]
+- [[#encapsulation--decapsulation][Encapsulation & Decapsulation]]
+
+* Introduction
+
+A layered architecture can give us *modularity* by allowing us to discuss *specific, well-defined parts of larger systems.* It also makes changing implementation-level details and identifying bugs easier. One analogy for layered architecture is sending post/mail, where each there is distinct layers for every process like the sender, to the courier, to the office, to the courier and to the recepient.
+
+Layers communicate in a /vertical/ fashion where each layer provides services to the layer above it. The above layer does not care about the details of how the layer below performs its services. This is called *abstraction*.
+
+In the post analogy, we can see that each layer at the sending end has a *parallel* in the receiving end. This implies that horizontal layers exists in computer systems. Applications in the *application layer* send & receive data from the network where the application on one end has a parallel on the other end. These applications seem to communicate with one another *directly (or horizontally)*, not aware of the layers below it.
+
+#+ATTR_HTML: :width 800px
+[[file:./images/layered-architecture-parallel-communication.png]]
+
+Take note that any lower layer can provide servics that the upper layer can build other services upon.
+
+* Encapsulation & Decapsulation
+
+*Encapsulation* is the process of adding the header to the message at it passes through the layers from above.
+
+*Decapsulation* is the process of removing the header from the message as it passes through the layers from below to the intended recipient. This is because then information in the header is useful for transmitting the message to the layer above.
+
+#+attr_html: :width 500px
+[[file:./images/layered-architecture-encapsulation-decapsulation.png]]

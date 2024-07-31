@@ -4,6 +4,13 @@
 #+title: AWS Accounts
 #+tags: [[id:CCF0A997-5D16-4F49-A032-1A1FADF9B505][Developer Associate]]
 
+* Table of Contents :toc:
+- [[#aws-accounts-introduction][AWS Accounts Introduction]]
+- [[#creating-multiple-aws-accounts-with-the-same-email][Creating multiple AWS accounts with the same email]]
+  - [[#example][Example]]
+- [[#multi-factor-authentication][Multi Factor Authentication]]
+  - [[#factors][Factors]]
+
 * AWS Accounts Introduction
 AWS accounts is a *container for identities (users) and resources. It can contain the impact of errors or exploits.
 

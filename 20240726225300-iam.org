@@ -2,4 +2,54 @@
 :ID:       138A4A8A-2F4F-4F4A-B77C-E699AAE59213
 :END:
 #+title: IAM
+#+tags: [[id:CCF0A997-5D16-4F49-A032-1A1FADF9B505][Developer Associate]]
 
+* Table of Contents :toc:
+- [[#basics][Basics]]
+  - [[#iam-policy][IAM Policy]]
+- [[#jobs-and-responsibilities][Jobs and Responsibilities]]
+- [[#iam-access-keys][IAM Access Keys]]
+
+* Basics
+
+Created accounts have an associated *Account Root User* and the AWS account trusts this user fully. This means that this root user have *unrestricted* access to the account and *cannot be restricted*.
+
+IAM is a *global service* so data is always secure across all AWS regions. Every account comes with its own instance of IAM, separate from other accounts. It is used to create other *identities* inside an AWS account. It can create *three different types of identities* namely:
+- *IAM User*: Represents humans or applications that need access to the AWS account.
+- *IAM Group*: A collection of related users such as teams or departments in a company.
+- *IAM Role*: Generally used to grant access to *AWS Services* in the account to an uncertain number of entities. It also allows granting external access to the account.
+
+IAM is also fully trusted by the account and can do anything besides restrictions on billing control and account closure, and allows the users to make use of identity federation and MFA.
+
+IAM is provided for free but there are limits on how many of each user, group, or role you can have.
+
+** IAM Policy
+
+IAM policies are *objects or documents which can be used to allow or deny access to AWS services.* It should be attached to IAM Users, Groups, or Roles, else, it doesn't do anything on its own.
+
+* Jobs and Responsibilities
+
+- *Manage Identities*
+  - IAM is an identity provider (IDP)
+  - Lets the user create, modify, and delete identities.
+- *Authenticate*
+  - Generally authenticates using a username and password, although there are other methods of authentication.
+- *Authorize*
+  - Allows or denies access to AWS resources.
+  - Based on *policies* associated with the identities.
+
+* IAM Access Keys
+
+Access keys are used of authentication within the *command line*. An IAM user can have 0 - 2 access keys but never more. It can also be created, deleted, and make inactive/active, where ~active~ is the default state when created.
+
+Access keys are formed from two parts:
+1. Access Key ID
+   - Which is like a username.
+   - Can be shown (public).
+2. Secret Access Key
+   - Longer and more complex than the Access Key ID.
+   - This is like a password where it should be hidden and not be shared with others (private).
+
+AWS provides both the Access Key ID and the Secret Access Key, where once provided, there is no way to access the Secret Access Key again, so it is good practice to store the Secret Access Key in a private place or even in a password manager.
+
+IAM Users are the *only identity that uses access keys*.     
