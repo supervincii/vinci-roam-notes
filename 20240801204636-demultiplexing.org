@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       6EAD2614-F2A6-4595-937F-B878B9F1FAB8
+:END:
+#+title: Demultiplexing
+
+* Demultiplexing
+
+Demultiplexing is the process of delivering the correct packages to the correct application from one stream.

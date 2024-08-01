@@ -1,0 +1,8 @@
+:PROPERTIES:
+:ID:       40809499-A4CB-49CB-AA9E-A61D0E06B555
+:END:
+#+title: Multiplexing
+
+* Multiplexing
+
+Multiplexing allows meessages to be sent to more than one destination via a single medium.

@@ -1,0 +1,40 @@
+:PROPERTIES:
+:ID:       137C8315-C508-4939-AFA8-EFCF5FE110DA
+:END:
+#+title: Network Application Architectures
+#+tags: [[id:7DADA851-4763-423B-AD73-77164A5D1466][Networks]]
+
+* Table of Contents :toc:
+- [[#client-server-architectures][Client-Server Architectures]]
+  - [[#servers][Servers]]
+  - [[#clients][Clients]]
+- [[#peer-to-peer-architecture-p2p][Peer-to-Peer Architecture (P2P)]]
+- [[#hybrid][Hybrid]]
+
+* Client-Server Architectures
+
+A network application consists of two parts: a *client-side* and a *server-side* software which are generally called *processes*. They communicate with each other through *messages*.
+
+** Servers
+
+Processes controls access to a centralized resource or service such as a website. It has two important characteristics which are:
+1. It has to be online all the time or be able to be available when needed.
+2. It needs to have atleast one reliable IP address that is reachable.
+
+Servers also processes wait requests from clients.
+
+** Clients
+
+Clients use the Internet to consume content and use the services. It almost always initiate connections to servers.
+
+* Peer-to-Peer Architecture (P2P)
+
+In this architecture, application on end-systems called *peers* communicate with each other. It has no dedicated server or large data center is involved. P2P architecture can scale rapidly without the need of spending large amounts of money, time or effort.
+
+Each peer can be categorized as servers or clients. Strictly speaking, a peer that initiates the connection is the client and the other one is a server. An example for P2P is *BitTorrent* where bits of the file is downloaded from several other users and puts it together on its end.
+
+P2P is not the same as file sharing. It is a design principle for distributed systems and an application architecture. Mathematically, P2P networks are more scalable than client server architecture.
+
+* Hybrid
+
+Hybrid architecture involves server involvement to some degree. It is a combination of P2P and client-server architecture.
