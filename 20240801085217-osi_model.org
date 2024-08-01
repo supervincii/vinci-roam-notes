@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       3D8669A7-760F-4138-89C3-2BC75C626319
+:END:
+#+title: OSI Model
+#+tags: [[id:775FB8DC-058C-4882-9477-0FC30E77A875][Layered Architecture]]
+
+* Table of Contents :toc:
+- [[#the-open-systems-interconnection-model][The Open Systems Interconnection Model]]
+- [[#layers-of-the-osi-model][Layers of the OSI Model]]
+
+* The Open Systems Interconnection Model
+
+Developed in the '70h by the *Organization for Standardization (ISO)*, it provided a standard for different computer systems to be able to communicate with each other.
+
+* Layers of the OSI Model
+
+The OSI model splits up a communication system into 7 abstract layers, stacked upon each other:
+1. Application Layer
+   - Contains the applications or protocols that are almost always implemented in software.
+   - 
+2. Presentation Layer
+3. Session Layer
+4. Transport Layer
+5. Network Layer
+6. Data Link Layer
+7. Physical Layer
+
+The main purpose of this network stack is to understand how the components of these protocols fit into the stack and work with each other.
