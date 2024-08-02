@@ -12,6 +12,8 @@
 - [[#textual-representation-of-ipv6][Textual Representation of IPv6]]
 - [[#address-format--types][Address Format & Types]]
   - [[#unicast][Unicast]]
+  - [[#anycast-addresses][Anycast Addresses]]
+  - [[#multicast-addresses][Multicast Addresses]]
 
 * Why IPv6?
 
@@ -71,10 +73,65 @@ An IPv6 unicast consists of three parts:
 
 In general, IPv6 is structured as ~{Global Routing Prefix}:{Subnet ID}:{Interface ID}~.
 
+[[file:./images/ipv6-unicast-structure.png]]
+
 In today's deployment, interface identifiers are always *64 bits*, so addresses must be grouped in $2^{64}$ subnets. Using 64 bits for the host identifier allows the addresses to be auto-configured and provides security benefits.
 
 In practice, there are *several types of IPv6 multicast address*.
 
 *** Provider Independent Address
 
+Most of the IPv6 unicast addresses are allocated in blocks under the responsibility of *IANA*. The current IPv6 allocations are part of the *2000::/3* address block. Regional Internet Registries have each received a block of IPv6 addresses that they sub-allocate to ISPs in their region. The ISPs then sub-allocate addresses to their customers as usual.
 
+The RIRs allocate *provider-independent (PI) addresses*.
+
+- PI addresses are usually allocated to ISPs and large companies that are connected to at least two different ISPs.
+- Once allocated to a company, this company can use its address block with the provider of choice and change its provider at will.
+- ISPs allocate provider-aggregatable (PA) address blocks from their own PI address block to their customers.
+- A company that is connected to only one ISP should only use PA addresses.
+
+*** Disadvantages of PI Addresses
+
+When a company using a PA address block changes its provider, it needs to change all the addresses that it uses. This can be a nightmare from an operational perspective, and many companies are lobbying to obtain PI address blocks even if they are small and connected to a single provider.
+
+*** Unique Local Unicast Addresses
+
+Unique Local Unicast (ULA) addresses (FC00::/7) are for the companies that want to use IPv6 without being connected to the IPv6 Internet. These addresses play a same role as the private IPv4 addresses defined in [[https:datatracker.ietf.org/doc/html/rfc1918.html][RFC1918]]. However the size of the FC00::/7 address block allows ULA to much more flexible than the private IPv4 addresses.
+
+The IETF has reserved some IPv6 addresses for special usage. The two most important ones are:
+- *::1* is the *loopback address*. This is the address of the logical interface that is always up and running on IPv6 enabled hosts. It is equivalent to *127.0.0.1* in IPv4.
+- *::* is the *unspecified IPv6 address* that a host can use a local source address when trying to acquire an official address.
+
+*** Link-Local Unicast Addresses
+
+The last type of unicast IPv6 address which are part of the *FE80::/10* address block.
+- Each host can compute its own local-link address by *concatenating* the ~FE80::/10~ prefix with the 64 bits identifier of its interface.
+- Can be used when hosts are attached to the same link (or LAN) need to exchange packets.
+- Used for address discovery and auto-configuration purposes.
+- Usage is restricted to each link, and router cannot forward a packet whose source or destination address is a local-link address.
+- Also defined for IPv4 however it is only used when a host cannot obtain a regular IPv4 address.
+
+[[file:images/ipv6-link-local-address-structure.png]]
+
+An important consequence of the IPv6 unicast addressing structure and the utilization of link-local addresses is that *an IPv6 host has several IPv6 addresses.* This implies that an IPv6 stack must be able to handle multiple IPv6 addresses. That is not always the case for IPv4.
+
+** Anycast Addresses
+
+On a subnetwork having prefix ~p/n~, the IPv6 address whose 128-n low-order bits are set to 0 is the anycast address that corresponds to all routers inside this subnetwork.
+
+This anycast address can be used by hosts to quickly send a packet to any routers inside their own network.
+
+** Multicast Addresses
+
+The structure of an IPv6 multicast address is as follows:
+
+- The lower order 112 bits are the group's identifier. The higher order bits are used as a marker to distinguish multicast addresses from unicast addresses.
+- The 4 bits flag field indicates whether the address is temporary or permanent.
+- The scope field indicates the boundaries of the forwarding of packets destined to a particular address.
+  - *Link local scope*: router should not forward a packet destined to such a multicast address
+  - *Organizational local scope*: packets send to a multicast destination should not leave the organization
+  - *Global scope*: for multicast groups spanning the global Internet.
+
+[[file:images/ipv6-multicast-structure.png]]
+
+All end-system automatically belong to the *FF02::1* multicast group while all routers automatically belong to the *FF02::2* multicast group.

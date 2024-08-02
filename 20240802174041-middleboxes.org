@@ -1,0 +1,14 @@
+:PROPERTIES:
+:ID:       9E42D5E5-3003-47EA-9B80-F7E3E4138B8D
+:END:
+#+title: Middleboxes
+#+tags: [[id:7DADA851-4763-423B-AD73-77164A5D1466][Networks]]
+
+* Middleboxes
+
+Middleboxes are not strictly routers but which *process, sometimes modify, and forward IP packets.* Some middleboxes only operate in the network layer, but most middleboxes are able to analyze the payload of the received packets and extract the transport header, and in some cases the application layer headers.
+
+There are two types of middleboxes namely:
+
+- [[id:D12877DD-7DA2-4F1A-A6E2-D425DBAC2C29][Firewalls]]
+- [[id:2A4CC05F-B4D4-442A-A01C-B853BEC57C6F][NATs]]

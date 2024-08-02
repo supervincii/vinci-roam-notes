@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       4E05A2E6-29AF-4CEA-823F-A865824F9E13
+:END:
+#+title: Data Link Layer
+#+tags: [[id:E59543ED-E1EB-4206-9A38-0F5DE15DB819][TCP/IP Model]]
+
+* Table of Contents :toc:
+- [[#responsibilities][Responsibilities]]
+
+* Responsibilities
+
+The data link layer receives packets from the network layer and deals with providing *hop to hop communication* or communication between entities that are *directly connected by a physical link.*

@@ -1,0 +1,41 @@
+:PROPERTIES:
+:ID:       D12877DD-7DA2-4F1A-A6E2-D425DBAC2C29
+:END:
+#+title: Firewalls
+#+tags: [[id:9E42D5E5-3003-47EA-9B80-F7E3E4138B8D][Middleboxes]]
+
+* Table of Contents :toc:
+- [[#firewall-intefaces][Firewall Intefaces]]
+- [[#firewall-filters][Firewall Filters]]
+- [[#stateless-vs-stateful-firewalls][Stateless vs Stateful Firewalls]]
+- [[#host-based-vs-network-based-firewalls][Host-Based vs Network-Based Firewalls]]
+
+* Firewall Intefaces
+
+A typical firewall has two interfaces:
+1. An *external interface* to the global Internet.
+2. An *internal interface* to a trusted network.
+
+* Firewall Filters
+
+Firewalls includes *configurable packet filters* that define a set of rules adhering to the security policy of a network. These rules are based on the values of fields in the IP or transport layers. The most common ones are:
+- *Source address*
+  - An example is a company discarding all packets received from its competitor while maintaining access to public resources.
+  - *Black lists* is an example of source based filtering where any packets from an IP on the black list will be discarded like ones from spammers.
+- *Destination address*
+- *Protocol number*
+  - A company might only allow hosts to use TCP or UDP, but not other transport protocols.
+- *TCP or UDP port numbers*
+- *TCP flags*
+
+* Stateless vs Stateful Firewalls
+
+A firewall that does not maintain the state of flows passing through it is known as a *stateless firewall.*
+
+A *stateful firewall* sees the first packet in a flow that is allowed by the configured security rules and creates a *session state* for it. All subsequent packets belonging to that flow are allowed to go through. This filtering is more efficient compared to stateless firewalls that have to apply their rules to every packet. The maintenance of state however needs to be controlled.
+
+* Host-Based vs Network-Based Firewalls
+
+*Network-based* firewalls are *hardware* based and generally deployed on the edge of the network. They are easy to scale and maintain.
+
+*Host-based* firewalls are software based and are deployed on end-systems. Generally not easy to maintain and require maintenance.

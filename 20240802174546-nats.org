@@ -1,0 +1,52 @@
+:PROPERTIES:
+:ID:       2A4CC05F-B4D4-442A-A01C-B853BEC57C6F
+:END:
+#+title: NATs
+#+tags: [[id:9E42D5E5-3003-47EA-9B80-F7E3E4138B8D][Middleboxes]]
+
+* Table of Contents :toc:
+- [[#introduction][Introduction]]
+- [[#broadband-access-routers][Broadband Access Routers]]
+- [[#enterprise-network][Enterprise Network]]
+- [[#sending-a-message-over-a-nat][Sending a Message over a NAT]]
+  - [[#sending-a-message][Sending a Message]]
+  - [[#receiving-a-message][Receiving a Message]]
+- [[#disadvantages-of-nats][Disadvantages of NATs]]
+
+* Introduction
+
+NAT is a middlebox that interconnects two networks that are using IPv4 addresses from different addressing spaces. Unlike a router, when a NAT box forwards traffic, *it modifies the IP addresses in the IP header.*
+
+* Broadband Access Routers
+
+Broadband access routers is a very common deployment of NAT. It interconnects a home network, either WiFi or Ethernet-based, and the global Internet via one ISP.
+
+A single IPv4 address is allocated to the broadband access router and NAT allows all the hosts attached to the home network to *share a single public IPv4 address.*
+
+* Enterprise Network
+
+Another deployment of NAT is in enterprise networks where the NAT functionality is installed on a border router of the enterprise. A private IPv4 address is assigned to each enterprise host while the border router manages a *pool containing several public IPv4 addresses*.
+
+* Sending a Message over a NAT
+
+The simplest NAT is a middlebox mapping between a private IP address and a public IP address. To understand its operation, let's assume that a NAT has just booted.
+
+** Sending a Message
+
+- When a NAT received the first packet from source *S* in the internal network which is destined to the public Internet, it creates a mapping between internal address *S* and the first address of its pool of public addresses (P1).
+- It then translates the received packet so that it can be sent to the public Internet. Translation is performed as follows:
+  - The source address of the packet (S) is replaced by the mapped public address (P1).
+  - The cheksum of the IP header is incrementally updated as its content has changed.
+  - If the packet is a TCP or UDP segment, the transport layer checksum found in the segment must be updated as its computed over the segment and the pseudo-header that includes the source and destination addresses.
+
+** Receiving a Message
+
+- When a packet P1 is received from the public Internet, the NAT consults its mapping table to find *S*.
+- The received packet is translated and forwarded in the internal network.
+
+This works as long as the pool of public IP addresses of the NAT does not become empty. In this case, a mappnig must be removed from the mapping table to allow a packet from a new host to be translated. This *garbage collection* can be implemented by adding a timestamp that contains the last utilization time. This is updated every time the entry is used, then the garbage collection algorithm can *remove the oldest mapping entry in the table.*
+
+* Disadvantages of NATs
+
+1. Not easily possible for external hosts to create TCP connections with the hosts that are behind a NAT.
+2. NAT breaks end-to-end transparency of the network and transport layers.
