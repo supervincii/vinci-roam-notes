@@ -1,0 +1,170 @@
+:PROPERTIES:
+:ID:       9E83DED2-5245-41F0-B268-901525BA60EE
+:END:
+#+title: Ethernet
+#+tags: [[id:4E05A2E6-29AF-4CEA-823F-A865824F9E13][Data Link Layer]]
+
+* Table of Contents :toc@4:
+- [[#first-official-ethernet-specification][First Official Ethernet Specification]]
+  - [[#important-parameters][Important Parameters]]
+  - [[#changes-recommended-by-first-official-specification][Changes Recommended by First Official Specification]]
+- [[#mac-addresses][MAC Addresses]]
+- [[#ethernet-frames][Ethernet Frames]]
+  - [[#problem-sending-short-frames][Problem: Sending Short Frames]]
+  - [[#solution-add-length-field][Solution: Add Length Field]]
+- [[#physical-layers-for-ethernet][Physical Layers for Ethernet]]
+  - [[#10base5][10Base5]]
+  - [[#10base2][10Base2]]
+  - [[#10basef][10BaseF]]
+  - [[#10baset][10BaseT]]
+    - [[#twisted-pairs][Twisted Pairs]]
+    - [[#changes-to-internet][Changes to Internet]]
+      - [[#change-in-topology][Change in Topology]]
+      - [[#introduction-to-ethernet-hubs][Introduction to Ethernet Hubs]]
+- [[#fast-ethernet][Fast Ethernet]]
+- [[#ethernet-switches][Ethernet Switches]]
+  - [[#mac-address-tables][MAC Address Tables]]
+  - [[#retaining-plug--play-with-switches][Retaining Plug & Play with Switches]]
+    - [[#mac-address-learning-algorithm][MAC Address Learning Algorithm]]
+  - [[#unicast-broadcast--multicast-frames][Unicast, Broadcast, & Multicast Frames]]
+  - [[#handling-failures][Handling Failures]]
+  - [[#spanning-tree-protocol][Spanning Tree Protocol]]
+
+* First Official Ethernet Specification
+
+** Important Parameters
+
+1. Standardize the commercial Ethernet at 10 Mbps.
+2. Slot time duration of *51.2 microseconds*, which corresponds to a minimum frame size of 64 bytes. A long slot time in Ethernet enables networks to span a long distance but forces the host to use a larger minimum frame size.
+3. Frame format with *48 bit source and destination address fields, and up to 1500 bytes of payload.*
+
+** Changes Recommended by First Official Specification
+
+1. Require each host attached to an Ethernet network to have a globally unique data link layer address.
+2. Encode each address as a 48 bit field.
+3. Definition of broadcast and multicast addresses.
+
+* MAC Addresses
+
+MAC addresses are the data link layer addresses used in Ethernet networks.
+- The first upper bit of the address indicates whether the address identifies a network adapter or a multicast group.
+- The upper 24 bits are used to encode on *Organizational Unique Identifier (OUI)* which identifies a block of addresses that has been allocated by the secretariat who is responsible for the uniquness of Ethernet addresses to a manufacturer.
+
+[[file:images/48-bits-ethernet-address-format.png]]
+
+MAC addresses are generally represented as *6 hex numbers separated by colons.*
+
+* Ethernet Frames
+
+Ethernet frames are composed of five fields:
+1. Destination Address
+2. Source Address
+3. Ether Type: A 16 bit integer that indicates which type of network layer packet is carried inside the frame.
+   - ~0x0800~ for IPv4
+   - ~0x86DD~ for IPv6
+   - ~0x806~ for ARP
+4. Payload: Minimum length of 46 bytes and cannot be longer that 1500 bytes.
+5. Cyclical Redundancy Check (CRC): 32 bits, that is able to catch a larger number of transmission errors than the Internet checksum of TCP, UDP, and IP.
+
+Another field not included in the list is the *preamble* that is used by the physical layer of the receiver to synchronize its clock with the sender's clock.
+
+** Problem: Sending Short Frames
+
+1. Ethernet mandated a minimum payload of 46 bytes.
+2. Original Ethernet header does not contain a ~length~ field, so it's impossible for the receiver to determine how many useful bytes were placed inside the payload field.
+
+** Solution: Add Length Field
+
+To solve the problem, the IEEE decided to replace the Type field with a length field. This field contains the number of useful bytes in a frame payload. The payload must still contain at least 46 bytes but *padding bytes are added by the sender and removed by the receiver.*
+
+Without the type field however, it is impossible for the receiving host to identify the type of network layer packet inside a received frame. To solve this, the IEEE developed a new sublayer called the *Logical Link Control*.
+
+The figure below shows the official 802.3 frame format.
+
+[[file:images/ethernet-802.3-frame-format.png]]
+
+* Physical Layers for Ethernet
+
+** 10Base5
+
+Provided 10 Mbps over thick coaxial cable, and enabled the utilization of 500 meter long segments. A 10Base5 network can also include repeaters between segments.
+
+** 10Base2
+
+Used a thin coaxial cable that was easier to install but could not be longer than 185 meters.
+
+** 10BaseF
+
+Defined to transport Ethernet over point-to-point optical links.
+
+** 10BaseT
+
+*** Twisted Pairs
+
+Traditionally used to support telephone service in office buildings.
+
+*** Changes to Internet
+
+**** Change in Topology
+
+A 10BaseT network is a *star-shaped network*. All devices connected to the network are attached to a twisted pair cable that ends in a telecom closet.
+
+With 10BaseT, when one twisted pair is damaged, only the device connected to this twisted pair is affected.
+
+**** Introduction to Ethernet Hubs
+
+It was impossible to build a 10BaseT network by simply connecting all the twisted pairs together as all of it should be connected to a relay that operates in a physical layer. This relay is called the *Ethernet hub*.
+
+A hub is a physical layer relay that receives an electrical signal in one of its interfaces, regenerates the signal, and transmits it over all its other interfaces.
+
+There are some important guidelines that must be followed when building a complex network with hubs.
+1. The network topology must be a tree.
+2. The maximum delay between any pair of devices in the network can't be longer than 51.2 microseconds, slot time. Longer, and collisions between short frames may not be correctly detected. This *constraint limits the geographical spread of 10BaseT networks containing hubs.*
+
+* Fast Ethernet
+
+Fast Ethernet was designed under two constraints:
+1. Had to support twisted pairs.
+2. Had to be perfectly compatible with the existing 10 Mbps Ethernets to allow Fast Ethernet technology to be used initially as a backbone technology to interconnect 10 Mbps Ethernet networks. This forced Fast Ethernet to use the same frame format as 10 Mbps Ethernet and implied that the minimum Fast Ethernet frame size remained at 512 bits. The duration of the time slot was also decreased to 5.12 microseconds, implying that the max distance between two end stations was also reduced.
+
+* Ethernet Switches
+
+An Ethernet switch is a relay that operates in the data link layer, unlike hubs that operate on the physical layer. Switches can analyze the destination address of each frame and forward the frames selectively on the link that leads to the destination. This allows multiple hosts communicating with each other simultaneously.
+
+** MAC Address Tables
+
+For an Ethernet switch to /selectively/ forward frames over each interface, it maintains a *MAC address table*. This table contains, for each MAC address known by the switch, the identifier of the switch's port over which a frame sent towards this address must be forwarded to reach its destination.
+
+Illustrated below is how it works with the MAC address table of *switch 2*.
+
+[[file:images/ethernet-switch-operation.png]]
+
+** Retaining Plug & Play with Switches
+
+*** MAC Address Learning Algorithm
+
+Ethernet switches must be able to build their MAC addresses table automatically without requiring any manual configuration. This automatic configuration is performed by the *MAC address learning algorithm* that runs on each Ethernet switch.
+
+1. This algorithm extracts the source address of the received frames and *remembers the port* over which a frame from each source Ethernet address has been received.
+2. This information is inserted into the MAC address table that the switch uses to forward frames.
+3. This allows the switch to automatically learn the ports that it can use to reach each destination address, provided that this host has previously sent at least one frame.
+
+** Unicast, Broadcast, & Multicast Frames
+
+The switch uses its MAC address table to forward the received *unicast* frame. If there is an entry for the frame's destination address, it is forwarded selectively on the port listed in this entry.
+
+Otherwise, the switch does now know how to reach the destination address and must forward the frame on all its ports except for the port from which the frame has been received. This is called *flooding*, and it ensures that the frame will reach its destination at the expense of some unecessary transmissions.
+
+Multicast and Broadcast frames are also forwarded in the same way.
+
+** Handling Failures
+
+To deal with link and switch failures, network admins often add *redundant links* to ensure that their network remains connected even after a failure.
+
+Loops arise when the network topology is not a tree and are a severe problem. Although forcing switches to be only used in tree-shaped networks as hubs would be a severe limitation.
+
+** Spanning Tree Protocol
+
+The spanning tree protocol enables switches to exchange control messages by means of which a root switch is first elected in the topology. All the switches then designate one of their ports that reaches the root switch with the minimum number of hops to be part of the spanning tree.
+
+All other ports that lead to the root switch, and hence create a loop are disabled.

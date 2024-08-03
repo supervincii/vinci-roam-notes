@@ -17,6 +17,11 @@
   - [[#solution-1-idle-physical-layer][Solution #1: Idle Physical Layer]]
   - [[#solution-2-multi-symbol-encodings][Solution #2: Multi-symbol Encodings]]
   - [[#solution-3-stuffing][Solution #3: Stuffing]]
+- [[#error-detection][Error Detection]]
+  - [[#error-detection-codes][Error Detection Codes]]
+  - [[#parity-bit][Parity Bit]]
+- [[#error-correction-mechanisms][Error Correction Mechanisms]]
+  - [[#triple-modular-redundancy-tmr][Triple Modular Redundancy (TMR)]]
 
 * Responsibilities
 
@@ -121,3 +126,28 @@ For example, to transmit frame ~1 2 3 DLE STX 4~:
 1. The length of the transmitted frame is *increased*.
 2. On a transmission error, the receiver may incorrectly decode one or two frames (if the error occurs in the markers). It will however be able to sychronize itself with the next correctly received markers.
 3. Bit stuffing is easily implemented in hardware, it is however difficult implementing it in software given the higher overhead of bit manipulation in software.
+
+* Error Detection
+
+** Error Detection Codes
+
+The data link layer also includes mechanisms to detect and sometimes even recover from transmission errors. To allow a receiver to detect transmission errors:
+1. Sender must add redundant information as an *error detection code* to the frame sent. This code is computed by the sender on the frame it transmits.
+2. When a receiver receives a frame with an error detection code, it recomputes and verifies whether the received code matches the computed.
+3. The frame is considered to be *valid if they match*.
+
+** Parity Bit
+
+Parity bit is the simplest error detection code. In this case, the number of redundant bit is ~1~. There are two types of parity schemes:
+1. *Even Parity*: The redundant bit is chosen so that an even number of bits are set to 1 in the transmitted bit string of ~N + 1~ bits.
+2. *Odd Parity*: The redundant bit is chosen so that an odd number of bits are set to 1 in the transmitted bit string of ~N + 1~ bits.
+
+* Error Correction Mechanisms
+
+** Triple Modular Redundancy (TMR)
+
+TMR is the *simplest error correction code*.
+
+- To transmit a bit set to ~1~, the sender transmits ~111~ and to transmit a bit set of ~0~, the sender transmits ~000~.
+- Without transmission errors, the receiver can decode ~111~ as ~1~.
+- If transmission errors have affected a single bit, the receiver *performs majority voting*. This scheme allows the receiver to correct all transmission errors that affect a single bit.
