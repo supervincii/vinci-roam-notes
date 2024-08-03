@@ -6,7 +6,118 @@
 
 * Table of Contents :toc:
 - [[#responsibilities][Responsibilities]]
+- [[#type-of-data-link-layers][Type of Data Link Layers]]
+  - [[#point-to-point-data-link-layer][Point-to-Point Data Link Layer]]
+  - [[#broadcast-multi-access][Broadcast Multi-Access]]
+  - [[#non-broadcast-multi-access-nbma-networks][Non-Broadcast Multi-Access (NBMA) Networks]]
+- [[#limitations][Limitations]]
+  - [[#imposed-by-the-data-link-layer][Imposed By the Data Link Layer]]
+  - [[#imposed-by-the-physical-layer][Imposed by the Physical Layer]]
+- [[#the-framing-problem][The Framing Problem]]
+  - [[#solution-1-idle-physical-layer][Solution #1: Idle Physical Layer]]
+  - [[#solution-2-multi-symbol-encodings][Solution #2: Multi-symbol Encodings]]
+  - [[#solution-3-stuffing][Solution #3: Stuffing]]
 
 * Responsibilities
 
 The data link layer receives packets from the network layer and deals with providing *hop to hop communication* or communication between entities that are *directly connected by a physical link.*
+
+Basically, the data link layer makes *intelligible communication* possible over a physical link that just transports 0s and 1s between two directly connected hosts.
+
+* Type of Data Link Layers
+
+Data link layer protocols exchanges *frames* that are transmitted through the physical layer. There are three main types of data link layers.
+
+** Point-to-Point Data Link Layer
+
+This layer is the /simplest/ data link layer type where it has only *two communicating systems connected directly through the physical layer*. It can either provide an unreliable or reliable service.
+
+The unreliable service is frequently used above physical layers that have a low bit error ratio, while reliability mechanisms are often used in wireless networks for transmission errors.
+
+** Broadcast Multi-Access
+
+This is used in LAN where both end systems and routers should be connected to. In this type, *each communicating device is identified by a unique data link layer address.* This address is usually embedded in the hardware of the device and the different types of LANs use different types of data link layer addresses.
+
+A device attached to the LAN can also send a data link frame to any other communication device that is attached to the same LAN.
+
+** Non-Broadcast Multi-Access (NBMA) Networks
+
+These networks are used to interconnect devices in a LAN. All devices attached to an NBMA network are identified by a unique data link address. The difference between an NBMA network and a traditional LAN is that NBMA service *only supports unicast* and *supports neither broadcast nor multicast*.
+
+* Limitations
+
+** Imposed By the Data Link Layer
+
+Most data link layer technologies impose limitations on the size of the frames.
+
+- Some only impose a maximum frame size.
+- Others enforce both minimum and maximum frame sizes.
+- Some only support a single frame size.
+
+** Imposed by the Physical Layer
+
+- May change the value of a bit being transmitted due to any reason, e.g., electromagnetic interferences.
+- May deliver more bits to the receiver than the bits sent by the sender.
+- May deliver fewer bits to the receiver than the bits send by the sender.
+
+* The Framing Problem
+
+Despite the limitations, the data link layer must allow end systems to exchange frames containing packets.
+
+The *framing problem* is defined as how does the sender encode the frames so that the receiver can efficiently extract them from the stream of bits it receives from the physical layer.
+
+** Solution #1: Idle Physical Layer
+
+*Require the physical layer to remain idle for some time after the transmission of each frame.* This idle periods can be detected by the receiver and can serve as markers to *indicate frame boundaries.*
+
+This solution is not sufficient for the following reasons:
+1. Some physical layer implementations can't remain idle and always need to transmit bits.
+2. Inserting an idle period between frames *decreases the maximum bandwidth that can be achieved* by the data link layer.
+
+** Solution #2: Multi-symbol Encodings
+
+Some technologies use other special symbols as markers for the beginning or end of frames. For example, the *Manchester encoding* can send four different symbols. Apart from the encodings for 0 and 1, it also supports two additional symbols: ~InvH and InvB~.
+
+** Solution #3: Stuffing
+
+Multi-symbol encodings cannot be used by all physical layer implementations. The generic solution which allows only transmitting 0s and 1s is called *stuffing*, and two variants exists:
+1. Bit stuffing
+2. Character stuffing
+
+These two techniques *reserve special bit strings as frame boundary markers* and encode the frames such that these special bit strings do not appear inside the frames.
+
+*** Bit Stuffing
+
+Bit stuffing reserves a special bit pattern and inserts it at the start and end to signify as markers.
+
+For example consider the transmission of ~0110111111111111111110010~:
+1. The sender will first send the special bit pattern, say ~01111110~ in this case, as the marker, followed by ~011011111~.
+2. After the five consecutive bits set to ~1~, it inserts a bit set to ~0~ followed by ~11111~.
+   - When decoding, the receiver removes the ~0~ as redundancy as six consecutive ~1~ signifies part of the special bit pattern marker.
+3. A new ~0~ is inserted, followed by ~11111~.
+4. A new ~0~ is inserted followed by the end of the frame ~110010~ and the ~01111110~ marker.
+
+Visualization: ~01111110 + 011011111 + 0 + 11111 + 0 + 11111 + 0 + 110010 + 01111110~
+
+*** Character Stuffing
+
+This technique operates on frames that *contain an integer number of characters of a fixed size* such as 8-bit characters. Many character stuffing techniques use ~DLE~, ~STX~, and ~ETX~ characters of the ASCII character set.
+
+~DLE STX~ is used to *mark the beginning of the frame* and ~DLE ETX~ is used to mark the *end of a frame*.
+
+#+begin_quote
+Software implementations prefer to process characters than bits so software-based data link layers usually use character stuffing.
+#+end_quote
+
+For example, to transmit frame ~1 2 3 DLE STX 4~:
+1. ~DLE STX~ is sent first as a marker.
+2. Followed by ~1 2 3 DLE~.
+3. The sender then transmits another ~DLE~ character.
+4. Followed by ~STX 4~ and the ~DLE ETX~ marker.
+5. The final string is: ~DLE STX 1 2 3 DLE DLE STX 4 DLE ETX~.
+
+*** Disadvantages of Stuffing
+
+1. The length of the transmitted frame is *increased*.
+2. On a transmission error, the receiver may incorrectly decode one or two frames (if the error occurs in the markers). It will however be able to sychronize itself with the next correctly received markers.
+3. Bit stuffing is easily implemented in hardware, it is however difficult implementing it in software given the higher overhead of bit manipulation in software.

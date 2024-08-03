@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       5963DC18-A4D9-48CB-A1B1-AFC63E9BC6F1
+:END:
+#+title: Personal Projects
+
+- [[id:16CEE03B-DB43-4B17-B162-E50305DFE52F][Online Portfolio]]
+- [[id:B81EFE62-9626-4237-8243-A9BC38203F51][Twitch Community Event Manager]]
