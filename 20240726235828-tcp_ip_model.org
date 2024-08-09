@@ -5,3 +5,17 @@
 #+tags: [[id:7DADA851-4763-423B-AD73-77164A5D1466][Networks]]
 
 * Table of Contents :toc:
+- [[#the-tcpip-model][The TCP/IP Model]]
+- [[#layers-of-the-tcpip-stack][Layers of the TCP/IP Stack]]
+
+* The TCP/IP Model
+
+The TCP (Transmission Control Protocol)/IP (Internet Protocol) model is also called the *Internet Protocol suite*. It is primarily based upon the most protocols of the Internet.
+
+The protocols in each layer is clearly defined, and it takes in a *protocol-oriented* approach. Because it is simpler than the OSI model, it is used for practical applications. It can also handle error detection and recovery unlike the OSI model.
+
+* Layers of the TCP/IP Stack
+
+The layers of the TCP/IP stack is divided into *5 abstract layers* where each layer performs a particular service and communicate with the layers above and below itself.
+
+- [[id:383FC2D1-BC34-4D28-B8CF-78A141520DB2][Application Layer]]

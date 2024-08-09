@@ -2,7 +2,7 @@
 :ID:       138A4A8A-2F4F-4F4A-B77C-E699AAE59213
 :END:
 #+title: IAM
-#+tags: [[id:CCF0A997-5D16-4F49-A032-1A1FADF9B505][Developer Associate]]
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
 
 * Table of Contents :toc:
 - [[#basics][Basics]]

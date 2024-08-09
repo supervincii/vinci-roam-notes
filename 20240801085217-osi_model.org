@@ -4,54 +4,78 @@
 #+title: OSI Model
 #+tags: [[id:775FB8DC-058C-4882-9477-0FC30E77A875][Layered Architecture]]
 
-* Table of Contents :toc:
+* Table of Contents :toc@4:
 - [[#the-open-systems-interconnection-model][The Open Systems Interconnection Model]]
 - [[#layers-of-the-osi-model][Layers of the OSI Model]]
+  - [[#host-layers][Host Layers]]
+    - [[#application-layer][Application Layer]]
+    - [[#presentation-layer][Presentation Layer]]
+    - [[#session-layer][Session Layer]]
+    - [[#transport-layer][Transport Layer]]
+  - [[#media-layers][Media Layers]]
+    - [[#network-layer][Network Layer]]
+    - [[#data-link-layer][Data Link Layer]]
+    - [[#physical-layer][Physical Layer]]
 
 * The Open Systems Interconnection Model
 
-Developed in the '70h by the *Organization for Standardization (ISO)*, it provided a standard for different computer systems to be able to communicate with each other.
+Developed in the '70h by the *Organization for Standardization (ISO)*, it provided a standard for different computer systems to be able to communicate with each other. The main purpose of this network stack is to understand how the components of these protocols fit into the stack and work with each other.
 
 * Layers of the OSI Model
 
 The OSI model splits up a communication system into 7 abstract layers, stacked upon each other:
-1. Application Layer
-   - Contains the applications or protocols that are almost always implemented in software.
-   - *End-users* interact with the application layer.
-   - Where outgoing messages starts its journey so it provides data for the layer below.
-2. Presentation Layer
-   - Presents data that is easily understood by the application layer
-     - *Encoding* is an example where the underlying layers might used different character encoding and the presentation layer is reponsible for translating it for the application layer.
-   - *Encryption* is done on this layer.
-   - *Abstracts*: Assumes that the user session is being maintained by the lower layers and transforms content presentation to suit the application.
-   - Might implement end-to-end compression to reduce the traffic in the network.
-3. Session Layer
-   - Takes the services of the transport layer and build a service on top of it that *manages user sessions.*
-   - Exchange of information between local applications and remote services on other end systems.
-   - *Abstracts*: Assumes the connections establishment and packet transformation is handled by the layers below it.
-4. Transport Layer
-   - Has protocols implemented largely in software
-   - Segments data into smaller chunks.
-   - Sometimes add additional information to transmit the segment/datagram reliably like:
-     - *Checksum*: Ensures that the message is correctly delivered to the destination.
-     - *Header*: Information added to the start of a segment/datagram.
-     - *Trailer*: Information appended to the end of a segment/datagram.
-5. Network Layer
-   - Messages here are called *packets*.
-   - Facilitate transportation of packets.
-   - Determines the best route for a packet to take.
-   - *Routing protocols* run on this layer and exchange messages with each other to develop information that helps route transport layer messages.
-   - Performs *load balancing*.
-6. Data Link Layer
-   - Allows *directly connected* hosts to communicate.
-   - Address *flow control* and *error detection/correction*.
-   - *Encapsulates packets* for transmission across a single link.
-   - Resolves transmission conflicts for when two systems send a message at the same time.
-   - *Handles addressing* if data links is a broadcast medium.
-   - [[id:40809499-A4CB-49CB-AA9E-A61D0E06B555][Multiplexing]] and [[id:6EAD2614-F2A6-4595-937F-B878B9F1FAB8][Demultiplexing]]
-7. Physical Layer
-   - Hardware
-   - Transmits *bits*. Not packets, datagrams, or segments.
-   - Has to deal with mechanical specifications about the makeup of cables and the design of connectors.
 
-The main purpose of this network stack is to understand how the components of these protocols fit into the stack and work with each other.
+** Host Layers
+*** Application Layer
+- Contains the applications or protocols that are almost always implemented in software.
+- *End-users* interact with the application layer.
+- Where outgoing messages starts its journey so it provides data for the layer below.
+  
+*** Presentation Layer
+- Presents data that is easily understood by the application layer
+  - *Encoding* is an example where the underlying layers might used different character encoding and the presentation layer is reponsible for translating it for the application layer.
+- *Encryption* is done on this layer.
+- *Abstracts*: Assumes that the user session is being maintained by the lower layers and transforms content presentation to suit the application.
+- Might implement end-to-end compression to reduce the traffic in the network.
+  
+*** Session Layer
+- Takes the services of the transport layer and build a service on top of it that *manages user sessions.*
+- Exchange of information between local applications and remote services on other end systems.
+- *Abstracts*: Assumes the connections establishment and packet transformation is handled by the layers below it.
+  
+*** Transport Layer
+- Has protocols implemented largely in software
+- Segments data into smaller chunks.
+- Sometimes add additional information to transmit the segment/datagram reliably like:
+  - *Checksum*: Ensures that the message is correctly delivered to the destination.
+  - *Header*: Information added to the start of a segment/datagram.
+  - *Trailer*: Information appended to the end of a segment/datagram.
+    
+** Media Layers
+*** Network Layer
+
+- Messages here are called *packets*.
+- Facilitate transportation of packets.
+- Determines the best route for a packet to take.
+- *Routing protocols* run on this layer and exchange messages with each other to develop information that helps route transport layer messages.
+- Performs *load balancing*.
+*** Data Link Layer
+
+- Allows *directly connected* hosts to communicate.
+- Address *flow control* and *error detection/correction*.
+- *Encapsulates packets* for transmission across a single link.
+- Resolves transmission conflicts for when two systems send a message at the same time.
+- *Handles addressing* if data links is a broadcast medium.
+- [[id:40809499-A4CB-49CB-AA9E-A61D0E06B555][Multiplexing]] and [[id:6EAD2614-F2A6-4595-937F-B878B9F1FAB8][Demultiplexing]]
+  
+*** Physical Layer
+- Hardware
+  - Physical medium can be copper (electrical), fibre (light), or WiFi (radio frequency)
+- Transmits *bits*. Not packets, datagrams, or segments.
+- Has to deal with mechanical specifications about the makeup of cables and the design of connectors.
+  - *Specifications* define the transmission and reception of *RAW BIT STREAMS* between a device and a shared physical medium.
+    - Defines things like voltage levels, timing, rates, distances, modultion, and connectors.
+- More devices in the physical layer connects multiple devices using a *hub*.
+  - Hubs retransmits anything it receives to all the other ports that has a connection, *including errors and collisions.*
+- At this layer, there is *no device addressing*. All data is processed by all devices.
+- If multiple devices transmit at once, a *collision* occurs which the physical layer *cannot detect*.

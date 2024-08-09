@@ -2,7 +2,7 @@
 :ID:       50802F75-82CF-400E-B644-5451617E2DD3
 :END:
 #+title: AWS Accounts
-#+tags: [[id:CCF0A997-5D16-4F49-A032-1A1FADF9B505][Developer Associate]]
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][AWS Associate]]
 
 * Table of Contents :toc:
 - [[#aws-accounts-introduction][AWS Accounts Introduction]]
