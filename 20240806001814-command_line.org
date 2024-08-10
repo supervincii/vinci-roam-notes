@@ -1,0 +1,31 @@
+:PROPERTIES:
+:ID:       200A41DA-DE08-4D9C-9321-D8EB80E207BF
+:END:
+#+title: Command Line
+#+tags: [[id:CE59F4E0-0C22-4D23-BB40-C2F93D1EC61A][Linux]]
+
+* Table of Contents :toc:
+- [[#the-shell][The Shell]]
+- [[#echo][echo]]
+
+* The Shell
+
+The shell is a program that takes commands from your keyboard and sends it to the OS to perform.
+
+The shell prompt (specifically for bash (Bourne Again Shell)) looks something like this:
+#+begin_src bash
+  username@hostname:current_directory
+
+  vinci@icebox:/home/vinci $
+#+end_src
+
+The prompt for bash is ~$~, and it is different for different shells.
+
+* echo
+
+The ~echo~ command just prints out the text arguments to display.
+
+#+begin_src bash
+  echo Hello World
+#+end_src
+

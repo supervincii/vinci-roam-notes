@@ -1,0 +1,39 @@
+:PROPERTIES:
+:ID:       BC3B0823-76E9-4E00-9364-7EF5D3727969
+:END:
+#+title: AWS Public vs Private Services
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+Public and private services refers to a *NETWORKING PERSPECIVE ONLY*. Both types of services still need permission and authorization to gain access.
+
+* Public Services
+
+Public services is something that is accessed using public endpoints such as S3, which can be accessed anywhere which has Internet connection. 
+
+* Private Services
+
+A private service is something that runs within a VPC. Only things within that VPC or what is connected to that VPC can access the service.
+
+* Zones
+
+** Public Internet Zone
+
+This is where Internet based services operate, like online stores, Gmail, and various online games.
+
+** Virtual Private Clouds (VPC)
+
+Also called the *AWS Private Zone*.
+
+Isolated, so VPCs cannot communicate with each other unless the user allows it. Nothing from the Internet can reach these private networks.
+
+Services can placed into this private zones such as *EC2* instances. The services here can only access the internet, and the internet can only access it, if the user allows it and configure it.
+
+On-premises can connect to VPCs only if configured via VPN or Direct Connect. We can also attach an *internet gateway* to a VPC that allows private-zone resources to access the public internet, as long as the resource has an allocated public IP address. It also allows access to public AWS services.
+
+** AWS Public Zone
+
+Sits between the *public internet zone* and the *AWS private zone/VPC*. This is not in the public internet, and is not a part of the public internet. It is a network that is *connected* to the public internet.
+
+This zone is where AWS public services operate from. These services have a *public endpoint*, such as S3.
+
+When accessing AWS public services from anywhere with a public internet connection, the communication uses the public internet for transit to and from the AWS public zone.

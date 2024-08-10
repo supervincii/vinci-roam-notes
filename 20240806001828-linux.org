@@ -1,0 +1,5 @@
+:PROPERTIES:
+:ID:       CE59F4E0-0C22-4D23-BB40-C2F93D1EC61A
+:END:
+#+title: Linux
+

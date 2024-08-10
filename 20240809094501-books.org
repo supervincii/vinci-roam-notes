@@ -1,0 +1,53 @@
+:PROPERTIES:
+:ID:       6EB32D3F-F6D6-4A1B-B0C0-F86B3206BE9B
+:END:
+#+title: Books
+
+* General
+
+- The Pragmatic Programmer
+- Modern Software Engineering
+- Code Complete: A Practical Handbook of Software Construction
+- Software Engineering at Google
+
+* Good Practices
+
+- Clean Code
+- Head First Design Patterns
+- Refactoring
+
+* Data Structures and Algorithms
+
+- Grokking Algorithms
+- Introduction to Algorithms
+
+* Data
+
+- Designing Data-Intensive Applications
+- Learning SQL
+
+* Testing
+
+- Growing OO Software by Tests
+- Unit Testing Principles, Practices, and Patterns
+- The Art of Unit Testing
+- TDD by Example
+
+* Software Architecture
+
+- Fundamentals of Software Architecture
+- Clean Architecture
+- Software Architecture: The Hard Parts
+- Domain Driven Design Quickly
+- A Philosophy of Software Design
+
+* Distributed Systems
+
+- Understanding Distributed Systems
+- Designing Distributed Systems
+
+* DevOps
+
+- DevOps Handbook
+- Continuous Delivery
+- Accelerate
