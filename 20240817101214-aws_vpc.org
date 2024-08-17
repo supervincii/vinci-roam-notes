@@ -1,0 +1,65 @@
+:PROPERTIES:
+:ID:       BBD11E2C-722B-4E9E-8B0D-EBC95863654E
+:END:
+#+title: AWS VPC
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+* Table of Contents :toc:
+- [[#vpc][VPC]]
+  - [[#default-vpc][Default VPC]]
+  - [[#custom-vpcs][Custom VPCs]]
+- [[#vpc-architecture][VPC Architecture]]
+
+* VPC
+Service to create private networks in AWS that other private services will run from.
+
+Used to connect AWS privte networks to on-premise networks, or other cloud platforms.
+
+A *VPC* is a virtual network inside AWS, withint *1 account* and *1 region*, making it a *regional service*.
+
+It is private and isolated unless you decide otherwise.
+
+Each VPC is allocated a range of IP addresses called ~VPC CIDR~ which defines the start and end range of IP addresses that the VPC can use.
+
+Two types: *Default VPC* and *Custom VPCs*
+
+** Default VPC
+
+Can only have 1 per region which can be removed & recreated.
+
+Initially created by AWS and come *pre-configured* in a specific way.
+- Internet Gateway
+- Security Group
+- Network ACL
+
+Only gets one VPC CIDR which is always ~172.31.0.0/16~, with ~/20~ subnet in each AZ in the region.
+
+Subnets assign public IPv4 addresses.
+
+** Custom VPCs
+
+Require the user to configure everything end-to-end in detail.
+
+100% private by default.
+
+Used in almost all serious AWS deployments because of the configurability.
+
+Have multiple CIDR ranges.
+
+* VPC Architecture
+- VPCs are created within an AWS account, within an AWS region
+- A region can have multiple custom VPCs created within it
+- There is no way for VPCs to communicate outside of their specifc network, unless configured
+
+- In a region we can have 1 default VPC
+- Default VPC is always pre-configured to have one subnet in every AZ in the region.
+- Each of these subnet use part of the VPC's range of IP addresses.
+- For example in us-east-2:
+  - us-east-2a: ~172.31.0.0/20~
+    - Start: ~172.31.0.0~
+    - End: ~172.31.15.255~
+  - us-east-2b: ~172.31.16.0/20~
+    - Start: ~172.31.16.0~
+    - End: ~172.31.15.255~
+  - us-east-2c: ~172.31.32.0/20~
+    - Start: ~172.31.32.0~
+    - End: ~172.31.47.255~

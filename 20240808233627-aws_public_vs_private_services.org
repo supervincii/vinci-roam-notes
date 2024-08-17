@@ -22,7 +22,7 @@ This is where Internet based services operate, like online stores, Gmail, and va
 
 ** Virtual Private Clouds (VPC)
 
-Also called the *AWS Private Zone*.
+[[id:BBD11E2C-722B-4E9E-8B0D-EBC95863654E][AWS VPC]] are also called the *AWS Private Zone*.
 
 Isolated, so VPCs cannot communicate with each other unless the user allows it. Nothing from the Internet can reach these private networks.
 

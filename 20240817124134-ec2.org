@@ -1,0 +1,67 @@
+:PROPERTIES:
+:ID:       B3839736-6663-4CFB-98CD-BE56A4F32A3A
+:END:
+#+title: EC2
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* Table of Contents :toc:
+- [[#elastic-compute-cloud-ec2][Elastic Compute Cloud (EC2)]]
+- [[#instance-lifecycle][Instance Lifecycle]]
+- [[#amazon-machine-image-ami][Amazon Machine Image (AMI)]]
+
+* Elastic Compute Cloud (EC2)
+
+Pretty much the default compute service within AWS. It provides access to VMs called "instances".
+
+It should be the default starting point for any compute requirement in AWS.
+
+EC2 is *IAAS (Infrastructure as a Service)*. Because it is IAAS, the unit of consumption is an instance.
+
+*Private* AWS service by default -- runs in the private AWS zone. EC2 instances are configured to launch into a single VPC subnet.
+
+*AZ* resilient, the instance fails if the AZ fails.
+
+Can have various instance sizes and capabilites.
+
+On demand billing, per second or per hour.
+
+Option for storage:
+- Local on-host storage
+- Elastic Block Store (EBS)
+
+* Instance Lifecycle
+EC2 instances has an attribute called *state* which indicates the instance condition.
+- Running
+- Stopped
+- Terminated
+
+- After provisioning, state = ~running~
+- Shutting down, state = ~running~ to ~stopped~
+- Start the instance, state = ~stopped~ to ~running~
+- Terminating can be done from ~running~ or ~stopped~ but it is a one way change, it is non reversible.
+
+State matter so much because it influences the charges for the instance.
+
+Charges Table: X = Charged by AWS
+
+| State      | CPU | Memory | Disk | Networking |
+|------------+-----+--------+------+------------|
+| Running    | X   | X      | X    | X          |
+| Stopped    |     |        | X    |            |
+| Terminated |     |        |      |            |
+
+* Amazon Machine Image (AMI)
+
+AMI is an image of an EC2 instance, used to create an EC2 instance, or can be created from an EC2 instance.
+
+Contains:
+- Attached permissions
+  - Control accounts that can use the AMI
+  - *Public* -- everyone allowed
+  - *Owner* - *Implicit* allow
+  - *Explicit* - specific AWS accounts allowed
+- Root Volume
+  - Drive that *boots* the OS
+- Block Device Mapping
+  - Configuration that links the volumes the AMI has and how it is presented in the OS.
+

@@ -1,0 +1,55 @@
+:PROPERTIES:
+:ID:       3C8A657C-076F-427C-BAA9-038E33468D05
+:END:
+#+title: AWS Global Infrastructure
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* Table of Contents :toc:
+- [[#global-infrastructure-design][Global Infrastructure Design]]
+- [[#aws-regions][AWS Regions]]
+  - [[#benefits][Benefits]]
+  - [[#availability-zones][Availability Zones]]
+- [[#aws-edge-locations][AWS Edge Locations]]
+- [[#service-resilience][Service Resilience]]
+
+* Global Infrastructure Design
+
+Although AWS is a global cloud platform, it is composed of smaller groupings of infrastructure connected by a high speed network.
+
+
+* AWS Regions
+Regions in AWS is an area of the world where AWS has selected and in it, is a full deployment of AWS infrastructure.
+
+Regions are geographically spread, meaning that we can use these regions to design systems that can withstand global level disasters. Interacting with AWS services is the same as interacting with that service in a specific region. AWS Elastic Compute in N. Virginia is separate from the one in Sydney, and so on.
+
+** Benefits
+- Geographic Separation - Isolated *Fault Domain*
+- Geopolitical Separation - Different *governance*
+- Location Control - Performance
+  
+** Availability Zones
+Inside every region are multiple *availability zones*.
+
+For the case of ~ap-southeast-2~, it currently has 3 availability zones:
+- ~ap-southeast-2a~
+- ~ap-southeast-2b~
+- ~ap-southeast-2c~
+
+Failure in 1 availability zone does not affect other AZs. As an architect, we can design solutions that distribute components across multiple AZs.
+
+* AWS Edge Locations
+Smaller than regions, and generally only have *content distribution services*, and some types of *edge computing*. It serves as local distribution points.
+
+Useful for fast and efficient data transfer at it is sometimes closer to end users.
+
+* Service Resilience
+
+Can be defined in one of three ways:
+- *Globally* Resilient
+  - Service operates globally with one database
+  - Data is replicated across multiple regions
+- *Region* Resilient
+  - One set of data in a region
+  - Replicates data to multiple AZs in the region
+- *AZ* Resilient
+  - Service that runs in a single AZ
