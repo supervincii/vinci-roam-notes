@@ -1,0 +1,46 @@
+:PROPERTIES:
+:ID:       D1808198-7DD1-4F2E-90C7-2BC253B11FC5
+:END:
+#+title: CloudFormation Basics
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* CloudFormation
+CloudFormation is a tool which let the user *create, update, and delete infrastructure in AWS* in a *consistent and repeatable way*.
+
+A CloudFormation template is written in ~YAML~ or ~JSON~.
+
+Resources inside a CloudFormation template are called *logical resources*.
+
+Logical resources has:
+- Type: type that CloudFormation uses to know exactly what to create
+- Properties: configuring the resources
+
+After giving the template to CFN, it creates a "stack" that contains all the logical resources that the template wants it to create.
+
+For any logical resource in the stack, CFN makes a corresponding *physical resource* in the AWS account.
+
+* Template Fields
+** Resources
+The only part of the template that is *mandatory*.
+
+It represents AWS resources.
+
+** Description
+Free text field that allows the author add description about what the template does.
+
+It must directly follow the ~AWSTemplateFormatVersion~ field.
+
+** Metadata
+Controls the UI in the AWS console on how it presents the template.
+
+** Parameters
+Adds fields that prompts the user for more information.
+
+** Mappings
+Allow creation of lookup tables.
+
+** Conditions
+Allows decision makings in the template.
+
+** Outputs
+Presents outputs from the template being applied.

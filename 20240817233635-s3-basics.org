@@ -1,0 +1,52 @@
+:PROPERTIES:
+:ID:       B71A21F8-E122-48A0-9D39-80C5BC9A368C
+:END:
+#+title: S3 Basics
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* S3
+*Global* Storage Platform - Regional based/resilient because data is stored in a specific AWS region at rest (not being used, just stored).
+
+S3 is a *public* service.
+
+It is perfect for hosting large amounts of data.
+
+*Economical* and can be accessed via GUI/CLI/API/HTTP
+
+Think of it as the default storage service for AWS.
+
+The two main things that it delivers are:
+- *Objects*
+  - Data that S3 stores.
+- *Buckets*
+  - Containers for objects
+
+* Objects
+Made up of two main components and some associated metadata.
+- Object Key (Name)
+- Value: Content or data of the object
+  - 0 bytes up to 5 terrabytes in size
+
+Other values:
+- Version ID
+- Metadata
+- Access Control
+- Subresources
+
+* Buckets
+Created in a specific AWS region.
+
+It is defined by its bucket name, that is *globally unique*. Composed of 3-63 characters, all lowercase, no underscores.
+
+Can hold an unlimited number of objects.
+
+Objects stored in the bucket is at the root level. There is no structure to the data. Though file names can have ~prefixes~ which can "represent" folders.
+
+Has a *100 soft limit*, *1000 hard per account*.
+
+
+* Patterns and Anti-Patterns
+
+- S3 is an object store -- not file or block
+- Great for large scale data storage, distribution, or upload.
+- Should be your default for *input* and/or *output* to many AWS products.

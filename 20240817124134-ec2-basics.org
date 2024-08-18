@@ -1,7 +1,7 @@
 :PROPERTIES:
 :ID:       B3839736-6663-4CFB-98CD-BE56A4F32A3A
 :END:
-#+title: EC2
+#+title: EC2 Basics
 #+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
 
 * Table of Contents :toc:
@@ -64,4 +64,3 @@ Contains:
   - Drive that *boots* the OS
 - Block Device Mapping
   - Configuration that links the volumes the AMI has and how it is presented in the OS.
-
