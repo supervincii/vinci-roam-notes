@@ -1,0 +1,78 @@
+:PROPERTIES:
+:ID:       9B21C34B-A914-4D3E-90F6-3E25F6A02C6F
+:END:
+#+title: Python OOP
+#+tags: [[id:F67AB522-3EBC-4FE9-A002-34E1F7799254][OOP]]
+
+* Table of Contents :toc:
+- [[#class-vs-instance-variables][Class vs Instance Variables]]
+- [[#methods-in-a-class][Methods in a Class]]
+  - [[#instance-methods-methods][Instance Methods (Methods)]]
+  - [[#class-methods][Class Methods]]
+  - [[#static-methods][Static Methods]]
+
+* Class vs Instance Variables
+
+Class variables are shared by all instances or objects of the classes. A change would affect all the instances.
+
+Instance variables are *unique* to each instance. A change would affect the value in that specific object only.
+
+Implementation:
+#+begin_src python
+  class ClassVar:
+      teamName: "Arsenal" # class variable
+
+      def __init__(self, name):
+          self.name = name # instance variable
+#+end_src
+
+* Methods in a Class
+** Instance Methods (Methods)
+#+begin_src python
+  class Test:
+      def __init__(self, arg1, arg2):
+          self.arg1 = arg1
+          self.arg2 = arg2
+
+      def test_method(self):
+          result = self.arg1 + self.arg2
+          return result
+#+end_src
+
+~self~ is a variable that represents the object itself. Take note that the first variable in an instance object is always a reference to the object. The variable name does not matter as long as it is also the same one used when referencing instance variables.
+
+** Class Methods
+#+begin_src python
+  class Test:
+      classVariable = "test"
+
+      @classmethod
+      def test_demo(cls):
+          return cls.classVariable
+
+
+  print(Test.test_demo())
+#+end_src
+
+Class methods work with *class variables*. It can be accessed using the class name rather than its object.
+
+They are usually used to access and modify class variables
+
+~cls~ works like ~self~.
+
+** Static Methods
+#+begin_src python
+  class Test:
+      @staticmethod
+      def demo():
+          print("hello world")
+
+  new = Test()
+  print(new.demo)
+#+end_src
+
+Have no direct correlation to class or instance variables. They are used as utility functions inside the class and cannot modify class attributes.
+
+It can be accessed using the class name or the object name.
+
+The purpose of static methods is produce a useful result.

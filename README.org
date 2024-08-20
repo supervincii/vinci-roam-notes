@@ -1,0 +1,5 @@
+#+title: Roam Notes
+
+This repo is a collection of notes that I use when studying for various tech topics.
+
+Disclaimer: This is not all my notes. I also take notes a notebook for the physical/kindle books that I read.

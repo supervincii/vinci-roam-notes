@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       DAAB8973-D73D-49BE-B2AF-91DB5A9B6CDE
+:END:
+#+title: CloudWatch Basics
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* CloudWatch
+CloudWatch collects and manages operational data. We could think about CloudWatch as three main products in one:
+1. *Metrics* - Data relating to AWS products, apps, or on-premises services.
+2. *CloudWatch Logs* - Collection, monitoring, and actions based on logging data.
+3. *CloudWatch Events* - Functions as an event hub.
+
+CloudWatch is a public service.
+
+* Namespace
+It is a container for monitoring data.
+
+Namespaces have a name which can be anything as long as it stays within the ruleset of the namespace names with an exception, which is ~AWS/service~. For example, ~AWS/EC2~, which contains all the metric data for EC2.
+
+It contains related metrics.
+
+* Metric
+A collection of related data points in a time ordered structure.
+
+* Datapoints
+Consists of:
+- Timestamp when the measurment is computed
+- Value
+
+* Dimension
+Dimensions are name-value pairs which enables CloudWatch to separate things within a metric.
+
+* Alarms
+Connected to a metric, and based on the alarm, it can take an action on that metric.
