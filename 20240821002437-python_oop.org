@@ -10,6 +10,12 @@
   - [[#instance-methods-methods][Instance Methods (Methods)]]
   - [[#class-methods][Class Methods]]
   - [[#static-methods][Static Methods]]
+  - [[#access-modifiers][Access Modifiers]]
+- [[#information-hiding][Information Hiding]]
+  - [[#encapsulation][Encapsulation]]
+- [[#inheritance][Inheritance]]
+  - [[#implementation][Implementation]]
+  - [[#super-function][~super()~ function]]
 
 * Class vs Instance Variables
 
@@ -76,3 +82,195 @@ Have no direct correlation to class or instance variables. They are used as util
 It can be accessed using the class name or the object name.
 
 The purpose of static methods is produce a useful result.
+
+** Access Modifiers
+
+*** Public Attributes
+Attributes that can be accessed inside the class and outside the class.
+
+By default, all methods and properties are publicly available.
+
+*** Private Attributes
+Cannot be accessed from outside the class but *can be accessed inside the class*.
+
+The aim of private attributes is to keep the data hidder from users and other classes.
+
+To make members private, we can add a ~double underscore~ prefix (~__~).
+
+#+begin_src python
+  class Employee:
+      def __init__(self, ID, salary):
+          self.ID = ID
+          self.__salary = salary # private property
+
+      def displaySalary(self): # public method
+          print("Salary:", self.__salary)
+
+      def __displayID(self): # private method
+          print("ID:", self.ID)
+
+  Steve = Employee(3789, 2500)
+  print("ID:", Steve.ID)
+  Steve.displaySalary() # will work because it is a public method and methods in the class can access the private properties inside the class
+  print("Salary:", Steve.__salary) # cause an error because we are accessing a private property
+  Steve.__displayID() # cause an error
+#+end_src
+
+If *absolutely necessary* to access the private properties, user can access it from outside the class using ~_<ClassName>~ prefix.
+
+#+begin_src python
+  print(Steve._Employee__salary)
+#+end_src
+
+* Information Hiding
+It is good practice to limit access to class members to make an object-oriented system more reliable and error free.
+
+Information hiding refers to the concept of *hiding the inner workings of a class* and simply providing an interface with the outside world.
+
+Components of data hiding:
+- Encapsulation
+- Abstraction
+
+** Encapsulation
+A fundamental programming technique used to achieve data hiding in OOP. It refers to the binding of data and methods to manipulate data in a single unit.
+
+When encapsulating classes, a good convention is to declare all variables of a class ~private~, which restricts direct access to the code outside the class. To communicate with the class, we implement ~public~ methods, often called as ~getters~ & ~setters~.
+
+*** Getters & Setters
+A ~getter~ method allows reading a property's value.
+
+A ~setter~ method allows modifying a property's value.
+
+#+begin_src python
+  class User:
+      def __init__(self, username=None):
+          self.__username = username
+
+      def setUsername(self, x):
+          self.__username = x
+
+      def getUsername(self):
+          return (self.__username)
+#+end_src
+
+* Inheritance
+Inheritance provides a way to create a class from an existing class. This new class is a specialized version of the exisiting class which inherits all the /non-private/ fields. and /methods/ of the existing class.
+
+Basically the existing class is used as a /base point/ for the new class.
+
+A good example that we are already using is creating a ~class~ in Python. The created class is a subclass of the built-in Python ~object class~.
+
+** Implementation
+#+begin_src python
+  class ParentClass:
+      # attributes
+
+  class ChildClass(ParentClass):
+      # attributes
+#+end_src
+
+Example:
+#+begin_src python
+  class Vehicle:
+      def __init__(self, make, color, model):
+          self.make = make
+          self.color = color
+          self.model = model
+
+      def printDetails(self):
+          print("Manufacturer:", self.make)
+          print("Color:", self.color)
+          print("Model:", self.model)
+
+
+  class Car(Vehicle):
+      def __init__(self, make, color, model, doors):
+          # calling the constructor from parent class
+          Vehicle.__init__(self, make, color, model)
+          self.doors = doors
+
+      def printCarDetails(self):
+          self.printDetails() # inherits the method from the parent class
+          print("Doors:", self.doors)
+
+
+  obj1 = Car("Suzuki", "Grey", "2015", 4)
+  obj1.printCarDetails()
+#+end_src
+
+** ~super()~ function
+The ~super()~ function is used in a child class to *refer* to the parent class without explicitly naming it. It makes the code more manageable and there is no need to know the name of the parent class to access its attributes.
+
+*** Use Cases
+
+**** Accessing parent class properties
+#+begin_src python
+  class Vehicle:  # defining the parent class
+      fuelCap = 90
+
+
+  class Car(Vehicle):  # defining the child class
+      fuelCap = 50
+
+      def display(self):
+          # accessing fuelCap from the Vehicle class using super()
+          print("Fuel cap from the Vehicle Class:", super().fuelCap)
+
+          # accessing fuelCap from the Car class using self
+          print("Fuel cap from the Car Class:", self.fuelCap)
+
+
+  obj1 = Car()  # creating a car object
+  obj1.display()  # calling the Car class method display()
+#+end_src
+
+**** Calling the parent class methods
+Used when the immediate child class have methods with the same name.
+
+#+begin_src python
+  class Vehicle:  # defining the parent class
+      def display(self):  # defining display method in the parent class
+          print("I am from the Vehicle Class")
+
+
+  class Car(Vehicle):  # defining the child class
+      # defining display method in the child class
+      def display(self):
+          super().display()
+          print("I am from the Car Class")
+
+
+  obj1 = Car()  # creating a car object
+  obj1.display()  # calling the Car class method display()
+
+#+end_src
+
+**** Using with initializers
+Used to call the initializer of the parent class, from inside the initializer of the child class.
+
+#+begin_src python
+  class Vehicle:
+      def __init__(self, make, color, model):
+          self.make = make
+          self.color = color
+          self.model = model
+
+      def printDetails(self):
+          print("Manufacturer:", self.make)
+          print("Color:", self.color)
+          print("Model:", self.model)
+
+
+  class Car(Vehicle):
+      def __init__(self, make, color, model, doors):
+          super().__init__(make, color, model)
+          self.doors = doors
+
+      def printCarDetails(self):
+          self.printDetails()
+          print("Door:", self.doors)
+
+
+  obj1 = Car("Suzuki", "Grey", "2015", 4)
+  obj1.printCarDetails()
+#+end_src
