@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       4297F640-F0FF-4008-B7BF-B12E369DE0FB
+:END:
+#+title: Shared Responsibility Model
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+X = Services that the customer manages
+The remaining ones without an X is managed by the cloud provider (AWS).
+
+| SERVICES       | ON-PREMISE | DC HOSTED | IaaS | PaaS | SaaS |
+|----------------+------------+-----------+------+------+------|
+| Interface      | X          | X         | X    | X    |      |
+| Application    | X          | X         | X    | X    |      |
+| Data           | X          | X         | X    | X    |      |
+| Runtime        | X          | X         | X    |      |      |
+| Container      | X          | X         | X    |      |      |
+| O/S            | X          | X         | X    |      |      |
+| Hypervisor     | X          | X         |      |      |      |
+| Servers        | X          | X         |      |      |      |
+| Infrastructure | X          | X         |      |      |      |
+| Facilities     | X          |           |      |      |      |
+
+At a high level, ~AWS is responsible for the security OF the cloud~, while the ~customer is reponsible for the security IN the cloud~.

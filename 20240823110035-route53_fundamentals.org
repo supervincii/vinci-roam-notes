@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       06A4271B-D350-4D3A-858F-61C10A0EF14E
+:END:
+#+title: Route53 Fundamentals
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* Route53
+R53 is AWS's managed DNS product. It provides 2 main services:
+1. Register domains
+2. Host zones on managed name servers
+
+R53 is a *global service* with a single database.
+
+* R53 Architecture
+** Register Domains
+R53 has major relationships with all the major domain registries.
+
+Steps R53 takes when a domain is registered:
+- Checks with the registry for that top level domain if it is available.
+- R53 then creates a zone file for the domain being registered.
+  - A ~zone file~ is just a DB which contains all the DNS information for a particular domain.
+- Allocates name service for the zone, which are managed servers created by R53, distributed globally.
+  - Generally 4 in one individual zone.
+  - Takes the zone file (hosted zone) and puts into the 4 managed servers.
+- Communicates with the domain registry, adds the name server records into the zone file for the top level domain.
+
+** Hosted Zones
+Hosted zones are basically zone files in AWS. It is hosted on four managed name servers.
+
+Can be ~public~, meaning that data can be accessed on the public Internet, or ~private~, meaning that it is linked to one or more VPCs, and only accessible from within the VPCs.
+
+A hosted zone hosts DNS records.

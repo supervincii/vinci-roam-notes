@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       DA8867F1-71DE-4BAB-8E80-89F9AC7B2ECA
+:END:
+#+title: Fault Tolerance
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+Fault tolerance means that if a system has faults, it *should continue to operate properly* even if those faults are present and being fixed.
+
+Comparing with HA, HA is about maximizing uptime, FA is about operating through failure.
+
+Implementing FA is much more expensive than HA because a system needs redundancies and needs to be designed in such a way that it will operate through failure.

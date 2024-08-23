@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       2E843DB4-7F73-44E6-B5DF-93564E8767AA
+:END:
+#+title: High Availability
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+High availability (HA) is not aiming to stop failure. A highly available system is one designed to be online and providing services as often as possible.
+
+Components in a HA system should be easily replaced when it fails, as quickly as possible. Often using automation.
+
+Basically, HA is about maximizing a system's online time.
+
+User disruption, while not ideal is okay. HA is only aboud minimizing any outages.

@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       3FB2FE2F-8FB8-42BF-89DC-E5EBA450004D
+:END:
+#+title: Disaster Recovery
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+Disaster recovery is about what to plan for and do when disaster occurs which knocks out a system. It comes in two stages:
+- Pre-planning
+- DR Process
+
+It is used when HA and FT does not work.
+
+Example of pre-planning:
+- Doing regular data backups and storing them somewhere else
+
+Example of DR process:
+- Having a backup system away from the main system ready to replace the main system when disaster occurs.
