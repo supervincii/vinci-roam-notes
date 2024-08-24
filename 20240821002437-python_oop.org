@@ -16,6 +16,7 @@
 - [[#inheritance][Inheritance]]
   - [[#implementation][Implementation]]
   - [[#super-function][~super()~ function]]
+  - [[#types-of-inheritance][Types of Inheritance]]
 
 * Class vs Instance Variables
 
@@ -274,3 +275,7 @@ Used to call the initializer of the parent class, from inside the initializer of
   obj1 = Car("Suzuki", "Grey", "2015", 4)
   obj1.printCarDetails()
 #+end_src
+
+** Types of Inheritance
+*** Single Inheritance
+There is only one class extending from another class.

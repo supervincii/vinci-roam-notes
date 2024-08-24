@@ -4,6 +4,12 @@
 #+title: Route53 Fundamentals
 #+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
 
+* Table of Contents :toc:
+- [[#route53][Route53]]
+- [[#r53-architecture][R53 Architecture]]
+  - [[#register-domains][Register Domains]]
+  - [[#hosted-zones][Hosted Zones]]
+
 * Route53
 R53 is AWS's managed DNS product. It provides 2 main services:
 1. Register domains

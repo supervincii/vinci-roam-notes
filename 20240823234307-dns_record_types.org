@@ -1,0 +1,51 @@
+:PROPERTIES:
+:ID:       C4449B47-BF2E-4787-892E-170B926A4709
+:END:
+#+title: DNS Record Types
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* Nameserver (NS) Records
+Record types that will allow delegation to occur in DNS
+
+
+* A & AAAA Records
+Maps hostname to IP addresses.
+
+~A records~ = IPv4
+~AAAA record~ = IPv6
+
+* CNAME Records
+CNAME (Canonical Name) lets you create the equivalent DNS shortcut (host-to-host records).
+
+Creating multiple CNAMEs and pointing them all to an A server record means that they will all resolve to the same IPv4 address.
+
+They are used to reduce admin overhead. CNAME however cannot point directly at an IP address, only other names.
+
+* MX Record
+Important on how email on the internet works.
+
+Used to send to an address. The email server needs to know which server to pass the email onto.
+
+In the case of sending to ~hi@google.com~:
+- We start at the ~google.com~ zone where we have an A record with the name ~mail~ (which does not matter) pointing at an IP address.
+- Inside the zone is also a collection of MX records [MX 10 mail, MX 20 mail.other.domain], which have two main parts:
+  - Priority
+  - Value (~mail~, ~mail.other.domain~)
+    - Can be just the host
+      - ~mail~ here is assumed to part of the same zone it is in, so it becomes ~mail.google.com~.
+    - ~mail.other.domain~ -> fully qualified domain name
+      - Can point an the host on the same zone
+      - Or point something outside that zone
+- The email server looks at the 2 address on the mail, ~hi@google.com~, and it focuses on the domain
+- Does an MX query using DNS on ~google.com~.
+- Retrieves any MX records, in this case 2 different records
+- The priority value is used to determine which record to choose. Lower number = higher priority
+- The server gets the result query back and uses it to connect to the mail server for ~google.com~ via SMTP to deliver the mail
+
+An MX server is how a server can find the mail server for a specific domain.
+
+* TXT Records
+TXT records allow to add arbitrary text to a domain. One use for TXT record type is to prove domain ownership.
+
+* DNS Time To Live
+TTL value is something that can be set on DNS records. It is a numeric value in seconds indicating how long the records can be cached for.

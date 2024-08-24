@@ -1,0 +1,154 @@
+:PROPERTIES:
+:ID:       821A025B-8A68-428D-9701-AD1A69A69635
+:END:
+#+title: Study Plan
+
+* Year 1: Strengthening Foundations in Computer Science
+** Months 1-2: Computer Architecture & Programming in C
+
+    Computer Architecture
+        Resource: "Computer Systems: A Programmer's Perspective" (CS: APP) by Bryant and O'Hallaron
+        Focus:
+            Understand the basics of computer systems, machine-level programming, data representation, and assembly language.
+            Learn how computer architecture influences software performance.
+        Activities:
+            Work through book exercises.
+            Implement a simple project in assembly language, like a basic calculator.
+        Estimated Time: 8 weeks
+
+    Programming in C
+        Resource: "C Programming: A Modern Approach" by K. N. King
+        Focus:
+            Strengthen understanding of low-level programming with C, focusing on pointers, memory management, and manual memory handling.
+        Activities:
+            Complete exercises and small projects (e.g., file I/O, memory management utilities).
+        Estimated Time: 8 weeks (concurrent with Computer Architecture)
+
+* Months 3-4: Discrete Mathematics
+
+    Discrete Mathematics
+        Resource: "Discrete Mathematics and Its Applications" by Kenneth H. Rosen
+        Focus:
+            Study essential topics like logic, set theory, combinatorics, graph theory, and number theory.
+            Understand proof techniques and their applications in computer science.
+        Activities:
+            Solve problems and exercises from the book.
+            Apply discrete math concepts to small programming tasks or algorithm design.
+        Estimated Time: 8 weeks
+
+* Months 5-6: Data Structures and Algorithms (DSA)
+
+    Data Structures and Algorithms
+        Resources: "Grokking Algorithms" by Aditya Bhargava, "Introduction to Algorithms" (CLRS) by Cormen et al.
+        Focus:
+            Deep dive into essential data structures (arrays, linked lists, stacks, queues, trees, graphs) and algorithms (sorting, searching, dynamic programming).
+        Activities:
+            Solve algorithm problems on platforms like LeetCode or HackerRank.
+            Implement data structures and algorithms in C or another familiar language.
+        Estimated Time: 8 weeks
+
+* Months 7-8: Operating Systems (O/S) & Software Engineering Principles
+
+    Operating Systems
+        Resource: "Operating Systems: Three Easy Pieces" (OSTEP) by Remzi Arpaci-Dusseau and Andrea Arpaci-Dusseau
+        Focus:
+            Learn OS concepts such as processes, threads, concurrency, memory management, and file systems.
+        Activities:
+            Complete book exercises, implement a simple shell or file system simulator.
+        Estimated Time: 8 weeks
+
+    Software Engineering Principles
+        Resources: "Clean Code" by Robert C. Martin, "The Pragmatic Programmer" by Andrew Hunt and David Thomas
+        Focus:
+            Refine coding practices, software design principles, and understand code quality.
+        Activities:
+            Refactor code from existing projects, apply best practices, and review case studies.
+        Estimated Time: 4 weeks (concurrent with Operating Systems)
+
+* Months 9-10: Databases (Introduction) & Computer Networks
+
+    Introduction to Databases
+        Resource: CMU Database Course (Introduction to Database Systems), "Database System Concepts" by Silberschatz et al.
+        Focus:
+            Learn relational database theory, SQL, database design, normalization, and indexing.
+        Activities:
+            Design and implement a basic CRUD application using PostgreSQL or MySQL.
+        Estimated Time: 8 weeks
+
+    Computer Networks
+        Resource: "Computer Networking: A Top-Down Approach" by Kurose and Ross
+        Focus:
+            Understand networking principles, the OSI model, TCP/IP, and fundamental network protocols.
+        Activities:
+            Complete exercises on network protocols, design a basic network application.
+        Estimated Time: 4 weeks (concurrent with Introduction to Databases)
+
+Year 2: Advanced Topics and Practical Applications
+* Months 1-2: Advanced Databases & Distributed Systems
+
+    Advanced Databases
+        Resource: CMU Advanced Database Course, "Designing Data-Intensive Applications" by Martin Kleppmann
+        Focus:
+            Study advanced database topics like transaction management, query optimization, distributed databases, and NoSQL databases.
+        Activities:
+            Work on optimizing queries, building a scalable database architecture, or implementing an advanced database-backed application.
+        Estimated Time: 8 weeks
+
+    Distributed Systems
+        Resource: "Distributed Systems: Concepts and Design" by Coulouris et al., MIT 6.824 Distributed Systems Course
+        Focus:
+            Understand key distributed systems concepts, including fault tolerance, consistency, replication, and distributed algorithms.
+        Activities:
+            Build a simple distributed system or key-value store.
+        Estimated Time: 4 weeks (concurrent with Advanced Databases)
+
+* Months 3-4: Compilers & Low-Level Programming
+
+    Compilers and Language Design
+        Resource: "Compilers: Principles, Techniques, and Tools" (The Dragon Book)
+        Focus:
+            Learn about lexical analysis, parsing, syntax trees, code optimization, and code generation.
+        Activities:
+            Implement a simple compiler or interpreter for a basic language.
+        Estimated Time: 8 weeks
+
+    Low-Level Programming and Systems Programming
+        Resources: "Programming Rust" by Jim Blandy et al., "Advanced Programming in the UNIX Environment" by Stevens and Rago
+        Focus:
+            Study systems programming concepts, such as system calls, concurrency, and network programming.
+        Activities:
+            Develop a multi-threaded server or networked application in Rust or C.
+        Estimated Time: 4 weeks (concurrent with Compilers)
+
+* Months 5-6: Capstone Projects
+
+    Capstone Projects
+        Goal: Apply all skills and knowledge gained in a comprehensive, real-world project.
+        Projects:
+            Develop a fully functional database engine, a distributed system, or a monitoring tool.
+        Estimated Time: 8 weeks
+
+* Months 7-8: Review Core Concepts & Professional Development
+
+    Review Core Concepts
+        Goal: Reinforce understanding of key topics and solidify foundational knowledge.
+        Activities:
+            Revisit challenging subjects, solve additional problems, and refine previous projects.
+        Estimated Time: 6 weeks
+
+    Professional Development
+        Activities:
+            Participate in networking opportunities, contribute to open-source projects, prepare for interviews or certifications.
+        Estimated Time: 2 weeks
+
+* Months 9-12: Advanced Specialization and Final Capstone Projects
+
+    Advanced Specialization
+        Focus: Deep dive into specialized topics like advanced database optimization, further distributed systems, or performance engineering.
+        Estimated Time: 8 weeks
+
+    Final Capstone Projects
+        Goal: Complete a large-scale project that integrates all acquired skills and knowledge.
+        Projects:
+            Undertake a complex, real-world application relevant to database development or systems engineering.
+        Estimated Time: 4 weeks
