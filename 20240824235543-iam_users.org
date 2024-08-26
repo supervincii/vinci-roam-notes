@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       40935318-E27F-4078-B5F6-EFD1AF61EB78
+:END:
+#+title: IAM Users
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* IAM Users
+IAM Users are an identity used for anything requiring long-term AWS access e.g. Humans, Applications, or service accounts.
+
+IAM starts with a *principal*. An entity, trying to access an AWS account. For a principal to interact with AWS resources, it needs to make a request to IAM and be authenticated.
+
+Authentication is done by using username & password, or access keys.
+
+After authentication, the principal is now called an ~authenticated identity~, which then allows AWS to know which policies to apply.
+
+- Each AWS account can only have up to ~5000 IAM users~.
+- An IAM user can be a member of 10 IAM groups.
+
+* Amazon Resource Names
+ARNs do one thing: Uniquely identify resources within any AWS accounts.
+
+Formats:
+- ~arn:partition:service:region:account-id:resource-id~
+- ~arn:partition:service:region:account-id:resource-type/resource-id~
+- ~arn:partition:service:region:account-id:resource-type:resource-id~
+
+Examples:
+- ~arn:aws:s3:::catgifs~
+  - This represents the *bucket* itself.
+- ~arn:aws:s3:::catgifs/*~
+  - ~catgifs/*~ represents the *objects* inside the bucket.
+
+The *bucket* and the *objects* inside the bucket are not the same thing.

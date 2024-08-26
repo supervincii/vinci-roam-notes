@@ -1,0 +1,129 @@
+:PROPERTIES:
+:ID:       26E78877-E084-4A98-B63D-46CE230A1C6F
+:END:
+#+title: IAM Identity Policies
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* Table of Contents :toc@4:
+- [[#iam-policies][IAM Policies]]
+  - [[#statements][Statements]]
+    - [[#statement-id-sid][Statement ID (SID)]]
+    - [[#action][Action]]
+    - [[#resources][Resources]]
+    - [[#effect][Effect]]
+  - [[#sample-cases][Sample Cases]]
+  - [[#rules][Rules]]
+  - [[#types-of-policies][Types of Policies]]
+
+* IAM Policies
+A type of policy that gets attached to identities inside AWS. It is a set of security statements in AWS. It *grants/denies* access to AWS products and features to any identity which uses that policy.
+
+Identity policies (policy documents) are created using JSON. At a high level, it is just 1 or more statements.
+#+begin_src js
+  // sample policy
+  {
+      "Version": "2012-10-17",
+      "Statement": [
+          {
+              "Sid": "FullAccess",
+              "Effect": "Allow",
+              "Action": ["s3:*"],
+              "Resource": ["*"]
+          },
+          {
+              "Sid": "DenyCatBucket",
+              "Action": ["s3:*"],
+              "Effect": "Deny",
+              "Resource": ["arn:aws:s3:::catgifs", "arn:aws:s3:::catgifs/*"]
+          },
+      ]
+  }
+#+end_src
+
+** Statements
+*Statements* are the ones that grant/deny permissions to AWS services.
+
+Every interaction with AWS is a combination of two main things:
+1. The ~resource~ you are interacting with
+2. The ~actions~ you're attempting to perform on that ~resource~
+
+A statement only applies if the interaction with AWS match the ~action~ and the ~resource~.
+
+*** Statement ID (SID)
+- Optional field
+- Lets you identify a statement and what it does
+
+*** Action
+Format: ~[<SERVICE>:<OPERATION>]~
+
+- Matches one/more actions.
+- Can be very specific and list individual action/s
+- Can also use wildcards (~*~) that matches any ~<SERVICE>~ operation
+
+*** Resources
+Format: ~<ARN>~
+
+- Matches AWS resources
+- Can use wildcards (~*~)
+- Can also specify lists of AWS resources
+
+*** Effect
+Either ~Allow~ or ~Deny~.
+
+It controls what AWS does.
+
+** Sample Cases
+/Use the sample policy above/
+
+Statement 1: All S3 actions on all S3 resource
+Statement 2: Denies access ~catgifs~ bucket and all objects inside that bucket
+
+The case above states that: The user has access to all S3 resources and can do all S3 actions on it EXCEPT the ~catgifs~ bucket and all the objects inside that bucket.
+
+** Rules
+Rules are ordered based on priority.
+
+1. Explicit DENY
+   #+begin_src js
+     // ...
+     {
+         "Sid": "DenyCatBucket",
+         "Action": ["s3:*"],
+         "Effect": "Deny",
+         "Resource": ["arn:aws:s3:::catgifs", "arn:aws:s3:::catgifs/*"]
+     },
+     // ...
+   #+end_src
+2. Explicit ALLOW
+   #+begin_src js
+     // ...
+     {
+         "Sid": "FullAccess",
+         "Effect": "Allow",
+         "Action": ["s3:*"],
+         "Resource": ["*"]
+     }
+     // ...
+   #+end_src
+3. Default DENY (Implicit)
+   - Identities start off with no access to AWS resources
+   - Not allowed access = No access
+
+In the case of a user, which have the following:
+- Mulitple polices
+- Under a group which has a policy
+- Access a resource which have an attached resource policy
+
+AWS evaluates all the policies all at once but the same rules apply. *DENY-ALLOW-DENY*.
+
+** Types of Policies
+
+- *Inline Policy*
+  - Policy attached to each identity/person individually.
+  - Normally used for exceptions
+- *Managed Policy*
+  - Created as their own object
+  - Detach the policy to any identities that need the access rights
+  - Reusable
+  - Low management overhead
+  - Two types which are: *AWS Managed Policies* and *Customer Managed Policies*

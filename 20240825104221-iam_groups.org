@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       FDFC1D19-933B-420D-ACD8-4292BF78C26C
+:END:
+#+title: IAM Groups
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* IAM Groups
+Container for users. Basically organizing IAM users.
+
+A user cannot login to IAM groups.
+
+Benefits:
+1. Allow administrator-style management of users
+2. Groups can have policies attached to them which is both ~inline~ and ~managed~ policies
+   - Users inside the group can also have attached policies with them
+   - The policies are merged and evaluated by AWS as one
+
+Nesting is not applicable. Basically we cannot have groups within groups.
+
+There is a limit of ~300 groups~ per account, but it can be increased with a support ticket.
+
+Groups are not a *true identity*. It cannot be referenced as a principal in a policy. Basically resource policy cannot grant access to IAM groups.
