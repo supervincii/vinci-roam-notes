@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       5B68541A-846F-4021-B3BF-91503CE16EA2
+:END:
+#+title: Security Token Service
+#+tags: [[id:CCF0A997-5D16-4F49-A032-1A1FADF9B505][Developer Associate]]
+
+* STS
+Generates temporary credentials (~sts:AssumeRole*~). It generally is similar to access keys except that they expire, and doensn't belong to the identity assuming the role.
+
+For another identity such as an AWS identity or an external identity (known as Web Identity Federation), these temporary credentials are requested.
+
+** Temporary Credentials
+- AccessKeyID: Unique ID of the credentials
+- Expiration: Date and time of credential expiration
+- SecretAccessKey: Used to sign requests
+- SessionToken: Unique token which must be passed with all requests

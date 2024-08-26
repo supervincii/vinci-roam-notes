@@ -1,0 +1,41 @@
+:PROPERTIES:
+:ID:       F133C490-3524-4559-8FEB-B4529668ED0D
+:END:
+#+title: Service Control Policies
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* Service Control Policies
+SCPs are a feature of AWS organizations which can be used to restrict AWS accounts. It is a policy document, and can be attached to organizations as a whole by attaching them to the root container, or to one or more OUs, or to individual AWS accounts.
+
+Even if the management accounts has an SCP attached to it, either via directly, or on the root container of the organization, *IT IS NEVER AFFECTED BY SCPs*.
+
+SCPs are *account permissions boundaries*. Meaning that they limit what an AWS account can do, *including the account root user.*
+
+SCPs however *do not grant permissions*.
+
+** ~Allow~ List vs ~Deny~ List
+SCPs can be used in two ways:
+- ~Allow~ list: block all by default and allow certain services.
+- ~Deny~ list: allow by default and block certain services. /(default)/
+
+AWS apply a default policy when enabling SCPs in an organization called ~FullAWSAccess~, applied to the organization and all OUs within that organization.
+#+begin_src js
+  // FullAWSAccess
+  {
+      "Version": "2012-10-17",
+      "Statement": [
+          {
+              "Effect": "Allow",
+              "Action": "*",
+              "Resource": "*"
+          }
+      ]
+  }
+#+end_src
+
+To implement ~Allow~ lists:
+- Remove AWS full access policy
+  - Only the implicit default deny is active
+- Then add service/resources you want to allow in a policy
+
+Only things that are both in the identity policy and an SCP are actually allowed.

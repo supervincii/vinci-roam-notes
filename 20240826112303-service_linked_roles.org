@@ -1,0 +1,58 @@
+:PROPERTIES:
+:ID:       264CBA45-01C2-4B87-B6B7-E410FB36A24C
+:END:
+#+title: Service-Linked Roles
+#+tags: [[id:9FF58AD1-A414-43E8-B88D-33E4BFC7440B][IAM Roles]]
+
+* Table of Contents :toc:
+- [[#service-linked-roles][Service-linked roles]]
+- [[#passrole][~PassRole~]]
+
+* Service-linked roles
+IAM role linked to a specific AWS service.
+
+It provides a set of permissions that are *predefined* by a service so it can interact with other AWS services on your behalf.
+
+It might be *created by the service*, or allow the user to create the role during the setup of the service, or created within IAM.
+
+The difference with IAM Roles is that service-linked roles cannot be deleted until it is no longer required.
+
+#+begin_src js
+  // sample policy to create a service linked role
+  // do not guess the "SERVICE-NAME.amazonaws.com/SERVICE-LINKED-ROLE-NAME-PREFIX*"
+  {
+      "Version": "2012-10-17",
+      "Statement": [
+          {
+              "Effect": "Allow",
+              "Action": "iam:CreateServiceLinkedRole",
+              "Resource": "arn:aws:iam::*:role/aws-service-role/SERVICE-NAME.amazonaws.com/SERVICE-LINKED-ROLE-NAME-PREFIX*",
+              "Condition": {"StringLike": {"iam:AWSServiceName": "SERVICE-NAME.amazonaws.com"}}
+          },
+          {
+              "Effect": "Allow",
+              "Action": [
+                  "iam:AttachRolePolicy",
+                  "iam:PutRolePolicy"
+              ],
+              "Resource": "arn:aws:iam::*:role/aws-service-role/SERVICE-NAME.amazonaws.com/SERVICE-LINKED-ROLE-NAME-PREFIX*"
+          }
+      ]
+  }
+#+end_src
+
+* ~PassRole~
+#+begin_src js
+  // ...
+  {
+      "Effect": "Allow",
+      "Action": [
+          "iam:ListRoles",
+          "iam:PassRole"
+      ],
+      "Resource": "arn:aws:iam::123456789012:role/my-role-fox-xyz"
+  }
+  // ...
+#+end_src
+
+~PassRole~ is basically allowing to pass an existing role to an AWS service, and an example of *role separation*. It means that the user can configure the service with a role that has already been created.

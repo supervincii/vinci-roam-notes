@@ -1,0 +1,44 @@
+:PROPERTIES:
+:ID:       F46DF339-EF37-4980-AD1C-1A2F987EB5B0
+:END:
+#+title: AWS Organizations
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* AWS Organizations
+Used by businesses to manage multiple AWS accounts in a cost effective way.
+
+- Start with a standard AWS account
+- In it you create an AWS organization
+  - Take note that the organization does not exist in this account. The account is just used to create an organization.
+- The account that created the organization becomes the management/master account for the organization.
+- With the management account, we can invite standard AWS accounts into the organization
+- Once in the organization, the invited standard accounts becomes *member accounts*
+
+Organizations hierarchy:
+- Organization Root (Not the root user)
+  - It is just a container for AWS accounts, both for the management and member accounts.
+- Organizational Unit (OU)
+  - It is also a container for AWS accounts, both for the management and member accounts, and as well as other OUs
+
+#+begin_src js
+  // sample org hierarchy
+  {
+      "Organization Root": [
+          OU1,
+          OU2,
+          OU3,
+          {OU4 : [
+              OU5,
+              OU6
+          ]}
+      ]
+  }
+#+end_src
+
+With AWS organizations, all account billings are consolidated to the payer account (also the management/master account). This removes financial admin overhead. Certain services also charge less for more usage, and with consolidated billing, it pools reservations and volume discounts resulting in a more cheaper cost for services.
+
+Organizations also features *Service Account Policies* (SCP) and this restricts what AWS accounts in the organization can do.
+
+Another feature is that within organizations, we can also create new AWS accounts. All we need is a valid unique email address, removing the invite process.
+
+We don't need IAM Users inside AWS account. IAM roles are used instead to allow access to other AWS accounts.
