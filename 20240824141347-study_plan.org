@@ -3,108 +3,133 @@
 :END:
 #+title: Study Plan
 
-* Table of Contents :toc@4:
-- [[#year-1][Year 1]]
-  - [[#month-1---4-core-fundamentals][Month 1 - 4: Core Fundamentals]]
-    - [[#computer-architecture][Computer Architecture]]
-    - [[#programming-in-c][Programming in C]]
-    - [[#discrete-mathematics][Discrete Mathematics]]
-  - [[#months-5---8-intermediate-topics][Months 5 - 8: Intermediate Topics]]
-    - [[#data-structures--algorithms][Data Structures & Algorithms]]
-    - [[#operating-systems][Operating Systems]]
-  - [[#months-9---12-database-systems-and-networking][Months 9 - 12: Database Systems and Networking]]
-    - [[#database-systems][Database Systems]]
-    - [[#networking][Networking]]
-- [[#year-2-advanced-topics-and-specialization][Year 2: Advanced Topics and Specialization]]
-  - [[#months-1---4-compilers--language-design-distributed-systems][Months 1 - 4: Compilers & Language Design, Distributed Systems]]
-    - [[#compilers-and-language-design][Compilers and Language Design]]
-    - [[#distributed-systems][Distributed Systems]]
-  - [[#months-5---8-advanced-database-topics-and-capstone-project][Months 5 - 8: Advanced Database Topics and Capstone Project]]
-    - [[#advanced-database-topics][Advanced Database Topics]]
-    - [[#capstone-project][Capstone Project]]
-  - [[#months-9---12-advanced-electives--consolidation][Months 9 - 12: Advanced Electives & Consolidation]]
-    - [[#electives-and-advanced-topics][Electives and Advanced Topics]]
-- [[#study-plan][Study Plan]]
+* Table of Contents :toc:
+- [[#year-1-core-foundations][Year 1: Core Foundations]]
+  - [[#trimester-1-jan---apr][Trimester 1 (Jan - Apr)]]
+  - [[#trimester-2-may---aug][Trimester 2 (May - Aug)]]
+  - [[#trimester-3-sep---dec][Trimester 3 (Sep - Dec)]]
+- [[#year-2-specialization-in-database-engineering--advanced-topics][Year 2: Specialization in Database Engineering & Advanced Topics]]
+  - [[#trimester-4-jan---apr][Trimester 4 (Jan - Apr)]]
+  - [[#trimester-5-may---aug][Trimester 5 (May - Aug)]]
+  - [[#trimester-6-sep---dec][Trimester 6 (Sep - Dec)]]
+- [[#year-3-advanced-specialization][Year 3: Advanced Specialization]]
+  - [[#trimester-7-jan---apr][Trimester 7 (Jan - Apr)]]
+  - [[#trimester-8-may---aug][Trimester 8 (May - Aug)]]
+  - [[#trimester-9-sep---dec][Trimester 9 (Sep - Dec)]]
+- [[#additional-learning][Additional Learning]]
+  - [[#capstone-project][Capstone Project]]
+  - [[#research-and-open-source-contribution][Research and Open Source Contribution]]
 
-* Year 1
-
-** Month 1 - 4: Core Fundamentals
+* Year 1: Core Foundations
+** Trimester 1 (Jan - Apr)
 
 *** Computer Architecture
-- Resource: Computer Systems: A Programmer's Perspective
-- Focus: Learn the fundamentals of computer architecture, data representation, assembly language, CPU design, memory hierarchy, and I/O systems.
-- Concurrent Project: Develop a basic CPU simulator
-
-*** Programming in C
-- Resource: C Programming: A Modern Approach
-- Focus: C programming proficiency
-- Concurrent Project: Build a simple text editor
-
-*** Discrete Mathematics
-- Resource: Discrete Mathematics and Its Applications, Mathematics for Computer Science
-- Focus: Understand foundational concepts in logic, set theory, functions, combinatorics, graph theory, and discrete probability.
-- Concurrent Project: Develop a graph library
-
-** Months 5 - 8: Intermediate Topics
+Resources: Computer Systems: A Programmers Perspective
 
 *** Data Structures & Algorithms
-- Resource: The Algorithm Design Manual, Grokking Algorithms, Introduction to Algorithms
-- Concurrent Project: Create an algorithm visualizer
+Resources: The Algorithm Design Manual
 
-*** Operating Systems
-- Resource: Operating Systems: Three Easy Pieces
-- Focus: Understand core OS concepts, including processes, threads, synchronization, memory management, file systems, and system calls.
-- Concurrent Project: Build a mini shell in C
-
-** Months 9 - 12: Database Systems and Networking
-
-*** Database Systems
-- Resource: CMU Intro to Database Systems, Database System Concepts
-- Focus: Learn the fundamentals of relational databases, SQL, transactions, indexing, query, optimization, and distributed databases.
-- Concurrent Project: Design a simple SQL database engine
-
-*** Networking
-- Resource: Computer Networking: A Top-Down Approach
-- Focus: Understand networking concepts, including the OSI model, TCP/IP routing, switching, DNS, and HTTP
-- Concurrent project: Develop a simple HTTP server
-
-* Year 2: Advanced Topics and Specialization
-
-** Months 1 - 4: Compilers & Language Design, Distributed Systems
-
-*** Compilers and Language Design
-- Resource: Writing an Interpreter in Go, Writing a Compiler in Go
-- Focus: Learn about language design, lexing, parsing, and code generation.
-- Concurrent Project: Write an interpreter for a custom language
-
-*** Distributed Systems
-- Resource: Designing Data-Intensive Applications, MIT OpenCourseWare on Distributed Systems
-- Focus: Understanding distributed systems, consistency models, distributed transactions, and system design patterns
-- Concurrent Project: Implement a distributed SQL query optimizer
-
-** Months 5 - 8: Advanced Database Topics and Capstone Project
-
-*** Advanced Database Topics
-- Resource: Readings in Database Systems (The Red Book)
-- Focus: Explore advanced database concepts such as distributed databases, NoSQL databases, OLAP, and data warehousing.
+*** Programming in C
+Resources: C Programming: A Modern Approach
 
 *** Capstone Project
-- Focus: Integrate knowledge from all subjects to build a comprehensive project.
-- Project: Develop a distributed database system, a custom query optimizer, or a fault tolerant distributed application.
+Implement a basic memory management library in C. Create a CLI tool that uses custom memory allocation strategies.
 
-** Months 9 - 12: Advanced Electives & Consolidation
+** Trimester 2 (May - Aug)
 
-*** Electives and Advanced Topics
-- Options:
-  - Advanced algorithms
-  - In-depth study of specific databases (e.g., PostgreSQL internals, MongoDB architecture)
-  - Cloud computing and DevOps for database engineers
+*** Discrete Math
+Resources: Discrete Mathematics and Its Applications
 
-* Study Plan
-- Weekdays:
-  - 2 hours daily: Primary subject of the week (rotate every week)
-  - 1 hour daily: Secondary subject
-- Weekends:
-  - 3-4 hours: Deep dive on the primary subject + related projects
-  - 1-2 hours: Review session/practical exercises
-    
+*** Operating System
+Resources: Operating Systems: Three Easy Pieces
+
+*** Advanced C Programming
+Resources: Expert C Programming: Deep C Secrets
+
+*** Capstone Project
+Build a basic multi-threaded server using sockets in C. Include file I/O and synchronization.
+
+** Trimester 3 (Sep - Dec)
+
+*** Computer Networking
+Resources: Computer Networking: A Top Down Approach
+
+*** Database Fundamentals
+Resources: CMU Introduction to Databases, Database System Concepts, Database Management Systems
+
+*** Systems Programming in C
+Resources: Advanced Programming in the UNIX Environment
+
+*** Capstone Project
+Create a simple relational database engine in C. Implement basic query processing and storage management.
+
+* Year 2: Specialization in Database Engineering & Advanced Topics
+
+** Trimester 4 (Jan - Apr)
+
+*** Languages and Compilers
+Resources: Writing an Interpreter in Go, Writing a Compiler in Go
+
+*** Distributed Systems
+Resources: Designing Data-Intensive Applications
+
+*** Java Programming
+Resources: Educative Java Programming Course, Effective Java
+
+*** Capstone Project
+Develop a simple distributed key-value store in Java. Include fault tolerance and basic replication.
+
+** Trimester 5 (May - Aug)
+
+*** Database Internals
+Resources: Database Internals
+
+*** Concurrency
+Resources: Java Concurrency
+
+*** Capstone Project
+Build a high performance concurrent in-memory cache in Java. Optimize for low-latency access and thread safety.
+
+** Trimester 6 (Sep - Dec)
+*** Advanced Networking
+Resources: TCP/IP Illustrated
+
+*** High Performance Java Programming
+Resources: Java Performance
+
+*** Capstone Project
+Implement a high performance network protocol stack in Java. Focus on optimizing for throughput and low latency.
+
+* Year 3: Advanced Specialization
+** Trimester 7 (Jan - Apr)
+*** Advanced Databases
+Resources: Advanced Database Systems
+
+*** Advanced Operating Systems
+Resources: Modern Operating Systems
+
+*** Capstone Project
+Design and implement an advanced database system component. Focus on features like distributed transactions or complex query optimizations.
+
+** Trimester 8 (May - Aug)
+*** Advanced System Design
+Resources: System Performance: Enterprise and the Cloud
+
+*** Capstone Project
+Develop a comprehensive large-scale system. Include advanced features such as load balancing, fault tolerance, and scalability.
+
+** Trimester 9 (Sep - Dec)
+*** Advanced Optimization Techniques
+Resources: High Performance SQL Server
+
+*** Capstone Project
+Optimize an existing open-source database engine or component. Focus on performance enhancements and efficiency improvements.
+
+* Additional Learning
+** Capstone Project
+Integrate and showcase all the skills and knowledge acquired. This could be a major project such as a new database engine, a high-performance application, or a complex distributed system.
+
+** Research and Open Source Contribution
+- Engage in research: Read research papers from SIGMOD, VLDB, or related conferences.
+- Contribute to open source projects: Work on large-scale database systems or other relevant projects to gain real-world experience and further your expertise.
+

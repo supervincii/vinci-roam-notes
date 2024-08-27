@@ -4,19 +4,48 @@
 #+title: Python OOP
 #+tags: [[id:F67AB522-3EBC-4FE9-A002-34E1F7799254][OOP]]
 
-* Table of Contents :toc:
+* Table of Contents :toc@4:
 - [[#class-vs-instance-variables][Class vs Instance Variables]]
 - [[#methods-in-a-class][Methods in a Class]]
   - [[#instance-methods-methods][Instance Methods (Methods)]]
   - [[#class-methods][Class Methods]]
   - [[#static-methods][Static Methods]]
   - [[#access-modifiers][Access Modifiers]]
+    - [[#public-attributes][Public Attributes]]
+    - [[#private-attributes][Private Attributes]]
 - [[#information-hiding][Information Hiding]]
   - [[#encapsulation][Encapsulation]]
+    - [[#getters--setters][Getters & Setters]]
 - [[#inheritance][Inheritance]]
   - [[#implementation][Implementation]]
   - [[#super-function][~super()~ function]]
+    - [[#use-cases][Use Cases]]
+      - [[#accessing-parent-class-properties][Accessing parent class properties]]
+      - [[#calling-the-parent-class-methods][Calling the parent class methods]]
+      - [[#using-with-initializers][Using with initializers]]
   - [[#types-of-inheritance][Types of Inheritance]]
+    - [[#single-inheritance][Single Inheritance]]
+    - [[#multi-level-inheritance][Multi-level Inheritance]]
+    - [[#hierarchical-inheritance][Hierarchical Inheritance]]
+    - [[#multiple-inheritance][Multiple Inheritance]]
+    - [[#hybrid-inheritance][Hybrid Inheritance]]
+  - [[#advantages-of-inheritance][Advantages of Inheritance]]
+    - [[#reusability][Reusability]]
+    - [[#code-modification][Code Modification]]
+    - [[#extensibility][Extensibility]]
+    - [[#data-hiding][Data Hiding]]
+- [[#polymorphism][Polymorphism]]
+  - [[#implementing-polymorphism-using-methods][Implementing Polymorphism Using Methods]]
+  - [[#implementing-polymorphism-using-inheritance][Implementing Polymorphism using Inheritance]]
+  - [[#method-overriding][Method Overriding]]
+    - [[#advantages-and-key-features][Advantages and Key Features]]
+  - [[#operator-overloading][Operator Overloading]]
+    - [[#overloading-operators-in-python][Overloading operators in Python]]
+    - [[#overloading-operators-for-a-user-defined-class][Overloading operators for a user-defined class]]
+    - [[#special-functions-for-some-common-operators][Special functions for some common operators]]
+  - [[#implementing-polymorphism-using-duck-typing][Implementing Polymorphism using Duck Typing]]
+  - [[#abstract-base-classes][Abstract Base Classes]]
+    - [[#syntax][Syntax]]
 
 * Class vs Instance Variables
 
@@ -279,3 +308,409 @@ Used to call the initializer of the parent class, from inside the initializer of
 ** Types of Inheritance
 *** Single Inheritance
 There is only one class extending from another class.
+
+Implementation:
+#+begin_src python
+  class Vehicle:
+        def setTopSpeed(self, speed):
+            self.topSpeed = speed
+            print("The top speed is set to", self.topSpeed)
+
+  class Car(Vehicle):
+        def openTrunk(self):
+              print("The trunk is open.")
+
+  corolla = Car()
+  corolla.setTopSpeed(220)
+  corolla.openTrunk()
+#+end_src
+
+*** Multi-level Inheritance
+It is when a class is derived from a class which itself is derived from another class. The classes can be extended to as many levels as we want.
+
+Implementation:
+#+begin_src python
+  class Vehicle:  # parent class
+      def setTopSpeed(self, speed):  # defining the set
+          self.topSpeed = speed
+          print("Top speed is set to", self.topSpeed)
+
+
+  class Car(Vehicle):  # child class of Vehicle
+      def openTrunk(self):
+          print("Trunk is now open.")
+
+
+  class Hybrid(Car):  # child class of Car
+      def turnOnHybrid(self):
+          print("Hybrid mode is now switched on.")
+
+
+  priusPrime = Hybrid()  # creating an object of the Hybrid class
+  priusPrime.setTopSpeed(220)  # accessing methods from the parent class
+  priusPrime.openTrunk()  # accessing method from the parent class
+  priusPrime.turnOnHybrid()  # accessing method from the child class
+#+end_src
+
+*** Hierarchical Inheritance
+More than one class extends, as per the requirement of the design, from the same base class. Common attributes of the child classes are implemented in the base class.
+
+Example:
+- A ~Car~ is a ~Vehicle~
+- A ~Truck~ is a ~Vehicle~
+
+Implementation:
+#+begin_src python
+  class Vehicle:  # parent class
+      def setTopSpeed(self, speed):  # defining the set
+          self.topSpeed = speed
+          print("Top speed is set to", self.topSpeed)
+
+
+  class Car(Vehicle):  # child class of Vehicle
+      pass
+
+
+  class Truck(Vehicle):  # child class of Vehicle
+      pass
+
+
+  corolla = Car()  # creating an object of the Car class
+  corolla.setTopSpeed(220)  # accessing methods from the parent class
+
+  volvo = Truck()  # creating an object of the Truck class
+  volvo.setTopSpeed(180)  # accessing methods from the parent class
+
+#+end_src
+
+*** Multiple Inheritance
+It is when a child class is derived from more than one base class.
+
+Example:
+- ~HybridEngine~ is an ~ElectricEngine~
+- ~HybridEngine~ is a ~CombustionEngine~ as well
+
+Implementation:
+#+begin_src python
+  class CombustionEngine():  
+      def setTankCapacity(self, tankCapacity):
+          self.tankCapacity = tankCapacity
+
+
+  class ElectricEngine():  
+      def setChargeCapacity(self, chargeCapacity):
+          self.chargeCapacity = chargeCapacity
+
+  # Child class inherited from CombustionEngine and ElectricEngine
+  class HybridEngine(CombustionEngine, ElectricEngine):
+      def printDetails(self):
+          print("Tank Capacity:", self.tankCapacity)
+          print("Charge Capacity:", self.chargeCapacity)
+
+  car = HybridEngine()
+  car.setChargeCapacity("250 W")
+  car.setTankCapacity("20 Litres")
+  car.printDetails()
+#+end_src
+
+*** Hybrid Inheritance
+Combination of *Multiple* and *Multi-level* inheritance.
+
+Example:
+- ~CombustionEngine~ is a ~Engine~
+- ~ElectricEngine~ is a ~Engine~
+- ~HybridEngine~ is a ~ElectricEngine~ and a ~CombustionEngine~
+
+Implementation:
+#+begin_src python
+  class Engine:  # Parent class
+      def setPower(self, power):
+          self.power = power
+
+
+  class CombustionEngine(Engine):  # Child class inherited from Engine
+      def setTankCapacity(self, tankCapacity):
+          self.tankCapacity = tankCapacity
+
+
+  class ElectricEngine(Engine):  # Child class inherited from Engine
+      def setChargeCapacity(self, chargeCapacity):
+          self.chargeCapacity = chargeCapacity
+
+  # Child class inherited from CombustionEngine and ElectricEngine
+
+
+  class HybridEngine(CombustionEngine, ElectricEngine):
+      def printDetails(self):
+          print("Power:", self.power)
+          print("Tank Capacity:", self.tankCapacity)
+          print("Charge Capacity:", self.chargeCapacity)
+
+
+  car = HybridEngine()
+  car.setPower("2000 CC")
+  car.setChargeCapacity("250 W")
+  car.setTankCapacity("20 Litres")
+  car.printDetails()
+#+end_src
+
+** Advantages of Inheritance
+
+*** Reusability
+Inheritance makes code reusable by not duplicating code.
+
+Take for example the ff:
+
+#+begin_src python
+  class BankAccount:
+      holdersName
+      accountBalance
+      accountNumber
+
+      def getBalance():
+          pass
+
+      def getDetails():
+          pass
+
+      def withdraw():
+          pass
+
+      def deposit():
+          pass
+
+  class SavingsAccount(BankAccount):
+      interestAmount
+
+      def addInterest():
+          pass
+
+  class CheckingAccount(BankAccount):
+      linkedAtmCard
+
+      def deductFee():
+          pass
+#+end_src
+
+In this case we don't need to duplicate code for ~deposit()~ and ~withdraw()~, and at the same time we can reuse the code for the ~BankAccount~ class for any other accounts that does /withdrawal/ and /deposit/.
+
+*** Code Modification
+Changes to code are localized and inconsistencies are avoided.
+
+This enforces *orthogonality*.
+
+*** Extensibility
+Inheritance provides an easy way to upgrade/enhance specific parts of a product without changing the core attributes
+
+Consider the example above in ~Reusability~. If for example you realize that you have to diversify the banking application by adding another class for ~MoneyMarketAccount~. Instead of implementing a new class from scratch, we can extend it from the existing ~BankAccount~ class as the starting point.
+
+*** Data Hiding
+Base class can hide sensitive data so that the derive class cannot alter it.
+
+This concept is called *encapsulation*.
+
+* Polymorphism
+In programming, /polymorphism/ refers to the same object exhibiting different forms and behaviors.
+
+The problem:
+Assume a parent class of ~Shape~ from which child classes ~Triangle~, ~Rectangle~, ~Circle~, etc. are derived. For calculating the area of each specific shape, there is no single implementation. Creating a function for each child class like ~getRectangleArea()~, ~getCircleArea()~, etc. woud be time consuming and makes it harder to remember each method's name.
+
+The solution:
+We could create a method in the parent class called ~getArea()~, inherited by all the subclasses. With *polymorphism*, each subclass has its own way of implementing the method.
+
+** Implementing Polymorphism Using Methods
+#+begin_src python
+  class Rectangle():
+
+      # initializer
+      def __init__(self, width=0, height=0):
+          self.width = width
+          self.height = height
+          self.sides = 4
+
+      # method to calculate Area
+      def getArea(self):
+          return (self.width * self.height)
+
+
+  class Circle():
+      # initializer
+      def __init__(self, radius=0):
+          self.radius = radius
+          self.sides = 0
+
+      # method to calculate Area
+      def getArea(self):
+          return (self.radius * self.radius * 3.142)
+
+
+  shapes = [Rectangle(6, 10), Circle(7)]
+  print("Sides of a rectangle are", str(shapes[0].sides))
+  print("Area of rectangle is:", str(shapes[0].getArea()))
+
+  print("Sides of a circle are", str(shapes[1].sides))
+  print("Area of circle is:", str(shapes[1].getArea()))
+#+end_src
+
+** Implementing Polymorphism using Inheritance
+Using inheritance to implement polymorphism allows us to inherit a method from the base class and have a different implementation for it.
+
+#+begin_src python
+  class Shape:
+      def __init__(self):
+          self.sides = 0
+
+      def getArea(self):
+          pass
+
+  class Rectangle(Shape):
+      def __init__(self, width, height):
+          self.width = width
+          self.height = height
+          self.sides = 4
+
+      def getArea(self):
+          return (self.width * self.height)
+
+  class Circle(Shape):
+      def __init__(self, radius):
+          self.radius = radius
+          self.sides = 0
+
+      def getArea(self):
+          return (self.radius * self.radius * 3.142)
+#+end_src
+
+** Method Overriding
+It is the process of redefining a parent's class's methods in a subclass.
+
+This process is done with the code above with implementing polymorphism with inheritance. We can see that the ~getArea()~ method from the parent class is being /overridden/ in the subclasses of ~Circle~ and ~Rectangle~.
+
+*** Advantages and Key Features
+- Derived classes can give their own implementation to inherited methods without modifying the parent class methods.
+- A child class can use the implementation in the parent class or make its own implementation.
+- Method overriding *needs inheritance*.
+- Methods in the derived classes usually have a dissimilar implementation.
+
+** Operator Overloading
+*** Overloading operators in Python
+Operators in Python can be overloaded to operate in a certain user-defined way. For example the ~+~ operator invokes the special function ~__add__~, but it behaves differently depending on the data type. Two ~int~ will add the numbers while two ~string~ get *merged*.
+
+*** Overloading operators for a user-defined class
+When defining a class, objects can interact with each other through operators, but it is necessary to define the behavior of these operators through operator overloading.
+
+#+begin_src python
+  class Com:
+      def __init__(self, real=0, imag=0):
+          self.real = real
+          self.imag = imag
+
+      def __add__(self, other):  # overloading the `+` operator
+          temp = Com(self.real + other.real, self.imag + other.imag)
+          return temp
+
+      def __sub__(self, other):  # overloading the `-` operator
+          temp = Com(self.real - other.real, self.imag - other.imag)
+          return temp
+
+
+  obj1 = Com(3, 7)
+  obj2 = Com(2, 5)
+
+  obj3 = obj1 + obj2
+  obj4 = obj1 - obj2
+
+  print("real of obj3:", obj3.real)
+  print("imag of obj3:", obj3.imag)
+  print("real of obj4:", obj4.real)
+  print("imag of obj4:", obj4.imag)
+#+end_src
+
+*** Special functions for some common operators
+
+| Operator | Method                   |
+|----------+--------------------------|
+| ~+~      | __add__(self, other)     |
+| ~-~      | __sub__(self, other)     |
+| ~/~      | __truediv__(self, other) |
+| ~*~      | __mul__(self, other)     |
+| ~<~      | __lt__(self, other)      |
+| ~>~      | __gt__(self, other)      |
+| ~==~     | __eq__(self, other)      |
+
+** Implementing Polymorphism using Duck Typing
+*Duck typing* extends the concept of *dynamic typing* in Python. *Dynamic typing* means that we can change the type of the object later in the code.
+
+Implementation
+#+begin_src python
+  class Dog:
+      def Speak(self):
+          print("Woof woof")
+
+
+  class Cat:
+      def Speak(self):
+          print("Meow meow")
+
+
+  class AnimalSound:
+      def Sound(self, animal):
+          animal.Speak()
+
+
+  sound = AnimalSound()
+  dog = Dog()
+  cat = Cat()
+
+  sound.Sound(dog)
+  sound.Sound(cat)
+#+end_src
+
+Why it is called *Duck typing*: if a bird speaks like a duck, swims like a duck, and eats like a duck, that bird is a duck.
+
+Similarly with the code above, the ~animal~ object inside the ~AnimalSound~ definition does not matter, *as long as it has the associated behavior*, ~Speak()~ defined in the object's class definition. Since both /dog/ and /cat/ speaks like animals, they are both animals.
+
+This is how polymorphism is achieved without inheritance.
+
+** Abstract Base Classes
+Abstract base classes define a set of methods and properties that a class must implement in order to be considered a /duck-type/ instance of that class.
+
+#+begin_src python
+  class Shape:  # Shape is a child class of ABC
+      def area(self):
+          pass
+
+      def perimeter(self):
+          pass
+
+
+  class Square(Shape):
+      def __init__(self, length):
+          self.length = length
+
+      def area(self):
+          return (self.length * self.length)
+
+      def perimeter(self):
+          return (4 * self.length)
+
+
+  shape = Shape()
+  square = Square(4)
+#+end_src
+
+From the code above, the ~Shape~ class cannot stand on its own and the ~Square~ class is actually the one that implements the methods ~area()~ and ~perimeter()~. To prevent users from making a ~Shape~ object, we use *abstract base classes*.
+
+*** Syntax
+#+begin_src python
+  # the abc module is built-in
+  from abc import ABC, abstractmethod
+
+  class ParentClass(ABC):
+  # the abstract base class is inherited from the built-in ABC class    
+
+      @abstractmethod
+      def method(self)
+#+end_src
+
+Methods with ~@abstractmethod~ decorator MUST be defined in the child class. It serves as like a REQUIRED blueprint.
