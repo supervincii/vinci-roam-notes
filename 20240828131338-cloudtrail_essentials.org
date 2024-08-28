@@ -12,6 +12,7 @@
   - [[#insight-events][Insight Events]]
 - [[#cloudtrail-trail][CloudTrail Trail]]
   - [[#organizational-trail][Organizational Trail]]
+- [[#pricing][Pricing]]
 
 * CloudTrail
 Logs API actions which affect AWS accounts. These logs are called as ~CloudTrail Event~.
@@ -46,3 +47,13 @@ By default, a trail can store events in a definable S3 bucket as a set of *compr
 
 ** Organizational Trail
 Creating this in the management account of an organization, it can store all the information for all of the accounts in that organization.
+
+* Pricing
+- FREE:
+  - 90 days log history
+  - One copy of managements events in every region in each AWS account.
+- PAID:
+  - Creating additional trails to get additional copies of management events
+    - $2 per 100k events
+  - Data events
+    - $0.10 per 100k events
