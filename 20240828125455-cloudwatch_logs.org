@@ -1,0 +1,26 @@
+:PROPERTIES:
+:ID:       847A3BF7-6CDA-4A61-916F-0557F4EA6503
+:END:
+#+title: CloudWatch Logs
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* CloudWatch Logs
+A public service, usable from AWS or on-premises, or other cloud platforms. (regional)
+
+Allow storing, accessing, and monitoring logging data.
+
+Has built-in integration with other AWS services including:
+- EC2
+- VPC Flow Logs
+- Lambda
+- CloudTrail
+- R53
+- etc.
+
+CloudWatch can also generate metrics based on logs - *metric filter*
+
+The sources that CloudnWatch gets logging data from emit *log events* which looks like ~YYYYMMDDHHMMSS MESSAGE~. Basically a ~timestamp~ and a ~message block~.
+
+These log events are stored into *log streams* which are log events from the same source.
+
+Within CloudWatch Logs are *log groups* which are *containers* for multiple log streams for same type of logging. It also stores *configuration settings* and *metric filters are defined.

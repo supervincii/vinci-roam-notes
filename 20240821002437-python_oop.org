@@ -46,6 +46,11 @@
   - [[#implementing-polymorphism-using-duck-typing][Implementing Polymorphism using Duck Typing]]
   - [[#abstract-base-classes][Abstract Base Classes]]
     - [[#syntax][Syntax]]
+- [[#object-relationships][Object Relationships]]
+  - [[#relationships-between-classes][Relationships Between Classes]]
+  - [[#association][Association]]
+  - [[#aggregation][Aggregation]]
+  - [[#composition][Composition]]
 
 * Class vs Instance Variables
 
@@ -714,3 +719,117 @@ From the code above, the ~Shape~ class cannot stand on its own and the ~Square~ 
 #+end_src
 
 Methods with ~@abstractmethod~ decorator MUST be defined in the child class. It serves as like a REQUIRED blueprint.
+
+* Object Relationships
+** Relationships Between Classes
+- *IS A*
+- *Part-of*
+  - One class is a component of another class object.
+  - The instance of the component class can only be created inside the main class.
+  - An example is ~class B~ and ~class C~ have their own implementation but can only be created once a ~class A~ object is created.
+- *Has-a*
+  - Slightly less concrete relationship than the above two.
+  - Classes can exist independently of each other but need each other's object to perform an operation.
+  - Implies that a class /has a/ reference to an object of another class but does not decide the lifetime of the other class's reference object.
+    
+** Association
+Association is the common term for both the *has-a* and *part-of* relationships but is not limited to these.
+
+Association relationship = we don't worry about the lifetime dependency between the objects.
+
+** Aggregation
+Follows the *Has-a* model and creates a parent-child relationship between two classes with one class owning the other.
+
+Has *indpendent lifetimes* where the owned object does not depend on the lifetime of the owner.
+
+The parent only contains a *reference* to the child.
+
+Implementation:
+#+begin_src python
+  class Country:
+      def __init__(self, name=None, population=0):
+          self.name = name
+          self.population = population
+
+      def printDetails(self):
+          print("Country Name:", self.name)
+          print("Country Population", self.population)
+
+
+  class Person:
+      def __init__(self, name, country):
+          # country becomes a reference to the Country object
+          # Country class however is not reliant on the Person class to function
+          self.name = name
+          self.country = country
+
+      def printDetails(self):
+          print("Person Name:", self.name)
+          self.country.printDetails()
+
+
+  c = Country("Wales", 1500)
+  p = Person("Joe", c)
+  p.printDetails()
+
+  # deletes the object p
+  del p
+  print("")
+  c.printDetails()
+#+end_src
+
+From the code above, we can delete the ~Person~ object and the ~Country~ object still functions as intended.
+
+** Composition
+Composition is the practice of accessing other class objects in your class. It follows *part-of* relationships.
+
+The class which creates the object of the other class is the /owner/ and is reponsible for the lifetime of that object. The lifetime of the /owned/ object depends on the lifetime of the owner
+
+Implementation:
+
+A ~Car~ owns the ~tires~, ~doors~, and ~engine~.
+
+#+begin_src python
+  class Engine:
+      def __init__(self, capacity=0):
+          self.capacity = capacity
+
+      def printDetails(self):
+          print("Engine Details:", self.capacity)
+
+
+  class Tires:
+      def __init__(self, tires=0):
+          self.tires = tires
+
+      def printDetails(self):
+          print("Number of tires:", self.tires)
+
+
+  class Doors:
+      def __init__(self, doors=0):
+          self.doors = doors
+
+      def printDetails(self):
+          print("Number of doors:", self.doors)
+
+
+  class Car:
+      def __init__(self, eng, tr, dr, color):
+          self.eObj = Engine(eng)
+          self.tObj = Tires(tr)
+          self.dObj = Doors(dr)
+          self.color = color
+
+      def printDetails(self):
+          self.eObj.printDetails()
+          self.tObj.printDetails()
+          self.dObj.printDetails()
+          print("Car color:", self.color)
+
+
+  car = Car(1600, 4, 2, "Grey")
+  car.printDetails()
+#+end_src
+
+When the ~Car~ object dies, so does the owned objects as well.
