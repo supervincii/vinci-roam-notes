@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       0F9845BD-734D-4F86-B9C4-9EA9F5141A71
+:END:
+#+title: S3 Performance Optimization
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* Table of Contents :toc:
+- [[#single-put-upload][Single PUT Upload]]
+- [[#mulitpart-upload][Mulitpart Upload]]
+- [[#s3-accelerated-transfer][S3 Accelerated Transfer]]
+
+* Single PUT Upload
+By default, uploading an object to S3, it's loaded as a single blob of data in a single stream.
+
+~Data --<s3:PutObject>--> Bucket~
+
+If the stream fails, the upload fails. The only recovery is a full restart of the upload.
+
+Max of 5Gb of data when utilizing a single stream upload in S3.
+
+* Mulitpart Upload
+Data, with a minimum size of 100Mb, is broken up to a maximum of 10,000 parts, where each part can range from 5Mb to 5Gb. The last part is /leftover/ so it can be smaller than 5Mb.
+
+It is effective because parts can fail in isolation, and can be restarted.
+
+Results in lower risk when uploading data to S3. It also improves the transfer rate which is the sum of all the individual parts.
+
+* S3 Accelerated Transfer
+Transfer acceleration uses the network of AWS edge locations.
+
+An S3 bucket needs to be enabled for transfer acceleration (~OFF by default~). The bucket needs to adhere to some requirements before being able to enable transfer acceleration:
+- Bucket name cannot contain periods
+- Needs to be DNS compatible in its namin
+
+Once enabled, data enters the closest best performing edge location, then transmits data over the AWS global network.
+
+The benefits improve the larger the distance between the upload location and the location of the S3 bucket.

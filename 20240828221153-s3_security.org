@@ -69,4 +69,7 @@ Inflexible & simple permissions.
 | WRITE_ACP    | Write the ACL for the applicable bucket                    | Write ACL for the applicable bucket                        |
 | FULL CONTROL | READ, WRITE, READ_ACP, WRITE_ACP permissions on the bucket | READ, WRITE, READ_ACP, WRITE ACP permissions on the object |
 
+* Block Public Access
+Added another level of security which are the *Block Public Access Settings* which apply no matter what the bucket policies say.
 
+Just applied on the public access.

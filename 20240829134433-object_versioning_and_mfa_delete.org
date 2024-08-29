@@ -1,0 +1,35 @@
+:PROPERTIES:
+:ID:       891C78E8-1ADE-42BE-B2C0-A71608DCEF36
+:END:
+#+title: Object Versioning and MFA Delete
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* Object Versioning
+Controlled at the bucket level. It starts of in a ~disabled~ state. We can ~enable~ it but once we do, we cannot disable it again. We can however ~suspend~ it and ~enable~ it again.
+
+Without versioning, each object is identified solely by the object key, its name.
+
+Versioning lets us store multiple versions of an object within a bucket. Operations that modify the object generate a new version.
+
+An object has an attribute called ~ID~. When versioning is disabled, the ID of that object is set to ~null~. When enabled though, S3 allocates an ID to the object.
+
+When accessing objects and the version is not specified, then we get the /latest version/. We can however specify an ID/version when accessing an object.
+
+Important to take note that space is consumed by ALL versions. We are billed for ALL versions inside the bucket.
+
+** Impact on Deletions
+
+When we delete an object but don't specify the version, S3 adds a special version of that object known as a ~delete marker~. It essentially is just a new version of that object.
+
+S3 does not actually delete the object. The delete marker just makes it look like it is deleted. In reality, it is just hidden.
+
+Basically a delete marker hides all previous versions of that object.
+
+We can delete the delete marker which in essence, /undeletes/ the object.
+
+To actually delete an object, specify the version ID.
+
+* MFA Delete
+Enabled in versioning configuration. Makes it so that MFA is required to change bucket versioning state and delete versions.
+
+~Serial number (MFA) + Code passed with API CALLS~

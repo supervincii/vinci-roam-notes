@@ -1,0 +1,22 @@
+:PROPERTIES:
+:ID:       4568897F-0AA8-422C-8CC8-67AB7DABC4CE
+:END:
+#+title: S3 Static Hosting
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* Static Website Hosting
+Normal access S3 is via *AWS APIs*.
+
+Static website hosting allows access via HTTP. After enabling this feature, we need to set an ~index~ document and an ~error~ document. AWS then creates a ~website endpoint~ which is an adderss that the bucket can be accessed from using HTTP.
+
+Index pages are default pages we get when we are not accessing something specific. Error documents are shown when errors occur.
+
+For custom domains, via R53, *BUCKETNAME MATTERS*.
+
+There are two specifc scenarios where S3 is great:
+- Offloading
+  - Basically offloading large data to S3 such as images that needs to render on an website.
+- Out-of-band pages
+  - Using S3 as a backup for when a service is down.
+
+In the case of static website hosting, there is a corresponding cost for each operation when requesting data (~INSERT, PUT, GET, etc.~) per 1000 operations.
