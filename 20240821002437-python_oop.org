@@ -2,7 +2,7 @@
 :ID:       9B21C34B-A914-4D3E-90F6-3E25F6A02C6F
 :END:
 #+title: Python OOP
-#+tags: [[id:F67AB522-3EBC-4FE9-A002-34E1F7799254][OOP]]
+#+tags: [[id:F67AB522-3EBC-4FE9-A002-34E1F7799254][OOP]], [[id:95F475E7-DE0B-4512-97F7-2A2158B2CC28][Python]]
 
 * Table of Contents :toc@4:
 - [[#class-vs-instance-variables][Class vs Instance Variables]]

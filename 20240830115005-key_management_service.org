@@ -1,0 +1,67 @@
+:PROPERTIES:
+:ID:       A57F4CBF-8CBF-4146-9334-29C6DCD92AA9
+:END:
+#+title: Key Management Service
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* KMS
+Used by AWS services when they use encryption.
+
+It is a regional and public service. It manages keys, more specifically, ~create, store, and manage~ cryptographic keys.
+
+KMS can handle both ~symmetric~ and ~asymmetric~ keys, and can perform cryptographic operations (encrypt, decrypt, ...)
+
+*Keys can NEVER leave KMS* - provides ~FIPS 140-2 (L2)~
+
+Keys are stored within the KMS service within that region.
+
+Main type of key: ~KMS Keys~ or ~CMK~ (Customer Master Keys (superseded))
+
+** KMS Keys
+KMS keys are /logical/. Think of it as containers for the actual keys.
+
+Contains:
+- Key ID
+- Creation date
+- Policy (Resource)
+- Description
+- State of the key
+
+Every key is backed by a *physical key material*.
+
+The physical key material can be either *generated* by KMS or *imported* by KMS, which can be used to directly *encrypt* or *decrypt* data up to 4kb in size.
+
+KMS Keys support rotation and contains the *backing key* (physical key material) and all previous backing keys caused by rotation.
+
+** Data Encryption Keys (DEKs)
+Generated using a KMS key using the ~GenerateDataKey~ operation, which can be used to encrypt or decrypt data which is *> 4kb* in size.
+
+DEKs are linked to the KMS keys that created them.
+
+When generated, KMS provides 2 versions:
+- *Plaintext* version
+  - can be used immediately to perform cryptographic operations
+- *Ciphertext* (encrypted) version
+  - encrypted version of the plaintext version
+  - encrypted using the KMS key
+
+Process/Architecture:
+1. Encrypt data using the plaintext version
+2. Discard the plaintext key
+3. Store the encrypted key with the encrypted data
+
+* KMS Policies and Security
+Account trust is EXPLICITLY added on a key policy.
+
+Every KMS key has one key policy
+
+Key policy sample:
+#+begin_src js
+  {
+      "Sid": "Enable IAM User Permissions",
+      "Effect": "Allow",
+      "Principal": {"AWS": "arn:aws:iam::111122223333:root"},
+      "Action": "kms:*",
+      "Resource": "*"
+  }
+#+end_src
