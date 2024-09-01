@@ -1,0 +1,57 @@
+:PROPERTIES:
+:ID:       F494D1F9-4CF6-426F-B0F9-AF6E715D1543
+:END:
+#+title: S3 Object Encryption CSE/SSE
+#+tags: [[id:CB72FBC3-D60D-421C-BC73-F37728416751][Shared All]]
+
+* S3 Encryption
+Generally, data transferred to and from S3 is encrypted in transit.
+
+* S3 Server Side Encryption
+Take note that buckets are not encrypted. *Objects are*, where each object in the bucket might use different encryption settings.
+
+The objects aren't intially encrypted. Once the data hits the S3 endpoint, the data becomes encrypted.
+
+#+begin_src 
+  Client --<UNENCRYTPED DATA>--> S3 Endpoint --<ENCRYPTED DATA>--> S3 Storage
+#+end_src
+
+SSE can control all of the keys, process, and tooling, or just some of it and TRUST AWS to handle the rest.
+
+SSE has two components:
+1. Encryption & decryption process
+2. Generation & management of the cryptographic keys
+
+** Types of SSE
+
+The difference between these types of SSE is what parts of the process do you trust S3 with.
+
+*** SSE-C
+"-C" = *Customer Provided Keys*. The customer is responsible for the keys, while S3 manages the encryption and decryption process. Essentially offloading the CPU requirements to AWS.
+
+This is not ~CSE~
+
+*** SSE-S3
+AWS handles *both the encryption processes and key generation & management*.
+
+Default SSE type, and uses ~AES-256~.
+
+One downside is that there is no role separation. An S3 admin can decrypt any encrypted object because S3 handles everything.
+
+*** SSE-KMS
+KMS Keys stored in AWS Key Management Service (KMS) instead of S3 from the above types of SSE.
+
+The biggest benefit of SSE-KMS is the *role separation*. This is because to decrypt an object, you need access to the KMS key. No access = no decrpytion.
+
+One use case is denying permission/access on an S3 administrator to the encrypted objects. Although the admin has full control/access on S3, he/she cannot decrypt the object if he/she has no permissions on the specific KMS key that was used to encrypt the object.
+
+* S3 Client Side Encryption
+When uploading, objects are encrypted by the client and the data is cipher text the entire time in transit.
+
+#+begin_src 
+  Client --<ENCRYPTED DATA>--> S3 Endpoint --<ENCRYPTED DATA>--> S3 Storage
+#+end_src
+
+CSE controls the keys, process, and tooling.
+
+*S3 NEVER SEES PLAINTEXT*.

@@ -1,0 +1,28 @@
+:PROPERTIES:
+:ID:       33C82CB9-76A3-4B21-BEEF-DC5A3D99D06F
+:END:
+#+title: S3 Bucket Keys
+#+tags: [[id:CCF0A997-5D16-4F49-A032-1A1FADF9B505][Developer Associate]]
+
+* S3 w/o Bucket Keys
+Each object being "~PUT~" using ~SSE-KMS~ uses a unique ~DEK~ (Data Encryption Key)
+
+Process:
+- User puts an object in S3 (~PutObject~) using SSE-KMS
+- KMS is called
+- KMS key generated a ~DEK~
+- Object is encrypted
+- Object with the ciphertext DEK are stored together in S3
+  - Each object stored uses a unique DEK which calls KMS to generate that DEK
+
+This means that for each object put into S3 needs a unique call to KMS. This poses as a problem specially at scale because it can limit the amount of ~PUT~ we can upload to S3 every second.
+
+* S3 w/ Bucket Keys
+Architecture changes where KMS is now used to generate a ~time limited bucket key~ used to generate DEKs within S3. This offloads the work from KMS to S3 since it reduces the number of KMS API calls therefore reducing cost and increase scalability.
+
+This is not retroactive. It only affects objects after it is enabled in a bucket. Prior objects will still call the KMS API.
+
+** Effects of turning on bucket keys
+- CloudTrail KMS events now show the bucket, *not the object*.
+- Works with *replication*. The object encryption is maintained.
+- With replicating plaintext (unencrypted objects), the object is encrypted based on the destination bucket encryption configuration.

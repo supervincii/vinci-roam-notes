@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       F7B6E714-F83B-4919-A12E-EA6BDBAF25E1
+:END:
+#+title: S3 Object Storage Classes
+#+tags: [[id:408B7225-BAE3-4B4B-B1E8-C12C831563B0][Associate Shared]]
+
+* Table of Contents :toc:
+- [[#s3-standard][S3 Standard]]
+  - [[#billing][Billing]]
+
+* S3 Standard
+~S3 Standard~ is the default storage class in S3.
+
+When storing objects in S3 using S3 standard, the objects are stored in atleast 3 AZ. This ensures ~99.99999999999%~ durability for ~10M~ objects.
+
+Replication uses MD5 checksums together with ~Cyclic Redundancy Checks (CRCs)~ to resolve any data issue.
+
+If the objects are stored durably, S3 responds with an ~HTTP 1.1 200 OK~ status.
+
+S3 standard makes data accessible immediately. It has a *first byte latency* in *milliseconds*, and objects can be made publicly available using S3 permissions or enabling static site hosting.
+
+** Billing
+Billed in a *GB/month* fee for *data stored*. A $ for GB charge of transfer OUT (TRANSFER IN IS FREE). And a price per ~1000 requests~.
+
+- No specific retrieval fee
+- No minimum duration
+- No minimum size
+
+There is no penalty in any way, however there is no discounts. It is the most balanced out of all the storage classes when looking at cost/(features & compromises).
