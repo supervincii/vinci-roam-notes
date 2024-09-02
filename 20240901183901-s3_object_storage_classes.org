@@ -6,7 +6,13 @@
 
 * Table of Contents :toc:
 - [[#s3-standard][S3 Standard]]
-  - [[#billing][Billing]]
+  - [[#pricing][Pricing]]
+- [[#s3-standard-ia][S3 Standard IA]]
+- [[#s3-one-zone---ia][S3 One Zone - IA]]
+- [[#s3-glacier---instant][S3 Glacier - Instant]]
+- [[#s3-glacier---flexible][S3 Glacier - Flexible]]
+- [[#s3-glacier---deep-archive][S3 Glacier - Deep Archive]]
+- [[#s3-intelligent-tiering][S3 Intelligent Tiering]]
 
 * S3 Standard
 ~S3 Standard~ is the default storage class in S3.
@@ -19,7 +25,7 @@ If the objects are stored durably, S3 responds with an ~HTTP 1.1 200 OK~ status.
 
 S3 standard makes data accessible immediately. It has a *first byte latency* in *milliseconds*, and objects can be made publicly available using S3 permissions or enabling static site hosting.
 
-** Billing
+** Pricing
 Billed in a *GB/month* fee for *data stored*. A $ for GB charge of transfer OUT (TRANSFER IN IS FREE). And a price per ~1000 requests~.
 
 - No specific retrieval fee
@@ -27,3 +33,82 @@ Billed in a *GB/month* fee for *data stored*. A $ for GB charge of transfer OUT 
 - No minimum size
 
 There is no penalty in any way, however there is no discounts. It is the most balanced out of all the storage classes when looking at cost/(features & compromises).
+
+* S3 Standard IA
+Standard IA (Infrequent Access) shares most of the architecture of S3 Standard. The differences are the following:
+- Cheaper storage cost
+- Has a retrieval fee
+  - Per GB data retrieval fee
+- There is minimum duration charge of 30 days
+- Billed a minimum of 128KB in size per object
+
+Basically it is used for long-lived data where data access is infrequent.
+
+* S3 One Zone - IA
+Similar to Standard IA. The differences are the following:
+- Cheaper than standard & standard IA
+- Data stored in 1 AZ in the region.
+
+Used for long-lived data which is NON-CRITICAL & REPLACEABLE, and where access is infrequent.
+
+* S3 Glacier - Instant
+Similar to S3 Standard IA except:
+- Offers cheaper storage
+- More expensive retrieval cost
+- Longer minimums
+  - Storage of 90 days
+
+Designed to be able to access data immediately but not often, say once every quarter.
+
+* S3 Glacier - Flexible
+Similar to Standard and Standard IA with the following differences:
+- Cost is ~ 1/6 of the cost of S3 Standard
+- Data is not immediately available
+- Data cannot be made public
+- There is a retrieval process for getting data
+  - Data being accessed is place in Standard IA temporarily, then removed after we have finshed accessing them
+  - 3 types of retrieval jobs
+    - Expedited (1-5 mins)
+    - Standard (3-5 hours)
+    - Bulk (5-12 hours)
+- First byte latency of *minutes/hours*.
+- 40KB minimum billable size
+- 90 day minimum billable duration
+
+Mostly used for archival data where frequent/real-time access is not needed.
+      
+* S3 Glacier - Deep Archive
+Cheapest form of storage.
+
+Restrictions:
+- Data is in a "frozen" state
+- 40KB minimum billable size
+- 180 day minimum billable durations
+- Retrieval process is the same as Glacier - Flexible but takes longer time
+  - Standard (12 hours)
+  - Bulk (48 hours)
+- First byte latency is in *hours or days*.
+
+
+Used for archival data where it is rarely accessed and where hours/days is tolerable for the retrieval process.
+
+* S3 Intelligent Tiering
+Storage class that contains *5 different storage tiers*.
+
+Tiers:
+- Frequent Access -> Standard
+- Infrequent Access -> Standard IA
+- Archive Instant Access -> Glacier Instant
+- Archive Access -> Glacier Flexible
+- Deep Archive -> Glacier Deep Archive
+
+We don't have to worry about moving data between tiers. It automatically does it for us by monitoring the access of the object. It moves from frequent access to deep archive when data is not accessed within 30, 90, 90-270, 180-730 days, respectively.
+
+Archive access, and deep archive are *optional*.
+
+When data becomes trending and are accessed more frequently, they are moved back to the frequent access tier with no retrieval cost.
+
+There is a cost however for monitoring and automation per 1000 objects.
+
+It is designed for long-live data with variety of access frequency.
+
