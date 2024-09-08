@@ -1,0 +1,42 @@
+:PROPERTIES:
+:ID:       A962D8BF-C3DC-4C4A-9103-B71CB7AD235E
+:END:
+#+title: C
+#+tags: [[id:8D8C89CD-0D59-4314-BC77-D24453E43D7E][Programming]]
+
+* Table of Contents :toc:
+- [[#fundamentals][Fundamentals]]
+  - [[#compiling-and-linking][Compiling and Linking]]
+  - [[#form-of-a-simple-program][Form of a simple program]]
+
+* Fundamentals
+** Compiling and Linking
+*** Preprocessing
+The program is given to a /preprocessor/ which obeys commands from directives (starts with ~#~).
+
+*** Compiling
+The /compiler/ translates the code to machine instructions.
+
+*** Linking
+The final step where the /linker/ combines the object code produced by the compiler with any additional code needed to yield an executable. This usually includes library functions (like ~printf~).
+
+*** To compile
+#+begin_src shell
+  gcc -o <exec-name> <file>
+#+end_src
+
+- ~gcc~: compiler
+- ~-o~: flag to "write output to ~<exec-name>~"
+- ~<exec-name>~: executable name
+- ~<file>~: source code file name
+
+** Form of a simple program
+#+begin_src c
+  // directives
+
+  int main(void) {
+    // statements
+  }
+#+end_src
+
+~#include <stdio.h>~ is called a /directive/ and must be included at the start of a C program. This is because C has no built in "read" and "write" commands. The ~stdio~ header gives us the ability to perform input and output functions.
