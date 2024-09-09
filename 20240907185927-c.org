@@ -8,6 +8,8 @@
 - [[#fundamentals][Fundamentals]]
   - [[#compiling-and-linking][Compiling and Linking]]
   - [[#form-of-a-simple-program][Form of a simple program]]
+  - [[#variables-and-assignment][Variables and Assignment]]
+  - [[#identifiers][Identifiers]]
 
 * Fundamentals
 ** Compiling and Linking
@@ -40,3 +42,12 @@ The final step where the /linker/ combines the object code produced by the compi
 #+end_src
 
 ~#include <stdio.h>~ is called a /directive/ and must be included at the start of a C program. This is because C has no built in "read" and "write" commands. The ~stdio~ header gives us the ability to perform input and output functions.
+
+** Variables and Assignment
+Variables must be declared before they can be used.
+#+begin_src 
+  <type> <name>
+#+end_src
+
+** Identifiers
+Identifiers in C may contain letters, digits, and underscores but *must begin with a letter or underscore.*
