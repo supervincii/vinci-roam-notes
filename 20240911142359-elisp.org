@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       33DB4F82-645E-4A52-A8B0-28CE25327DE2
+:END:
+#+title: Elisp
+#+tags: [[id:8D8C89CD-0D59-4314-BC77-D24453E43D7E][Programming]]
+
+* Table of Contents :toc:
+- [[#list-processing][List Processing]]
+
+* List Processing
+
+Lists are bouned by paretheses, and sometimes preceded by an apostrophe. It looks like: ~'(rose violet daisy buttercup)~.
+
+Lisp "atoms" are words/values that cannot be divided into any smaller parts.
+
+A printed representation of woth atoms and lists are called *symbolic expressions* or ~s-expressions~.
+
+Types of /atoms/:
+- Symbols: ~(foo bar foo-bar)~
+- Numbers: ~(1 2 3)~
+- String: ~("hello world")~
+
+When a list have a "quote" (~'(+ 2 2)~) that precedes the list, it tells Lisp to *do nothing* with the list, other than take it as it is written. If there is no quote preceding the list then the *first* item of the list becomes a *command* (function) for the machine to obey.
+
