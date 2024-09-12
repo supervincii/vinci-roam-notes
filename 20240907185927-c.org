@@ -10,6 +10,9 @@
   - [[#form-of-a-simple-program][Form of a simple program]]
   - [[#variables-and-assignment][Variables and Assignment]]
   - [[#identifiers][Identifiers]]
+- [[#formatted-inputoutput][Formatted Input/Output]]
+  - [[#conversion-specifications][Conversion Specifications]]
+  - [[#scanf][~scanf~]]
 
 * Fundamentals
 ** Compiling and Linking
@@ -50,4 +53,19 @@ Variables must be declared before they can be used.
 #+end_src
 
 ** Identifiers
-Identifiers in C may contain letters, digits, and underscores but *must begin with a letter or underscore.*
+Identifiers in C may contain letters, digits, and underscores but *must begin with a letter or underscore.*m
+
+* Formatted Input/Output
+** Conversion Specifications
+~Conversion specifications~ begins with the ~%~ character. They give a great deal of control over the appearance of the output.
+
+Common conversion specifiers:
+- ~d~: integer in decimal
+- ~e~: float in exponential format
+- ~f~: float in fixed decimal format
+- ~g~: float in *either* exponential or fixed decimal format, depending on the number's size.
+  - Useful for displaying numbers whose size can't be predicted when the program is written or that tend to vary widely in size.
+  - Very large number = exponential format, otherwise fixed decimal
+
+** ~scanf~
+~%d~ and ~%i~ can both match an integer written in base 10. ~%i~ however can also match integers expressed in octal (base 8) when prefixed with 0, and hexadecimal (base 16) when prefixed with 0x or 0X.

@@ -5,8 +5,13 @@
 #+tags: [[id:8D8C89CD-0D59-4314-BC77-D24453E43D7E][Programming]]
 
 * Table of Contents :toc:
+- [[#things-to-take-noteresearch-more][Things to take note/research more]]
 - [[#list-processing][List Processing]]
 
+* Things to take note/research more
+- Byte compiling
+  - When, how, and why is it used?
+    
 * List Processing
 
 Lists are bouned by paretheses, and sometimes preceded by an apostrophe. It looks like: ~'(rose violet daisy buttercup)~.
