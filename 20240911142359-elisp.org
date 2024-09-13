@@ -7,6 +7,11 @@
 * Table of Contents :toc:
 - [[#things-to-take-noteresearch-more][Things to take note/research more]]
 - [[#list-processing][List Processing]]
+- [[#practicing-evaluation][Practicing Evaluation]]
+- [[#writing-function-definitions][Writing Function Definitions]]
+  - [[#wrting-an-interactive-function][Wrting an ~interactive~ function]]
+  - [[#install-code-permanently][Install Code Permanently]]
+  - [[#let][~let~]]
 
 * Things to take note/research more
 - Byte compiling
@@ -27,3 +32,63 @@ Types of /atoms/:
 
 When a list have a "quote" (~'(+ 2 2)~) that precedes the list, it tells Lisp to *do nothing* with the list, other than take it as it is written. If there is no quote preceding the list then the *first* item of the list becomes a *command* (function) for the machine to obey.
 
+* Practicing Evaluation
+A file and a buffer are two different entities. A file is information recorded permanently in the computer. A buffer is information inside Emacs that will vanish at the end of the editing session.
+
+* Writing Function Definitions
+Structure:
+#+begin_src emacs-lisp
+  (defun FUNCTION-NAME (ARGUMENTS...)
+    "OPTIONAL-DOCUMENTATION..."
+    (interactive ARGUMENT-PASSING-INFO)
+    BODY...)
+#+end_src
+
+Before we evaluate a function we defined, it is important that we first tell the computer about the definition, basically loading the function definition in Emacs.
+
+To install a function definition, we just need te evaluate the ~defun~, then we can evaluate the function call.
+
+** Wrting an ~interactive~ function
+#+begin_src emacs-lisp
+  (defun multiply-by-seven (number)
+    "Multiply NUMBER by seven."
+    (interactive "p")
+    (message "The result is %d" (* 7 number)))
+#+end_src
+
+The expression ~(interactive "p")~ is a list of two elements. The ~"p"~ tells Emacs to pass the *prefix argument* to the function and use its value for the argument of the function.
+
+There are different options for ~interactive~. The ~"p"~ as shown earlier is used for a prefix argument with the function. In almost any case, every option for ~interactive~ will enable the user to pass the right information /interactively/ to a function.
+
+** Install Code Permanently
+1. To install code permanently, define the function in the initialization file (~.emacs~ or ~.emacs.d/init.el or ~.config/emacs/init.el~). Code in the init file is automaticall evaluated when we start Emacs.
+2. Put the function definition in their own files and use the ~load~ function to evaluate the functions.
+3. Define the function in a file called ~site-init.el~ which is loaded when Emacs is built. This makes the code available to everyone who uses your machine.
+
+** ~let~
+~let~ is used to attach or bind a symbol to a value in such a way that the interpreter will not confuse the variable with a variable of the same name.
+
+Structure:
+#+begin_src emacs-lisp
+  (let VARLIST BODY...)
+#+end_src
+
+~VARLIST~: list, where each element of which is either a symbol by itself or a two-element list, the first element of which is a symbol.
+
+Basically symbols in the varlist are the variables that are given a value, either nil, or the value of the second element if it is a two-element list.
+
+If the varlist is composed of two-element lists, the template for the ~let~ expression looks like this:
+
+#+begin_src emacs-lisp
+  (let ((VARIABLE VALUE)
+        (VARIABLE VALUE)
+        ...)
+    BODY...)
+#+end_src
+
+Sample:
+#+begin_src emacs-lisp
+  (let ((zebra "stripes")
+        (tiger "fierce"))
+    (message "One kind of animal has %s and another is %s." zebra tiger))
+#+end_src

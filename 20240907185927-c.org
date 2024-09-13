@@ -4,15 +4,24 @@
 #+title: C
 #+tags: [[id:8D8C89CD-0D59-4314-BC77-D24453E43D7E][Programming]]
 
-* Table of Contents :toc:
+* Table of Contents :toc@4:
 - [[#fundamentals][Fundamentals]]
   - [[#compiling-and-linking][Compiling and Linking]]
+    - [[#preprocessing][Preprocessing]]
+    - [[#compiling][Compiling]]
+    - [[#linking][Linking]]
+    - [[#to-compile][To compile]]
   - [[#form-of-a-simple-program][Form of a simple program]]
   - [[#variables-and-assignment][Variables and Assignment]]
   - [[#identifiers][Identifiers]]
 - [[#formatted-inputoutput][Formatted Input/Output]]
   - [[#conversion-specifications][Conversion Specifications]]
   - [[#scanf][~scanf~]]
+- [[#expressions][Expressions]]
+  - [[#arithmetic-operators][Arithmetic Operators]]
+  - [[#assignment-operators][Assignment Operators]]
+    - [[#lvalues][~lvalues~]]
+    - [[#increment-and-decrement-operators][Increment and Decrement Operators]]
 
 * Fundamentals
 ** Compiling and Linking
@@ -69,3 +78,47 @@ Common conversion specifiers:
 
 ** ~scanf~
 ~%d~ and ~%i~ can both match an integer written in base 10. ~%i~ however can also match integers expressed in octal (base 8) when prefixed with 0, and hexadecimal (base 16) when prefixed with 0x or 0X.
+
+* Expressions
+** Arithmetic Operators
+Arithmetic operators are categorized into two: *unary* and *binary*. Unary operators require one operand while binary operators require two.
+
+#+begin_src c
+  // unary
+  int i = +1;
+  int j = -i;
+
+  //binary
+  int k = 1 + 2;
+  int l = k * 5;
+#+end_src
+
+When ~int~ and ~float~ operands are mixed, the result is of type ~float~.
+
+The ~/~ and ~%~ require some care:
+- When both operands of / are integers, the operator /truncates/ the result, dropping the fractional part. ~1/2~ is ~0~ and not ~0.5~.
+- The % operator requires *integer operands* or else it won't compile.
+
+** Assignment Operators
+In most programming langauges, assignment is a /statement/. In C, assignment is an /operator/. In simple terms, the act of assignment *produces a result*.
+
+*** ~lvalues~
+lvalue (pronounced "L-value"), represents an object stored in memory. Variables are considered /lvalues/. It is not a constant or the result of a computation.
+
+*** Increment and Decrement Operators
+- ~++~: increment
+- ~--~: decrement
+
+They can however be used as a prefix (~++i~) or a postfix (~i++~) operator.
+
+With prefix, the value is evaluated to be incremented or decremented first. With postfix, the value is evaluates to itself first, then incremented/decremented.
+
+#+begin_src C
+  int i = 1;
+  printf("i is %d\n", ++i); // prints "i is 2"
+  printf("i is %d\n", i) //prints "i is 2"
+
+  int j = 1;
+  printf("j is %d\n", j++); // prints "j is 1"
+  printf("j is %d\n", j) //prints "j is 2"
+#+end_src
