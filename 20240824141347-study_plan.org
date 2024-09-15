@@ -3,275 +3,244 @@
 :END:
 #+title: Study Plan
 
-* Table of Contents :toc:
-- [[#year-1-core-fundamentals][Year 1: Core Fundamentals]]
-  - [[#trimester-1][Trimester 1]]
-  - [[#trimester-2][Trimester 2]]
-  - [[#trimester-3][Trimester 3]]
-- [[#year-2-advanced-system-level-programming-and-gpu-development][Year 2: Advanced System-Level Programming and GPU Development]]
-  - [[#trimester-4][Trimester 4]]
-  - [[#trimester-5][Trimester 5]]
-  - [[#trimester-6][Trimester 6]]
-- [[#year-3-advanced-gpu-and-os-specialization][Year 3: Advanced GPU and OS Specialization]]
-  - [[#trimester-7][Trimester 7]]
-  - [[#trimester-8][Trimester 8]]
-  - [[#trimester-9][Trimester 9]]
-- [[#final-capstone-project][Final Capstone Project]]
-- [[#post-study-deep-dive][Post-Study Deep Dive]]
-- [[#post-study-plan-strengthening-weak-areas][Post-Study Plan (Strengthening Weak Areas)]]
-  - [[#year-1-advanced-hardware-math-and-rtos][Year 1: Advanced Hardware, Math, and RTOS]]
-  - [[#year-2-specialization-and-capstone-project][Year 2: Specialization and Capstone Project]]
+* Study Plan for Systems Engineering and Kernel Development
 
-* Year 1: Core Fundamentals
-** Trimester 1
-
-*** Computer Architecture
-Resources: Computer Systems: A Programmers Perspective
-Project: Build a software-based CPU simulator, covering instruction execution.
-
-*** Data Structures & Algorithms
-Resources: The Algorithm Design Manual by Steven Skiena
-Project: Implement basic data structures (stack, queue, linked list) in C and perform operations (insert, delete, search).
-
+** Phase 1: Foundations (Months 1-6)
 *** Programming in C
-Resources: C Programming: A Modern Approach
-Project: Implement a basic CLI text editor in C.
+    - Resources:
+        - [ ] C Programming: A Modern Approach by K.N. King
+        - Project-Based Learning:
+            - [ ] Learn C the Hard Way by Zed A. Shaw
+    - Projects:
+        - [ ] Complete exercises in "Learn C the Hard Way"
+        - [ ] Develop a simple text editor in C with features:
+            - [ ] Syntax highlighting
+            - [ ] Search functionality
+            - [ ] File operations
+*** Discrete Mathematics (Start after 1 month of C programming)
+    - Resources:
+        - [ ] Discrete Mathematics and Its Applications by Kenneth H. Rosen
+    - Projects:
+        - [ ] Implement a graph library in C, including algorithms:
+            - [ ] Traversal (BFS, DFS)
+            - [ ] Shortest path (Dijkstra's, A*)
+            - [ ] Graph coloring
 
-*** Capstone Project
-Implement a data structure libary in C (with balanced trees and hash tables), integrating it with a CPU simulator to perform memory operations efficiently.
+** Phase 2: Core Systems Concepts (Months 7-12)
+*** Computer Systems Fundamentals
+    - Resources:
+        - [ ] Computer Systems: A Programmer's Perspective by Bryant and O'Hallaron
+    - Hands-On Labs:
+        - [ ] Complete lab assignments from CMU 15-213
+    - Projects:
+        - [ ] Build a simple CPU simulator that interprets assembly instructions
+        - [ ] Implement a memory allocator and garbage collector in C
+*** Data Structures & Algorithms (Begin after initial chapters of Computer Systems Fundamentals)
+    - Resources:
+        - [ ] The Algorithm Design Manual by Steven Skiena
+    - Projects:
+        - [ ] Implement data structures (hash tables, trees, graphs) in C
+        - [ ] Participate in coding challenges on LeetCode or HackerRank
+*** Operating Systems Basics (Start after understanding Computer Systems Fundamentals)
+    - Resources:
+        - [ ] Operating Systems: Three Easy Pieces by Remzi & Andrea Arpaci-Dusseau
+    - Project-Based Learning:
+        - [ ] Work on the MIT xv6 Operating System
+    - Projects:
+        - [ ] Extend xv6 OS:
+            - [ ] Add new system calls
+            - [ ] Improve the scheduler
+            - [ ] Implement virtual memory
 
-** Trimester 2
+** Phase 3: Advanced Programming and Systems (Months 13-18)
+*** Advanced C Programming & UNIX Systems
+    - Resources:
+        - [ ] Advanced Programming in the UNIX Environment by W. Richard Stevens
+        - [ ] Beej's Guide to Network Programming by Brian "Beej" Hall
+    - Projects:
+        - [ ] Develop a multi-threaded HTTP server in C
+        - [ ] Create UNIX-like command-line tools (e.g., grep, find, tar)
+*** Computer Architecture
+    - Resources:
+        - [ ] Computer Organization and Design by Patterson and Hennessy
+    - Project-Based Learning:
+        - [ ] Complete projects from Nand2Tetris Part II
+    - Projects:
+        - [ ] Build a computer in simulation (from NAND gates to a working CPU)
+        - [ ] Implement a simple assembler and virtual machine
+*** Computer Networking (Begin after starting Advanced C Programming)
+    - Resources:
+        - [ ] Computer Networking: A Top-Down Approach by Kurose and Ross
+    - Projects:
+        - [ ] Create a chat application using TCP/UDP sockets in C
+        - [ ] Implement a simple HTTP client and server
 
-*** Discrete Math
-Resources: Discrete Mathematics and Its Applications by Kenneth H. Rosen
-Project: Write a C program to solve the Boolean satisfiability problem (SAT solver).
-
-*** Operating System
-Resources: Operating Systems: Three Easy Pieces
-Project: Implement a simplified process scheduler in C.
-
-*** Advanced C Programming
-Resources: Advanced Programming in the Unix Environment by W. Richard Stevens
-Project: Create a multi-threaded file compression tool using standard C libraries.
-
-*** Capstone Project
-Develop a basic UNIX-like OS kernel that handles process scheduling, basic memory management, and task switching.
-
-** Trimester 3
-
-*** Computer Networking
-Resources: Computer Networking: A Top-Down Approach by Kurose & Ross
-Project: Build a networked chat system using sockets in C.
-
-*** Database Fundamentals
-Resources: CMU Introduction to Databases and Database System Concepts by Silberschatz, Korth, and Sudarshan
-Project: Write a simple database engine in C that can perform basic SQL-like queries.
-
-*** Systems Programming in C
-Resources: Beej's Guide to Network Programming
-Project: Implement a basic HTTP server from scratch in C.
-
-*** Capstone Project
-Develop a simple, networked database server in C that supports basic file storage and querying over the network.
-
-* Year 2: Advanced System-Level Programming and GPU Development
-
-** Trimester 4
-
-*** Compilers
-Resources: Writing an Interpreter in Go, Writing a Compiler in Go by Thorstel Ball
-Project: Build a basic compiler that converts simple language into assembly code.
-
-*** Advanced OS
-Resources: Modern Operating Systems by Andrew S. Tanenbaum
-Project: Design a microkernel in C++ that supports basic inter-process communication (IPC).
-
+** Phase 4: Introduction to C++ and Assembly (Months 19-24)
 *** C++ Programming
-Resources: Effective C++ by Scott Meyers
-Project: Build a task scheduler using multithreading in C++.
+    - Resources:
+        - [ ] Programming: Principles and Practice Using C++ by Bjarne Stroustrup
+        - [ ] Effective Modern C++ by Scott Meyers
+    - Projects:
+        - [ ] Develop a mini-IDE with code editing and compilation features
+        - [ ] Re-implement previous C projects in C++ to learn OOP concepts
+*** Assembly Language Programming (Begin after understanding basics of C++)
+    - Resources:
+        - [ ] Programming from the Ground Up by Jonathan Bartlett
+        - [ ] PC Assembly Language by Paul A. Carter
+    - Projects:
+        - [ ] Write assembly routines to optimize performance-critical sections
+        - [ ] Develop a bootloader that can load and execute a simple kernel
 
-*** Capstone Project
-Develop an extensible OS kernel using C++ with modules for process scheduling and memory management.
+** Phase 5: Operating Systems and Kernel Development (Months 25-30)
+*** Linux Kernel Internals
+    - Resources:
+        - [ ] Linux Kernel Development by Robert Love
+        - [ ] Linux Device Drivers by Corbet, Rubini, and Kroah-Hartman
+    - Projects:
+        - [ ] Develop Linux kernel modules and device drivers for virtual or real hardware
+        - [ ] Contribute to an open-source kernel module or subsystem
+*** Advanced Operating Systems
+    - Resources:
+        - [ ] Modern Operating Systems by Andrew S. Tanenbaum
+        - [ ] MIT's Operating Systems Engineering course (6.828)
+    - Projects:
+        - [ ] Implement a simple hypervisor or extend OS virtualization features
+        - [ ] Build a file system or enhance memory management in an existing OS
 
-** Trimester 5
+** Phase 6: Compiler Design and Parallel Programming (Months 31-36)
+*** Compiler Design
+    - Resources:
+        - [ ] Writing an Interpreter in Go by Thorsten Ball
+        - [ ] Writing a Compiler in Go by Thorsten Ball
+    - Projects:
+        - [ ] Build an interpreter and compiler for a simple programming language
+        - [ ] Extend your compiler to generate code for a virtual machine or LLVM
+*** Concurrent & Parallel Programming (Begin after starting Compiler Design)
+    - Resources:
+        - [ ] The Art of Multiprocessor Programming by Herlihy and Shavit
+    - Projects:
+        - [ ] Implement thread-safe data structures in C++
+        - [ ] Parallelize computational tasks using multithreading or GPU acceleration
 
-*** GPU Programming (CUDA)
-Resources: CUDA Programming Guide
-Project: Implement parallel matrix multiplication on a GPU using CUDA.
-
-*** Parallel Programming in C++
-Resources: Parallel Programming with CUDA
-Project: Write a parallel sorting algorithm optimized for GPUs using CUDA.
-
+** Phase 7: Specialization in GPU and Distributed Systems (Months 37-42)
+*** GPU Programming with CUDA
+    - Resources:
+        - [ ] CUDA Programming: A Developer's Guide to Parallel Computing with GPUs by Shane Cook
+        - [ ] NVIDIA's CUDA tutorials and labs
+    - Projects:
+        - [ ] Implement parallel algorithms (e.g., matrix multiplication) on GPUs
+        - [ ] Optimize existing codebases for GPU execution
 *** Distributed Systems
-Project: Implement a distributed key-value store with fault tolerance.
-Resource: Designing Data-Intensive Applications by Martin Kleppmann
+    - Resources:
+        - [ ] Designing Data-Intensive Applications by Martin Kleppmann
+    - Projects:
+        - [ ] Build a distributed key-value store or message queue
+        - [ ] Implement distributed algorithms like Raft or Paxos
+*** Computer Security (Begin after starting Distributed Systems)
+    - Resources:
+        - [ ] Security Engineering by Ross Anderson
+    - Projects:
+        - [ ] Implement secure authentication and encryption in your systems
+        - [ ] Conduct security audits and penetration testing on your applications
 
-*** Capstone Project
-Create a distributed, GPU-accelerated computational engine for large-scale data processing.
+** Phase 8: Advanced Specialization (Months 43-48)
+*** Advanced GPU Programming (OpenCL & Vulkan)
+    - Resources:
+        - [ ] OpenCL Programming Guide by Munshi et al.
+        - [ ] Vulkan API Tutorial
+    - Projects:
+        - [ ] Develop a graphics rendering engine using Vulkan
+        - [ ] Create compute-intensive applications using OpenCL
+*** Advanced Compiler Techniques
+    - Resources:
+        - [ ] Engineering a Compiler by Cooper and Torczon
+        - [ ] LLVM Documentation
+    - Projects:
+        - [ ] Extend your compiler to support JIT compilation using LLVM
+        - [ ] Implement advanced optimization passes in LLVM
+*** Formal Methods and Verification (Begin after understanding Advanced Compiler Techniques)
+    - Resources:
+        - [ ] The Calculus of Computation by Bradley and Manna
+        - [ ] Software Foundations series using Coq
+    - Projects:
+        - [ ] Formally verify critical components of your OS kernel or compiler
+        - [ ] Develop automated testing and verification tools
 
-** Trimester 6
-*** Computer Security
-Resource: Cryptography and Network Security by William Stallings
-Project: Develop a basic encryption algorithm and implement it in C++ for secure file transfer.
+** Phase 9: Embedded Systems and Real-Time Computing (Months 49-54)
+*** Real-Time Operating Systems (RTOS)
+    - Resources:
+        - [ ] Real-Time Systems by Jane W. S. Liu
+        - [ ] Work with FreeRTOS on embedded hardware
+    - Projects:
+        - [ ] Develop an RTOS for an ARM Cortex-M microcontroller
+        - [ ] Implement real-time scheduling algorithms on hardware
+*** Embedded Systems Programming
+    - Resources:
+        - [ ] Embedded Systems: Introduction to ARM Cortex-M Microcontrollers by Jonathan Valvano
+    - Projects:
+        - [ ] Create hardware interface drivers for peripherals
+        - [ ] Integrate drivers and RTOS into a complete embedded application
+*** Advanced Mathematics for System Optimization
+    - Resources:
+        - [ ] Concrete Mathematics by Graham, Knuth, and Patashnik
+    - Projects:
+        - [ ] Optimize algorithms using advanced mathematical techniques
+        - [ ] Implement numerical methods and evaluate their performance
 
-*** Advanced C++ Programming
-Resource: The C++ Programming Language by Bjarne Stroustrup
-Project: Create a memory-safe, multi-threaded HTTP server in C++.
+** Phase 10: Final Integration and Advanced Concepts (Months 55-60)
+*** Advanced Distributed Systems
+    - Resources:
+        - [ ] Distributed Algorithms by Nancy Lynch
+    - Projects:
+        - [ ] Develop a fully-featured distributed file system with replication and fault tolerance
+        - [ ] Implement a distributed ledger or blockchain prototype
+*** Machine Learning on Systems
+    - Resources:
+        - [ ] Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow by Aurélien Géron
+    - Projects:
+        - [ ] Optimize machine learning algorithms for GPU execution
+        - [ ] Incorporate ML modules into your OS for tasks like predictive scheduling
+*** Advanced Security Concepts
+    - Resources:
+        - [ ] Cryptography Engineering by Ferguson, Schneier, and Kohno
+    - Projects:
+        - [ ] Implement advanced encryption standards and protocols
+        - [ ] Secure your OS and applications against vulnerabilities and attacks
 
-*** Distributed Systems
-Resource: Distributed Systems by Andrew S. Tanenbaum
-Project: Build a distributed file system with fault tolerance, implementing replication strategies.
+** Capstone Project (Months 61-66)
+*** Build a Comprehensive, Distributed, GPU-Accelerated Operating System
+    - Description:
+        - [ ] Design and develop an OS with:
+            - [ ] Multi-GPU support
+            - [ ] Real-time task scheduling
+            - [ ] Distributed architecture
+            - [ ] Robust security features
+            - [ ] Machine learning integration
+    - Approach:
+        - [ ] Modular development
+        - [ ] Collaboration (consider forming a team)
+        - [ ] Thorough documentation
+        - [ ] Rigorous testing (unit tests, integration tests, formal verification)
 
-*** Capstone Project
-Create a distributed, fault-tolerant file storage system with GPU-accelerated encryption.
-
-* Year 3: Advanced GPU and OS Specialization
-** Trimester 7
-*** Advanced C++ and Hardware-Level Programming
-Resource: Introduction to 64-bit Assembly Language Programming for Linux and OS X by Ray Seyfarth
-Project: Write optimized assembly code for critical sections of an application, interfacing with C++.
-
-*** Advanced GPU Programming (OpenCL for AMD)
-Resource: OpenCL Programming Guide
-Project: Implement a particle simulation using OpenCL for parallel GPU computation.
-
-*** Formal Methods for System Design
-Resource: Introduction to Formal Methods by Jeannette Wing
-Project: Use formal verification techniques to verify the correctness of an OS scheduling algorithm.
-
-*** Capstone Project
-Build a fully-optimized, GPU-accelerated, distributed system for real-time scientific simulations.
-
-** Trimester 8
-*** Low-Level Optimization Techniques
-Resource: Optimizing C++ by Anselmo Lastra
-Project: Write assembly-optimized code for key operations in a distributed application.
-
-*** Advanced OS
-Resource: The Design and Implementation of the FreeBSD Operating System
-Project: Create a real-time OS with support for GPU offloading.
-
-*** Networking
-Resource: Computer Networks by Andrew S. Tanenbaum
-Project: Build a network traffic analyzer in C++ that uses parallel GPU processing to analyze traffic patterns.
-
-*** Capstone Project
-Design and implement a real-time networked OS that supports GPU scheduling and load balancing.
-
-** Trimester 9
-*** Distributed Systems (Advanced)
-Project: Design a distributed system with real-time load balancing and fault tolerance across multiple GPUs.
-Resource: Distributed Algorithms by Nancy Lynch
-
-*** Advanced Databases
-Project: Build a distributed NoSQL database with optimized data retrieval algorithms using C++.
-Resource: Database Management Systems by Ramakrishnan and Gehrke
-
-*** GPU Programming (Deep Dive)
-Project: Develop a GPU-accelerated machine learning algorithm from scratch using C++ and OpenCL.
-Resource: Hands-On GPU Programming with CUDA
-
-*** Capstone Project
-Create a real-time, distributed OS that leverages multi-GPU environments for large-scale computation and data processing.
-
-* Final Capstone Project
-Build a high-performance distributed operating system with multi-GPU support for scientific simulations or real-time data processing, implementing custom encryption algorithms, load-balancing, and fault tolerance strategies.h
-
-* Post-Study Deep Dive
-- Advanced GPU Programming (Focus on AI/ML and optimization for specific architectures like Tensor Cores in Nvidia GPUs).
-- Formal Verification and Static Analysis (For building secure, error-free system software).
-- Advanced Compiler Design (For developing performance-critical compilers for specific hardware).
-- Research Papers: Start exploring advanced research in distributed systems, real-time OS design, and GPU-accelerated computing.
-
-* Post-Study Plan (Strengthening Weak Areas)
-Focus: Hardware architecture, deeper math for system optimization, and RTOS development.
-
-** Year 1: Advanced Hardware, Math, and RTOS
-
-*** Trimester 1
-**** Advanced Computer Architecture
-Topics: In-depth look at modern CPU design, pipelining, instruction-level parallelism, cache hierarchies, and branch prediction.
-Project: Design a simple 5-stage pipelined CPU simulator that can execute a subset of instructions from an ISA (e.g., RISC-V or MIPS).
-
-Resources:
-Book: Computer Architecture: A Quantitative Approach by Hennessy and Patterson
-Course: MIT 6.823 Computer System Architecture
-
-**** Hardware Description Languages (HDL)
-Topics: Verilog or VHDL for hardware design and simulation.
-Project: Implement the CPU design from the first project in Verilog, simulate it, and test the instruction execution pipeline.
-
-Resources:
-Book: Digital Design and Computer Architecture by Harris & Harris
-Course: Nand2Tetris Part II
-
-*** Trimester 2
-**** Linear Algebra and Numerical Methods
-Topics: Matrices, vectors, eigenvalues, eigenvectors, numerical algorithms for solving systems of equations.
-Project: Implement matrix manipulation operations and explore their application in optimizing GPU workloads for linear algebra-heavy operations (e.g., AI/ML algorithms).
-
-Resources:
-Book: Linear Algebra and Its Applications by Gilbert Strang
-Course: MIT 18.06 Linear Algebra
-
-**** Numerical Methods for Engineers
-Topics: Algorithms for solving differential equations, numerical integration, and iterative methods.
-Project: Build numerical methods to solve large systems of equations and optimize parallel GPU implementations.
-
-Resources:
-Book: Numerical Methods for Engineers by Chapra and Canale
-Course: Coursera: Numerical Methods
-
-*** Trimester 3
-**** Real-Time Systems and RTOS Concepts
-Topics: Real-time scheduling algorithms, task management, synchronization, interrupt handling.
-Project: Design a basic real-time operating system kernel for an embedded system (Raspberry Pi or STM32) that can manage tasks with hard and soft deadlines.
-
-Resources:
-Book: Real-Time Systems: Design Principles for Distributed Embedded Applications by Hermann Kopetz
-Course: UT Austin Real-Time Operating Systems
-
-**** Embedded Systems Development
-Topics: Embedded C, interfacing hardware peripherals, low-level debugging.
-Project: Develop an embedded system application for a real-time task (e.g., sensor data collection and processing).
-
-Resources:
-Book: Making Embedded Systems by Elecia White
-Course: Coursera: Introduction to Embedded Systems
-
-** Year 2: Specialization and Capstone Project
-
-*** Trimester 1
-**** Compiler Optimization
-
-Topics: Advanced compiler optimizations (loop unrolling, register allocation, instruction scheduling), intermediate representations.
-Project: Extend the compiler from the previous study plan by adding advanced optimizations and support for multi-core CPUs or GPUs.
-    
-Resources:
-Book: Engineering a Compiler by Keith Cooper and Linda Torczon
-Course: Stanford Compilers Course
-
-**** Static Analysis and Formal Verification
-
-Topics: Techniques for verifying software correctness, model checking, formal methods.
-Project: Implement a static analysis tool for verifying properties of your RTOS kernel (e.g., deadlock detection, memory safety).
-    
-Resources:
-Book: Principles of Program Analysis by Nielson, Nielson, Hankin
-Course: MIT 6.820 Formal Methods for System Design
-
-*** Trimester 2
-**** Distributed System Design
-Topics: Consensus algorithms, distributed file systems, fault-tolerance strategies, and distributed computing for GPUs.
-Project: Develop a distributed system that leverages GPU clusters for parallel computation, implementing fault-tolerance and load-balancing mechanisms.
-
-Resources:
-Book: Distributed Systems: Principles and Paradigms by Andrew S. Tanenbaum
-Course: MIT 6.824 Distributed Systems
-
-*** Final Capstone Project
-Build an Advanced Real-Time Distributed OS:
-
-- Integrate real-time capabilities, distributed systems, and GPU-accelerated computing. The system should manage tasks across CPU and GPU clusters, provide fault-tolerance, handle real-time scheduling, and run performance-critical workloads.
-- Apply advanced numerical methods for system optimization and include formal verification checks using static analysis.
+** Post-Study Deep Dive (Months 67-72)
+*** Focus Areas:
+    - Advanced GPU Programming:
+        - [ ] NVIDIA Developer Documentation
+        - [ ] Research papers on GPU architectures
+    - Formal Verification and Static Analysis:
+        - [ ] The Calculus of Computation by Bradley and Manna
+        - [ ] Tools like Coq, Isabelle, Z3
+    - Advanced Compiler Design:
+        - [ ] Contribute to LLVM project
+        - [ ] Explore research papers on compiler optimizations
+    - Open-Source Contributions:
+        - [ ] Linux Kernel
+        - [ ] LLVM
+        - [ ] Mesa3D
+    - Strengthen Mathematical Foundations:
+        - [ ] Study "Concrete Mathematics"
+        - [ ] Solve advanced problems
+    - Networking & Soft Skills:
+        - [ ] Attend and present at industry conferences
+        - [ ] Engage with professional communities
+        - [ ] Write articles or tutorials to share knowledge

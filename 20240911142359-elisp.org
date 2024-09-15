@@ -12,6 +12,8 @@
   - [[#wrting-an-interactive-function][Wrting an ~interactive~ function]]
   - [[#install-code-permanently][Install Code Permanently]]
   - [[#let][~let~]]
+  - [[#if][~if~]]
+  - [[#save-excursion][~save-excursion~]]
 
 * Things to take note/research more
 - Byte compiling
@@ -91,4 +93,91 @@ Sample:
   (let ((zebra "stripes")
         (tiger "fierce"))
     (message "One kind of animal has %s and another is %s." zebra tiger))
+#+end_src
+
+~let~ binds variables using "dynamic binding" by default, and by "lexical binding", which is the preferred form of binding.
+
+To enable lexical binding, add ~;;; -*- lexical-binding: t -*-~ in the first line of your Elisp file.
+
+*** Lexical vs Dynamic Binding
+
+*Lexical Binding*: Variables defined within ~let~ are valid only within the body of the ~let~ expression.
+
+*Dynamic Binding*: The variables created are valid during the execution of the ~let~ expression. Meaning that when we call a function within that ~let~ expression, it can see these local variables, regardles of where the function is defined.
+
+Example:
+#+begin_src emacs-lisp
+  (setq x 0)
+
+  (defun getx () x)
+
+  (setq x 1)
+
+  (let ((x 2))
+    (getx))
+#+end_src
+
+With the example above, ~getx~ will return 1 when lexical binding is enabled, and 2 if we use dynamic binding.
+
+This is because for lexical binding, the binding of ~x~ at the /global/ level, where ~getx~ is defined, is 1. It does not see the value of ~x~ inside the ~let~ body because the function ~getx~ is not defined inside the ~let~ body.
+
+For dynamic binding however, ~getx~ returns 2 because it sees the value of ~x~ inside the ~let~ body.
+
+** ~if~
+Structure:
+#+begin_src emacs-lisp
+  (if TRUE-OR-FALSE-TEST
+      ACTION-TO-CARRY-OUT-IF-TEST-IS-TRUE)
+#+end_src
+
+Example:
+#+begin_src emacs-lisp
+  (defun type-of-animal (characteristic)
+    "Print message in an echo area depending on CHARACTERISTIC.
+  If the CHARACTERISTIC is the string \"fierce\",
+  then warn of a tiger."
+    (if (equal characteristic "fierce")
+        (message "It is a tiger!")))
+#+end_src
+
+Using with an else-statement:
+#+begin_src emacs-lisp
+  (defun type-of-animal (characteristic)
+    "Print message in an echo area depending on CHARACTERISTIC.
+  If the CHARACTERISTIC is the string \"fierce\",
+  then warn of a tiger."
+    (if (equal characteristic "fierce")
+        (message "It is a tiger!")
+      (message "It is not fierce!")))
+
+  (type-of-animal "fierce")
+  (type-of-animal "striped")
+#+end_src
+
+*** ~nil~
+The symbol ~nil~ has two meanings, either an empty list, or ~false~. It can be written as an empty list '()' or as 'nil'.
+
+** ~save-excursion~
+~save-excursion~ is very common for Elisp programs used for editing. It saves the location of point, executes the body of a function, and then restores point to its previous position if the location was changed.
+
+Its primary purpose is to keep the user from being surprised and disturbed by unexpected movement of point.
+
+*** Point and Mark
+*Point*: Current location of the cursor.
+*Mark*: A position in the buffer where the user can set. Setting another mark saves the previous mark in the /mark ring/.
+
+The area between the point and the mark is called the /region/.
+
+*** ~save-excursion~ code
+Template:
+#+begin_src emacs-lisp
+  (save-excursion
+    BODY...)
+#+end_src
+
+In Elisp, ~save-excursion~ often occurs within the body of a ~let~ expression:
+#+begin_src emacs-lisp
+  (let VARLIST
+    (save-excursion
+      BODY...))
 #+end_src
