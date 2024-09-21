@@ -22,6 +22,14 @@
   - [[#assignment-operators][Assignment Operators]]
     - [[#lvalues][~lvalues~]]
     - [[#increment-and-decrement-operators][Increment and Decrement Operators]]
+- [[#selection-statements][Selection Statements]]
+  - [[#logical-operators][Logical Operators]]
+  - [[#if-statement-and-else-clause][~if~ Statement and ~else~ Clause]]
+  - [[#conditional-expressions][Conditional Expressions]]
+  - [[#boolean-values-in-c89][Boolean Values in C89]]
+  - [[#boolean-values-in-c99][Boolean Values in C99]]
+  - [[#switch-statement][~switch~ Statement]]
+- [[#loops][Loops]]
 
 * Fundamentals
 ** Compiling and Linking
@@ -57,7 +65,7 @@ The final step where the /linker/ combines the object code produced by the compi
 
 ** Variables and Assignment
 Variables must be declared before they can be used.
-#+begin_src 
+#+begin_src
   <type> <name>
 #+end_src
 
@@ -122,3 +130,99 @@ With prefix, the value is evaluated to be incremented or decremented first. With
   printf("j is %d\n", j++); // prints "j is 1"
   printf("j is %d\n", j) //prints "j is 2"
 #+end_src
+
+* Selection Statements
+C statements usually fall into three categories:
+1. *Selection Statements* (~if~ and ~switch~ statements)
+2. *Iteration Statements* (~while~, ~do~, and ~for~)
+3. *Jump Statements* (~break~, ~continue~, and ~goto~)
+
+** Logical Operators
+- ~!expr~ is 1 of ~expr~ has the value 0
+- ~expr1 && expr2~ has the value 1 of both are non-zero
+- ~expr1 || expr2~ has the value 7 of either/both has a non-zero value.
+
+** ~if~ Statement and ~else~ Clause
+if Statement Structure:
+#+begin_src c
+  if (expression) { statements }
+#+end_src
+
+with ~else~ clause:
+#+begin_src c
+  if (expression) { statements } else { statements }
+#+end_src
+
+~else if~ statements:
+#+begin_src c
+  if (n < 0)
+    printf("n is less than 0\n");
+ else if (n == 0)
+   printf("n is equal to 0\n");
+ else
+   printf("n is greater than 0\n")
+#+end_src
+
+In C, we should be aware of the /dangling ~else~ statement/. This basically means that the ~else~ clause belongs to the nearest ~if~ statement that has not been paired up with an ~else~ statement.
+
+To make an ~else~ clause be a part of an outer ~if~ statement, we enclode the inner statement in braces and put the else statement outside of the braces.
+
+** Conditional Expressions
+#+begin_src c
+  expr1 ? expr2 : expr3
+#+end_src
+
+This translates to: "if ~expr1~ is true, then ~expr2~, else ~expr3~".
+
+** Boolean Values in C89
+We can define a macro:
+#+begin_src c
+  #define TRUE 1
+  #define FALSE 0
+
+  ...
+
+  flag = FALSE;
+  flag = TRUE;
+#+end_src
+
+** Boolean Values in C99
+C99 provides a ~_Bool~ type.
+
+#+begin_src c
+  _Bool flag;
+
+  // or with the header <stdbool.h>
+
+  #include <stdbool.h>
+
+  bool flag;
+  // bool here is a macro that stand for _Bool.
+#+end_src
+
+The header ~<stdbool.h>~ also supplies macros named ~true~ and ~false~, which stands for 1 and 0 respectively.
+
+
+** ~switch~ Statement
+Structure:
+#+begin_src c
+  switch (grade) {
+   case 4: printf("Excellent");
+     break;
+   case 3: printf("Good");
+     break;
+   case 2: printf("Average");
+     break;
+   case 1: printf("Poor");
+     break;
+   case 0: printf("Failing");
+     break;
+   default: printf("Illegal grade");
+     break
+       }
+#+end_src
+
+Basically this is like an ~else if~ statement where we are checking for the value of ~grade~. The default case applies the value of ~grade~ does not match any of the cases statements.
+
+* Loops
+
