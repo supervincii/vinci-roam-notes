@@ -2,245 +2,114 @@
 :ID:       821A025B-8A68-428D-9701-AD1A69A69635
 :END:
 #+title: Study Plan
+* Embedded Software Engineering Self Study Plan
 
-* Study Plan for Systems Engineering and Kernel Development
+** Programming
+*** Languages
+**** C Programming
+- Resources:
+  - [ ] C Programming: A Modern Approach
+**** C++ Programming
+**** ARM Assembly
 
-** Phase 1: Foundations (Months 1-6)
-*** Programming in C
-    - Resources:
-        - [ ] C Programming: A Modern Approach by K.N. King
-        - Project-Based Learning:
-            - [ ] Learn C the Hard Way by Zed A. Shaw
-    - Projects:
-        - [ ] Complete exercises in "Learn C the Hard Way"
-        - [ ] Develop a simple text editor in C with features:
-            - [ ] Syntax highlighting
-            - [ ] Search functionality
-            - [ ] File operations
-*** Discrete Mathematics (Start after 1 month of C programming)
-    - Resources:
-        - [ ] Discrete Mathematics and Its Applications by Kenneth H. Rosen
-    - Projects:
-        - [ ] Implement a graph library in C, including algorithms:
-            - [ ] Traversal (BFS, DFS)
-            - [ ] Shortest path (Dijkstra's, A*)
-            - [ ] Graph coloring
+*** Concepts
+**** Data Structures & Algorithms
+- Resources:
+  - [ ] The Algorithm Design Manual
+**** Design Patterns
+- Resources:
+  - Design Patterns for Embedded Systems in C - Bruce Powel Douglass
+  - Making Embedded Systems: Design Patterns for Great Software - Elecia White
+**** State Machines
+**** Memory Management
 
-** Phase 2: Core Systems Concepts (Months 7-12)
-*** Computer Systems Fundamentals
-    - Resources:
-        - [ ] Computer Systems: A Programmer's Perspective by Bryant and O'Hallaron
-    - Hands-On Labs:
-        - [ ] Complete lab assignments from CMU 15-213
-    - Projects:
-        - [ ] Build a simple CPU simulator that interprets assembly instructions
-        - [ ] Implement a memory allocator and garbage collector in C
-*** Data Structures & Algorithms (Begin after initial chapters of Computer Systems Fundamentals)
-    - Resources:
-        - [ ] The Algorithm Design Manual by Steven Skiena
-    - Projects:
-        - [ ] Implement data structures (hash tables, trees, graphs) in C
-        - [ ] Participate in coding challenges on LeetCode or HackerRank
-*** Operating Systems Basics (Start after understanding Computer Systems Fundamentals)
-    - Resources:
-        - [ ] Operating Systems: Three Easy Pieces by Remzi & Andrea Arpaci-Dusseau
-    - Project-Based Learning:
-        - [ ] Work on the MIT xv6 Operating System
-    - Projects:
-        - [ ] Extend xv6 OS:
-            - [ ] Add new system calls
-            - [ ] Improve the scheduler
-            - [ ] Implement virtual memory
-
-** Phase 3: Advanced Programming and Systems (Months 13-18)
-*** Advanced C Programming & UNIX Systems
-    - Resources:
-        - [ ] Advanced Programming in the UNIX Environment by W. Richard Stevens
-        - [ ] Beej's Guide to Network Programming by Brian "Beej" Hall
-    - Projects:
-        - [ ] Develop a multi-threaded HTTP server in C
-        - [ ] Create UNIX-like command-line tools (e.g., grep, find, tar)
+** Basic Electronics
+*** Principles of Electric Circuits
+- Resources:
+  - [ ] Principles of Electric Circuits: Conventional Current Version
+*** Electronics Fundamentals
+- Resources:
+  - [ ] Electronics Fundamentals: Circuits, Devices, & Applications
+*** Digital Design
+- Resources:
+  - [ ] Digital Design and Computer Architecture: ARM Edition
 *** Computer Architecture
-    - Resources:
-        - [ ] Computer Organization and Design by Patterson and Hennessy
-    - Project-Based Learning:
-        - [ ] Complete projects from Nand2Tetris Part II
-    - Projects:
-        - [ ] Build a computer in simulation (from NAND gates to a working CPU)
-        - [ ] Implement a simple assembler and virtual machine
-*** Computer Networking (Begin after starting Advanced C Programming)
-    - Resources:
-        - [ ] Computer Networking: A Top-Down Approach by Kurose and Ross
-    - Projects:
-        - [ ] Create a chat application using TCP/UDP sockets in C
-        - [ ] Implement a simple HTTP client and server
+- Resources:
+  - [ ] Computer Organization and Design: ARM Edition
 
-** Phase 4: Introduction to C++ and Assembly (Months 19-24)
-*** C++ Programming
-    - Resources:
-        - [ ] Programming: Principles and Practice Using C++ by Bjarne Stroustrup
-        - [ ] Effective Modern C++ by Scott Meyers
-    - Projects:
-        - [ ] Develop a mini-IDE with code editing and compilation features
-        - [ ] Re-implement previous C projects in C++ to learn OOP concepts
-*** Assembly Language Programming (Begin after understanding basics of C++)
-    - Resources:
-        - [ ] Programming from the Ground Up by Jonathan Bartlett
-        - [ ] PC Assembly Language by Paul A. Carter
-    - Projects:
-        - [ ] Write assembly routines to optimize performance-critical sections
-        - [ ] Develop a bootloader that can load and execute a simple kernel
+** Test Equipment
+*** Multimeter
+*** Logic/Protocol Analyzer
+*** Oscilloscope
 
-** Phase 5: Operating Systems and Kernel Development (Months 25-30)
-*** Linux Kernel Internals
-    - Resources:
-        - [ ] Linux Kernel Development by Robert Love
-        - [ ] Linux Device Drivers by Corbet, Rubini, and Kroah-Hartman
-    - Projects:
-        - [ ] Develop Linux kernel modules and device drivers for virtual or real hardware
-        - [ ] Contribute to an open-source kernel module or subsystem
-*** Advanced Operating Systems
-    - Resources:
-        - [ ] Modern Operating Systems by Andrew S. Tanenbaum
-        - [ ] MIT's Operating Systems Engineering course (6.828)
-    - Projects:
-        - [ ] Implement a simple hypervisor or extend OS virtualization features
-        - [ ] Build a file system or enhance memory management in an existing OS
+** Prototyping Skills
+*** Breadboarding
+*** Hardware Design Basics
+*** PCB Design/EMC
+*** Soldering/Rework
 
-** Phase 6: Compiler Design and Parallel Programming (Months 31-36)
-*** Compiler Design
-    - Resources:
-        - [ ] Writing an Interpreter in Go by Thorsten Ball
-        - [ ] Writing a Compiler in Go by Thorsten Ball
-    - Projects:
-        - [ ] Build an interpreter and compiler for a simple programming language
-        - [ ] Extend your compiler to generate code for a virtual machine or LLVM
-*** Concurrent & Parallel Programming (Begin after starting Compiler Design)
-    - Resources:
-        - [ ] The Art of Multiprocessor Programming by Herlihy and Shavit
-    - Projects:
-        - [ ] Implement thread-safe data structures in C++
-        - [ ] Parallelize computational tasks using multithreading or GPU acceleration
+** Operating Systems
+*** OS Fundamentals
+- Resources:
+  - [ ] Operating Systems: Three Easy Pieces
+  - [ ] Modern Operating Systems
+    
+*** Embedded Linux
+- Resources:
+  - [ ] Mastering Embedded Linux Programming
+**** Linux Kernel
+- Resources:
+  - [ ] Linux Kernel Development
+  - [ ] The Linux Programming Interface
+**** Device Drivers
+- Resources:
+  - [ ] Linux Device Drivers - Jonathan Corbet
 
-** Phase 7: Specialization in GPU and Distributed Systems (Months 37-42)
-*** GPU Programming with CUDA
-    - Resources:
-        - [ ] CUDA Programming: A Developer's Guide to Parallel Computing with GPUs by Shane Cook
-        - [ ] NVIDIA's CUDA tutorials and labs
-    - Projects:
-        - [ ] Implement parallel algorithms (e.g., matrix multiplication) on GPUs
-        - [ ] Optimize existing codebases for GPU execution
-*** Distributed Systems
-    - Resources:
-        - [ ] Designing Data-Intensive Applications by Martin Kleppmann
-    - Projects:
-        - [ ] Build a distributed key-value store or message queue
-        - [ ] Implement distributed algorithms like Raft or Paxos
-*** Computer Security (Begin after starting Distributed Systems)
-    - Resources:
-        - [ ] Security Engineering by Ross Anderson
-    - Projects:
-        - [ ] Implement secure authentication and encryption in your systems
-        - [ ] Conduct security audits and penetration testing on your applications
+*** Real Time OS
+**** RTOS Basics
+**** FreeRTOS
+- Resources:
+  - [ ] Mastering the FreeRTOS Real Time Kernel
+**** Zephyr
 
-** Phase 8: Advanced Specialization (Months 43-48)
-*** Advanced GPU Programming (OpenCL & Vulkan)
-    - Resources:
-        - [ ] OpenCL Programming Guide by Munshi et al.
-        - [ ] Vulkan API Tutorial
-    - Projects:
-        - [ ] Develop a graphics rendering engine using Vulkan
-        - [ ] Create compute-intensive applications using OpenCL
-*** Advanced Compiler Techniques
-    - Resources:
-        - [ ] Engineering a Compiler by Cooper and Torczon
-        - [ ] LLVM Documentation
-    - Projects:
-        - [ ] Extend your compiler to support JIT compilation using LLVM
-        - [ ] Implement advanced optimization passes in LLVM
-*** Formal Methods and Verification (Begin after understanding Advanced Compiler Techniques)
-    - Resources:
-        - [ ] The Calculus of Computation by Bradley and Manna
-        - [ ] Software Foundations series using Coq
-    - Projects:
-        - [ ] Formally verify critical components of your OS kernel or compiler
-        - [ ] Develop automated testing and verification tools
+** Microcontrollers
+*** GPIO
+*** ADC/DAC
+*** Timers/Counters
+*** PWM
+*** Watchdog
+*** Interrupts
+*** DMA
+*** Clock Management
+*** Power Management
+*** Bootloader/DFU
 
-** Phase 9: Embedded Systems and Real-Time Computing (Months 49-54)
-*** Real-Time Operating Systems (RTOS)
-    - Resources:
-        - [ ] Real-Time Systems by Jane W. S. Liu
-        - [ ] Work with FreeRTOS on embedded hardware
-    - Projects:
-        - [ ] Develop an RTOS for an ARM Cortex-M microcontroller
-        - [ ] Implement real-time scheduling algorithms on hardware
-*** Embedded Systems Programming
-    - Resources:
-        - [ ] Embedded Systems: Introduction to ARM Cortex-M Microcontrollers by Jonathan Valvano
-    - Projects:
-        - [ ] Create hardware interface drivers for peripherals
-        - [ ] Integrate drivers and RTOS into a complete embedded application
-*** Advanced Mathematics for System Optimization
-    - Resources:
-        - [ ] Concrete Mathematics by Graham, Knuth, and Patashnik
-    - Projects:
-        - [ ] Optimize algorithms using advanced mathematical techniques
-        - [ ] Implement numerical methods and evaluate their performance
+** Build System
+*** Compilers/GCC
+*** Make/CMake
+*** Bash Scripting
 
-** Phase 10: Final Integration and Advanced Concepts (Months 55-60)
-*** Advanced Distributed Systems
-    - Resources:
-        - [ ] Distributed Algorithms by Nancy Lynch
-    - Projects:
-        - [ ] Develop a fully-featured distributed file system with replication and fault tolerance
-        - [ ] Implement a distributed ledger or blockchain prototype
-*** Machine Learning on Systems
-    - Resources:
-        - [ ] Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow by Aurélien Géron
-    - Projects:
-        - [ ] Optimize machine learning algorithms for GPU execution
-        - [ ] Incorporate ML modules into your OS for tasks like predictive scheduling
-*** Advanced Security Concepts
-    - Resources:
-        - [ ] Cryptography Engineering by Ferguson, Schneier, and Kohno
-    - Projects:
-        - [ ] Implement advanced encryption standards and protocols
-        - [ ] Secure your OS and applications against vulnerabilities and attacks
+** Debugging
+*** JTAG/SWD
+*** GDB
 
-** Capstone Project (Months 61-66)
-*** Build a Comprehensive, Distributed, GPU-Accelerated Operating System
-    - Description:
-        - [ ] Design and develop an OS with:
-            - [ ] Multi-GPU support
-            - [ ] Real-time task scheduling
-            - [ ] Distributed architecture
-            - [ ] Robust security features
-            - [ ] Machine learning integration
-    - Approach:
-        - [ ] Modular development
-        - [ ] Collaboration (consider forming a team)
-        - [ ] Thorough documentation
-        - [ ] Rigorous testing (unit tests, integration tests, formal verification)
+** Interfaces & Protocols
+*** Basic
+*** High Speed
+*** Wireless
+*** Industrial
+*** Automotive
+*** Network
+- Resources:
+  - [ ] Hands on Network Programming with C
+  - [ ] Network Algorithmics
 
-** Post-Study Deep Dive (Months 67-72)
-*** Focus Areas:
-    - Advanced GPU Programming:
-        - [ ] NVIDIA Developer Documentation
-        - [ ] Research papers on GPU architectures
-    - Formal Verification and Static Analysis:
-        - [ ] The Calculus of Computation by Bradley and Manna
-        - [ ] Tools like Coq, Isabelle, Z3
-    - Advanced Compiler Design:
-        - [ ] Contribute to LLVM project
-        - [ ] Explore research papers on compiler optimizations
-    - Open-Source Contributions:
-        - [ ] Linux Kernel
-        - [ ] LLVM
-        - [ ] Mesa3D
-    - Strengthen Mathematical Foundations:
-        - [ ] Study "Concrete Mathematics"
-        - [ ] Solve advanced problems
-    - Networking & Soft Skills:
-        - [ ] Attend and present at industry conferences
-        - [ ] Engage with professional communities
-        - [ ] Write articles or tutorials to share knowledge
+** Memory Technologies & File Systems
+
+** Hardware Simulation / Emulation
+*** QEMU
+*** Renode
+
+** Testing
+- Resources:
+  - [ ] Test Driven Development for Embedded C
