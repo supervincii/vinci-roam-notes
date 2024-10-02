@@ -3,113 +3,168 @@
 :END:
 #+title: Study Plan
 * Embedded Software Engineering Self Study Plan
+** Phase 1: Core Foundations and CS Fundamentals
+*** Topics and Time Allocation
 
-** Programming
-*** Languages
-**** C Programming
-- Resources:
-  - [ ] C Programming: A Modern Approach
-**** C++ Programming
-**** ARM Assembly
+| Topic Area                | Daily Time Allocation |
+|---------------------------+-----------------------|
+| Programming Languages     | 2 hours               |
+| Electronics & Prototyping | 1 hour                |
+| CS Fundamentals           | 1 hour                |
 
-*** Concepts
-**** Data Structures & Algorithms
-- Resources:
-  - [ ] The Algorithm Design Manual
-**** Design Patterns
-- Resources:
-  - Design Patterns for Embedded Systems in C - Bruce Powel Douglass
-  - Making Embedded Systems: Design Patterns for Great Software - Elecia White
-**** State Machines
-**** Memory Management
+*** Topics and Resources
 
-** Basic Electronics
-*** Principles of Electric Circuits
-- Resources:
-  - [ ] Principles of Electric Circuits: Conventional Current Version
-*** Electronics Fundamentals
-- Resources:
-  - [ ] Electronics Fundamentals: Circuits, Devices, & Applications
-*** Digital Design
-- Resources:
-  - [ ] Digital Design and Computer Architecture: ARM Edition
-*** Computer Architecture
-- Resources:
-  - [ ] Computer Organization and Design: ARM Edition
+| Topic                               | Resource                                                      |
+|-------------------------------------+---------------------------------------------------------------|
+| C Programming                       | C Programming: A Modern Approach                              |
+| C++ Programming (Introduction)      |                                                               |
+| Principles of Electric Circuits     | Principles of Electric Circuits: Conventional Current Version |
+| Electronics Fundamentals            | Electronics Fundamentals: Circuits, Devices, & Applications   |
+| Data Structures & Algorithms        | The Algorithm Design Manual                                   |
+| GPIO (General-Purpose Input/Output) |                                                               |
+| ADC/DAC (Introduction)              |                                                               |
+| Breadboarding                       |                                                               |
+| Soldering/Rework                    |                                                               |
+| Math for CS                         | Discrete Mathematics and its Applications                     |
+| Computer Networking                 | Computer Networking: A Top Down Approach                      |
+| Operating Systems Fundamentals      | Operating Systems: Three Easy Pieces                          |
 
-** Test Equipment
-*** Multimeter
-*** Logic/Protocol Analyzer
-*** Oscilloscope
+*** Projects
 
-** Prototyping Skills
-*** Breadboarding
-*** Hardware Design Basics
-*** PCB Design/EMC
-*** Soldering/Rework
+1. Implement basic data structures (linked lists, stacks, queues) in C.
+2. Build simple electronic circuits on a breadboard (e.g., LED blinking, button input).
+3. Create a simple client-server application in C using sockets for basic networking.
 
-** Operating Systems
-*** OS Fundamentals
-- Resources:
-  - [ ] Operating Systems: Three Easy Pieces
-  - [ ] Modern Operating Systems
-    
-*** Embedded Linux
-- Resources:
-  - [ ] Mastering Embedded Linux Programming
-**** Linux Kernel
-- Resources:
-  - [ ] Linux Kernel Development
-  - [ ] The Linux Programming Interface
-**** Device Drivers
-- Resources:
-  - [ ] Linux Device Drivers - Jonathan Corbet
+*** Capstone Project
 
-*** Real Time OS
-**** RTOS Basics
-**** FreeRTOS
-- Resources:
-  - [ ] Mastering the FreeRTOS Real Time Kernel
-**** Zephyr
+*Smart Sensor System*:
 
-** Microcontrollers
-*** GPIO
-*** ADC/DAC
-*** Timers/Counters
-*** PWM
-*** Watchdog
-*** Interrupts
-*** DMA
-*** Clock Management
-*** Power Management
-*** Bootloader/DFU
+Develop an Arduino based system that reads sensor data, and sends it to a PC application over a serial or network communication. The PC application will display real-time data.
 
-** Build System
-*** Compilers/GCC
-*** Make/CMake
-*** Bash Scripting
+** Phase 2: Intermediate Embedded Systems and Enhanced CS Concepts
+*** Topics and Time Allocation
 
-** Debugging
-*** JTAG/SWD
-*** GDB
+| Topic Area                                | Daily Time Allocation |
+|-------------------------------------------+-----------------------|
+| Advanced Programming and Microcontrollers | 2 hours               |
+| Build Systems and Debugging               | 1 hour                |
+| CS Fundamentals                           | 1 hour                |
 
-** Interfaces & Protocols
-*** Basic
-*** High Speed
-*** Wireless
-*** Industrial
-*** Automotive
-*** Network
-- Resources:
-  - [ ] Hands on Network Programming with C
-  - [ ] Network Algorithmics
+*** Topics and Resources
 
-** Memory Technologies & File Systems
+| Topic                          | Resource                                                           |
+|--------------------------------+--------------------------------------------------------------------|
+| C++ Programming (Advanced)     | Effective Modern C++ by Scott Meyers                               |
+| ARM Assembly                   | ARM Assembly Language by William Hohl                              |
+| Computer Architecture          | Computer Organization and Design: ARM Edition                      |
+| ADC/DAC                        |                                                                    |
+| Timers/Counters                |                                                                    |
+| PWM (Pulse-Width Modulation)   |                                                                    |
+| Interrupts                     |                                                                    |
+| DMA (Direct Memory Access)     |                                                                    |
+| Clock Management               |                                                                    |
+| Operating Systems              | Modern Operating Systems by Andrew S. Tanenbaum                    |
+| Compilers/GCC                  |                                                                    |
+| Make/CMake                     |                                                                    |
+| Bash Scripting                 |                                                                    |
+| GDB                            |                                                                    |
+| Languages & Compilers          | Writing an Interpreter & Compiler in Go by Thorsten Ball           |
+| Computer Networking (Advanced) | Computer Networking: A Top Down Approach (Ch. 4 - 7)               |
+| Algorithms                     | Introduction to Algorithms by Cormen, Leiserson, Rivest, and Stein |
 
-** Hardware Simulation / Emulation
-*** QEMU
-*** Renode
+*** Projects
 
-** Testing
-- Resources:
-  - [ ] Test Driven Development for Embedded C
+1. Write ARM assembly programs implementing basic algorithms
+2. Develop firmware for an ARM-based microcontroller (e.g., STM32) utilizing peripherals like PWM to control servo motors.
+3. Build a simple compiler or interpreter for a subset of a language (e.g., arithmetic expressions)
+
+*** Capstone Project
+
+*Embedded Networking Device*:
+
+Design and implement a network-enabled device using an ARM microcontroller that collects sensor data and communicates over TCP/IP, integrating advanced C++ features and operating systems concepts.
+
+** Phase 3: Advanced Embedded Systems and Specialized Topics
+
+*** Topics and Time Allocation
+
+| Topic Area                     | Daily Time Allocation |
+|--------------------------------+-----------------------|
+| RTOS and Embedded Linux        | 2 hours               |
+| Interfaces and Protocols       | 1 hour                |
+| Security and Signal Processing | 1 hour                |
+
+*** Topics and Resources
+
+| Topic                                 | Resource                                                                                         |
+|---------------------------------------+--------------------------------------------------------------------------------------------------|
+| RTOS Basics                           |                                                                                                  |
+| FreeRTOS                              | Mastering the FreeRTOS Real Time Kernel by Richard Barry                                         |
+| Zephyr                                |                                                                                                  |
+| Embedded Linux                        | Mastering Embedded Linux Programming by Chris Simmonds                                           |
+| Device Drivers                        | Linux Device Drivers by Jonathan Corbet, Alessandro Rubini, and Greg Kroah-Hartman               |
+| I2C, SPI, UART                        |                                                                                                  |
+| Wireless Protocols (Bluetooth, Wi-Fi) |                                                                                                  |
+| Network Programming                   | Hands-On Network Programming with C by Lewis Van Winkle, Network Algorithmics by George Varghese |
+| Memory Technologies and File Systems  |                                                                                                  |
+| Testing                               | Test Driven Development for Embedded C by James W. Grenning                                      |
+| Secure Bootloaders                    |                                                                                                  |
+| Encryption Techniques                 | Embedded Systems Security by David Kleidermacher and Mike Kleidermacher                          |
+| Filters and Transforms                | Signal Processing for Embedded Systems by Roger Woods et al.                                     |
+| QEMU                                  |                                                                                                  |
+| Renode                                |                                                                                                  |
+| Distributed Systems                   | Designing Data-Intensive Applications by Martin Kleppmann                              |
+
+*** Projects
+
+1. Implement a multi-threaded real-time data logger using FreeRTOS.
+2. Develop a Linux device driver for a custom hardware interface.
+3. Create a secure communication channel between two embedded devices using encryption.
+4. Simulate an embedded system using QEMU and test firmware applications.
+
+*** Capstone Project
+
+*Embedded Linux Device with Secure Monitoring*:
+
+Build and embedded Linux system on a Raspberry Pi that interfaces with custom hardware, includes a device driver, uses secure network protocols, and implements real-time data processing.
+
+** Phase 4: Specialization in Advanced Topics and Hardware Design
+
+*** Topics and Time Allocation
+
+| Topic Area                             | Daily Time Allocation |
+|----------------------------------------+-----------------------|
+| Design Patterns and Advanced Debugging | 2 hours               |
+| Prototyping and HDL                    | 1 hour                |
+| Emerging Technologies                  | 1 hour                |
+
+*** Topics and Resources
+
+| Topic                                    | Resources/Focus Items                                                                                                                          |
+|------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------|
+| Design Patterns                          | Design Patterns for Embedded Systems in C by Bruce Powel Douglass, Making Embedded Systems: Design Patterns for Great Software by Elecia White |
+| State Machines                           | Implementing finite state machines in embedded applications.                                                                                   |
+| Memory Management                        | Advanced techniques in dynamic memory allocation and optimization.                                                                             |
+| Linux Kernel Development                 | Linux Kernel Development by Robert Love, The Linux Programming Interface by Michael Kerrisk                                                    |
+| JTAG/SWD Debugging Techniques            |                                                                                                                                                |
+| Hardware Design Basics                   |                                                                                                                                                |
+| PCB Design/EMC Considerations            | PCB Design for Real World EMI Control by Bruce Archambeault                                                                                    |
+| VHDL or Verilog Basics                   |                                                                                                                                                |
+| FPGA Programming                         | Digital Design and Computer Architecture by David Harris and Sarah Harris                                                                      |
+| Functional Safety Standards (ISO 26262)  |                                                                                                                                                |
+| Failure Mode and Effects Analysis (FMEA) | Safety Critical Systems Handbook by David J. Smith and Kenneth G. L. Simpson                                                                   |
+| Embedded ML                              | TinyML by Pete Warden and Daniel Situnayake                                                                                                    |
+| Databases                                | CMU Introduction to Databases                                                                                                                  |
+
+*** Projects
+
+1. Design and fabricate a custom PCB for a microcontroller-based system.
+2. Develop a FPGA project implementing a digital signal processing algorithm.
+3. Implement a safety-critical embedded application following ISO 26262 guidelines.
+4. Deploy a TinyML model on a microcontroller for real-time data classification (e.g., gesture recognition)
+
+*** Capstone Project
+
+*Advanced Embedded System with ML and Safety Features*:
+
+Develop an embedded system that includes custom hardware (PCB design), integrates machine learning for intelligent features, complies with safety standards, and utilizes advanced debugging and optimization techniques.
