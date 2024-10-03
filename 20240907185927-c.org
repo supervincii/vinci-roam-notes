@@ -58,6 +58,15 @@
     - [[#advantages][Advantages]]
     - [[#type-definitions-and-portability][Type Definitions and Portability]]
   - [[#sizeof-operator][~sizeof~ Operator]]
+- [[#arrays][Arrays]]
+  - [[#one-dimensional-arrays][One-Dimensional Arrays]]
+    - [[#array-subscripting][Array Subscripting]]
+    - [[#array-initialization][Array Initialization]]
+    - [[#designated-initializers][Designated Initializers]]
+    - [[#using-the-sizeof-operator-with-arrays][Using the ~sizeof~ operator with arrays]]
+  - [[#multidimensional-arrays][Multidimensional Arrays]]
+  - [[#constant-arrays][Constant Arrays]]
+  - [[#variable-length-arrays][Variable-Length Arrays]]
 
 * Fundamentals
 ** Compiling and Linking
@@ -595,3 +604,62 @@ Allows a program to determint how much memory is required to store values of a p
 #+end_src
 
 
+* Arrays
+
+** One-Dimensional Arrays
+An /array/ is a data structure containing a number of data values, all of which have the same type. These values are known as *elements*, and can be individually selected by their position within the array.
+
+Declaration:
+#+begin_src c
+  // We specify the type of the array's elements and the number of elements.
+  int a[10]
+#+end_src
+
+*** Array Subscripting
+Also called ~indexing~, which is used to access a particular element of an array.
+
+*** Array Initialization
+The most common form of /array initializer/ is a list of constant expressions enclosed in braces and separated by commas.
+
+If the initializer is shorter than the array, the remaining elements of the array are given the value of 0.
+
+*** Designated Initializers
+If we want:
+~int a[15] = {0, 0, 29, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 48}~
+We use designated initializers:
+~int a[15] = {[2] 29, [9] = 7, [14] = 48}~
+
+*** Using the ~sizeof~ operator with arrays
+~sizeof~ can determine the size of an array (in bytes). If a is an array of 10 integers, then ~sizeof(a)~ is typically 40 (assuming that each integer requires 4 bytes).
+
+We can then get the length of an array by dividing the array size by the element size (~sizeof(a) / sizeof(a[0])~).
+
+** Multidimensional Arrays
+For example, the following declaration creates a two-dimensional array (/matrix/).
+
+#+begin_src C
+  // The array m has 5 rows and 9 columns
+  int m[5][9];
+#+end_src
+
+Although visualized as tables, arrays are actually stored in /row-major order/ with row 0 first, then row 1, and so on.
+
+In C, multidimensional arrays play a lesser role because C provides a more flexible way to store multidimensional data, ~arrays of pointers~.
+
+** Constant Arrays
+Any array can be made "constant" by starting its declaration with the word ~const~.
+
+#+begin_src c
+  const char hex_chars[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+#+end_src
+
+Any array that's been declared ~const~ should not be modified by the program.
+
+~const~ isn't limited to arrays. It works with any variables. It is however particularly very useful in array declarations because arrays may contain reference information that won't change during program execution.
+
+** Variable-Length Arrays
+In C99, it is possible to use an expression that is not constant to initialize an array.
+
+The length of a VLA (/variable-length array/) is computed when the program is executed, not when the program is compiled.
+
+Like other arrays, VLAs can be multidimensional.
