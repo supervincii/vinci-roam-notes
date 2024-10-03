@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       A87F3ED7-67F7-4FBE-90F2-AFBB6EFCE68E
+:END:
+#+title: Emacs Packages
+
+* Introduction
+Here is a list of Emacs packages that I have seen that I need for both work and personal usage. These packages will be used for my config reset in the future.
+
+* Packages
+- [[https://github.com/manateelazycat/lsp-bridge][LSP Bridge]]
+- Annotations
+- Help Packages
+- ~rainbow delimeters~
+- ~sql.el~
+  
+* Package Manager
+Use ~use-package~.
