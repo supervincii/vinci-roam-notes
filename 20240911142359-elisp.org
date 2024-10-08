@@ -15,6 +15,14 @@
   - [[#if][~if~]]
   - [[#save-excursion][~save-excursion~]]
 - [[#buffer-related-functions][Buffer-Related Functions]]
+  - [[#finding-more-information][Finding More Information]]
+  - [[#simplified-beginning-of-buffer-definition][Simplified 'beginning-of-buffer' Definition]]
+  - [[#definition-of-mark-whole-buffer][Definition of 'mark-whole-buffer']]
+  - [[#definition-of-append-to-buffer][Definition of 'append-to-buffer']]
+- [[#more-complex-functions-study][More complex functions study]]
+  - [[#copy-to-buffer][~copy-to-buffer~]]
+  - [[#insert-buffer][~insert-buffer~]]
+  - [[#beginner-of-buffer-complete-definition][~beginner-of-buffer~ complete definition]]
 
 * Things to take note/research more
 - Byte compiling
@@ -184,4 +192,136 @@ In Elisp, ~save-excursion~ often occurs within the body of a ~let~ expression:
 #+end_src
 
 * Buffer-Related Functions
+
+** Finding More Information
+- Function documentation: ~C-h f~
+- Variable documentation: ~C-h v~
+- Function original source: ~xref-find-definitions~
+
+** Simplified 'beginning-of-buffer' Definition
+#+begin_src emacs-lisp
+  (defun cg/simplified-beginning-of-buffer ()
+    "Move point to the beginning of the buffer;
+  leave mark at previous position."
+    (interactive)
+    (push-mark)
+    (goto-char (point-min)))
+#+end_src
+
+** Definition of 'mark-whole-buffer'
+#+begin_src emacs-lisp
+  (defun mark-whole-buffer ()
+    "DOCUMENTATION"
+    (declare (interactive-only t))
+    (interactive)
+    (push-mark)
+    (push-mark (point-max) nil t)
+    (goto-char (minibuffer-prompt-end)))
+#+end_src
+
+** Definition of 'append-to-buffer'
+A possible implementation of the ~append-to-buffer~ function:
+#+begin_src elisp
+  (defun append-to-buffer (buffer start end)
+    "Append to specified buffer the text of the region.
+  It is inserted into that buffer before its point.
+
+  When calling from a program, give three arguments:
+  BUFFER (or buffer name), START and END.
+  START and END specify the portion of the current buffer to be copied."
+    (interactive
+     (list (read-buffer "Append to buffer: " (other-buffer
+                                              (current-buffer) t))
+           (region-beginning) (region-end)))
+    ;; The interactive expression starts with a list of a buffer,
+    ;; the beginning of a region, and the end of a region.
+    
+    (let ((oldbuf (current-buffer))) ;; sets the variable of `oldbuf` to the value of `current-buffer`
+      (save-excursion ;; saves the location of point and restores it to that position after the expression in the body is completed
+        (let* ((append-to (get-buffer-create buffer)) ;; let* allows variable setting in its varlist in sequence, one after another
+               (windows (get-buffer-window-list append-to t t))
+               point)
+          (set-buffer append-to)
+          (setq point (point))
+          (barf-if-buffer-read-only) ;; displays an error if a buffer is read only. It prematurely ends the function here if an error occurs.
+          (insert-buffer-substring oldbuf start end)
+          (dolist (window windows)
+            (when (= (window-point window) point)
+              (set-window-point window (point))))))))
+#+end_src
+
+* More complex functions study
+** ~copy-to-buffer~
+Definition:
+
+#+begin_src elisp
+  (defun copy-to-buffer (buffer start end)
+    "Copy to specified BUFFER the text of the region.
+  The text is inserted into that buffer, replacing existing text there.
+  BUFFER can be a buffer or the name of a buffer; this
+  function will create BUFFER if it doesn't already exist.
+
+  When calling from a program, give three arguments:
+  BUFFER (or buffer name), START and END.
+  START and END specify the portion of the current buffer to be copied."
+    (interactive "BCopy to buffer: \nr")
+    (let ((oldbuf (current-buffer)))
+      (with-current-buffer (get-buffer-create buffer) ;; `with-current-buffer` executes the expression within its inner body to the buffer temporarily.
+        (barf-if-buffer-read-only)
+        (erase-buffer)
+        (save-excursion
+          (insert-buffer-substring oldbuf start end)))))
+#+end_src
+** ~insert-buffer~
+Earlier code for ~insert-buffer~
+
+#+begin_src elisp
+  (defun insert-buffer (buffer)
+    "Insert after point the contents of BUFFER.
+    Puts mark after the inserted text.
+  BUFFER may be a buffer or a buffer name."
+    (interactive "*bInsert buffer: ")
+    (or (bufferp buffer)
+        (setq buffer (get-buffer buffer))) ;; checks if buffer is a buffer object, else sets buffer object to buffer variable
+    (let (start end newmark) ;; variables initialized to nil
+      (save-excursion
+        (save-excursion
+          (set-buffer buffer) ;; change Emacs's attention from the current buffer to the one from which the text will be copied
+          (setq start (point-min) end (point-max))) ;; save-excurtion restores the original buffer but start and end will remain set to the values of the beginning and end of the buffer
+        (insert-buffer-substring buffer start end) ;; copies the text into the current buffer from the region indicated by start and end.
+        (setq newmark (point)))
+      (push-mark newmark)))
+#+end_src
+
+The asterisk in the ~interactive~ function is for the situation when the current buffer is a read-only buffer. If the ~insert-buffer~ is called when the current buffer is read-only, a message is printed in the echo area and will not be permitted to insert anything into the current buffer.
+
+~b~ tells the interpreter that the argument for ~insert-buffer~ should be an existing buffer.
+
+In the body, the ~or~ expression is to ensure that the argument ~buffer~ is bound to a buffer and not just the name of the buffer.
+
+Take note that ~or~ evaluates arguments in turn and returns the value of the first of its aguments that is not ~nil~. It does not evaluate subsequent arguments after returning the first non-nil value.
+** ~beginner-of-buffer~ complete definition
+#+begin_src elisp
+  (defun beginning-of-buffer (&optional arg)
+    "Move point to the beginning of the buffer.
+  With numeric arg N, put point N/10 of the way from the beginning.
+  If the buffer is narrowed, this command uses the beginning of the
+  accessible part of the buffer.
+
+  Push mark at previous position, unless either a \\[universal-argument] prefix
+  is supplied, or Transient Mark mode is enabled and the mark is active."
+    (declare (interactive-only "use `(goto-char (point-min))' instead."))
+    (interactive "^P")
+    (or (consp arg)
+        (region-active-p)
+        (push-mark))
+    (let ((size (- (point-max) (point-min))))
+      (goto-char (if (and arg (not (consp arg)))
+                     (+ (point-min) 1
+                        (/ (* size (prefix-numeric-value arg)) 10))
+                   (point-min))))
+    (if (and arg (not (consp arg))) (forward-line 1)))
+#+end_src
+
+~optional~ arguments us used to tell the Lisp interpreter that an argument is optional. The keyword is ~&optional~. 
 
