@@ -23,6 +23,9 @@
   - [[#copy-to-buffer][~copy-to-buffer~]]
   - [[#insert-buffer][~insert-buffer~]]
   - [[#beginner-of-buffer-complete-definition][~beginner-of-buffer~ complete definition]]
+- [[#narrowing-and-widening][Narrowing and Widening]]
+  - [[#advantages-of-narrowing][Advantages of Narrowing]]
+  - [[#save-restriction-special-form][~save-restriction~ special form]]
 
 * Things to take note/research more
 - Byte compiling
@@ -325,3 +328,13 @@ Take note that ~or~ evaluates arguments in turn and returns the value of the fir
 
 ~optional~ arguments us used to tell the Lisp interpreter that an argument is optional. The keyword is ~&optional~. 
 
+* Narrowing and Widening
+~narrowing~ is a feature that makes is possible to focus on a specific part of a buffer and work without accidentally changing other parts.
+
+** Advantages of Narrowing
+The rest of the buffer is made invisible, is if it weren't there. For example, replacing a word in one part of a buffer but not in another part. You basically narrow to the part you want and /the replacement is carried out only in that section./
+
+To return the full visibility of the buffer after narrowing, we can use the ~widen~ command (~C-x n w~).
+
+** ~save-restriction~ special form
+~save-restriction~ keeps track of whatever narrowing is in effect.

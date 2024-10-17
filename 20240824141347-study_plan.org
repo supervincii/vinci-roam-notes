@@ -168,3 +168,260 @@ Build and embedded Linux system on a Raspberry Pi that interfaces with custom ha
 *Advanced Embedded System with ML and Safety Features*:
 
 Develop an embedded system that includes custom hardware (PCB design), integrates machine learning for intelligent features, complies with safety standards, and utilizes advanced debugging and optimization techniques.
+* Backend Engineering Study Plan
+** Programming Foundations and Data Structures
+*** Programming in C
+Resources:
+- C Programming: A Modern Approach
+  
+*** Data Structures and Algorithms
+Resources:
+- The Algorithm Design Manual
+- Introduction to Algorithms
+
+*** Mathematics for Computer Science
+Resources:
+- Discrete Mathematics and Its Applications
+- MIT OpenCourseWare: Mathematics for Computer Science
+
+*** Books
+- Test-Driven Development by Example by Kent Beck
+- The Pragmatic Programmer by Andrew Hunt and David Thomas
+
+*** Projects
+- Write own versions of fundamental data structures using C.
+- Implement sorting and searching algorithms, and analyze for performance.
+
+*** Capstone Project
+*Library Management System*
+
+Develop a console-based application that manages book inventories, borrowing, and returning functionalities.
+
+Goals:
+- Utilize data structures to store and manage data.
+- Implement algorithms for search and sort features.
+- Practice file I/O operations in C.
+- Apply testing practices learned.
+** Computer Architecture, Operating Systems, and Web Servers
+*** Computer Architecture
+Resources:
+- Computer Systems: A Programmer's Perspective
+  
+*** Operating Systems
+Resources:
+- Operating Systems: Three Easy Pieces
+
+*** Web Servers
+Resources:
+- Mastering Nginx by Dimitri Aivaliotis
+- High Performance Browser Networking by Ilya Grigorik
+  - Select chapters relevant to web servers
+
+*** Books
+- Modern Software Engineering by David Farley
+- Head First Design Patterns by Eric Freeman and Elisabeth Robson
+- Art of Unit Testing by Roy Osherove
+
+*** Projects
+- Build a simple Unix shell that can execute commands and handle basic I/O redirection.
+- Develop a basic web server that can handle HTTP requests and serve static files.
+- Install Nginx and perform basic configurations to serve static content and reverse proxy requests to your web server.
+
+*** Capstone Project
+*Scalable Web Application with Nginx and Go*
+
+Build a full-featured web application that integrates Nginx and your Go web server to create a scalable, high-performance platform. The project will involve:
+
+- Nginx:
+  - Advanced configuration to handle load balancing across multiple instances of your Go web server.
+  - Implementing caching strategies for static and dynamic content.
+  - Setting up SSL/TLS for secure communications.
+  - Configuring Nginx for high availability and fault tolerance.
+
+- Go Web Server:
+  - Enhancing your Go server to handle dynamic content generation.
+  - Interacting with a backend database (to be implemented in later phases).
+  - Implementing RESTful APIs with proper routing and middleware.
+  - Applying design patterns and testing practices.
+
+** Networking, Communication Protocols, and Proxies
+*** Computer Networking
+Resources:
+- Computer Networking: A Top Down Approach
+  
+*** Communication Protocols
+Resources:
+- TCP/IP Illustrated
+
+*** Proxies
+Resources:
+- HAProxy documentation
+
+*** Books
+- Understanding Distributed Systems by Roberto Vitillo
+- A Philosophy of Software Design by John Ousterhout
+
+*** Projects
+- Implement client-server applications using TCP and UDP sockets in C and Go.
+- Develop a real-time chat application using WebSockets in Go.
+- Build a proxy server that can forward HTTP requests and responses.
+
+*** Capstone Project
+*Multi-Protocol Network Service*
+
+Create a network that supports multiple protocols and can act as a proxy and load balancer.
+
+Goals:
+- Apply networking and protocol knowledge.
+- Implement advanced features like SSL/TLS encryption.
+- Handle concurrent connections efficiently.
+- Incorporate software design principles.
+
+** Database and Database Engineering
+*** Databases
+Resources:
+- Database System Concepts by Silberschatz, Korth, and Sudarsharan
+- CMU's Intro to Database Systems
+  
+*** Database Engineering
+Resources:
+- Database Internals by Alex Petrov
+
+*** Books
+- Refactoring by Martin Fowler
+- Unit Testing Principles, Practices, and Patterns by Vladimir Khorikov
+
+*** Projects
+- Write complex SQL queries involving joins, subqueries, and aggregate functions.
+- Build an application that interacts with a database using Go's ~database/sql~ package.
+
+*** Capstone Project
+*Custom Database Engine*
+
+Implement a simple database engine that supports basic SQL commands, indexing, and transaction handling.
+
+Goals:
+- Understand how databases process and execute queries.
+- Learn about data storage, indexing mechanisms, and concurrency control.
+- Apply refactoring techniques to improve code quality.
+
+** Distributed Systems, Messaging Systems, and Microservices
+*** Distributed Systems
+Resources:
+- Designing Data-Intensive Applications
+  
+*** Messaging Systems
+Resources:
+- Enterprise Integration Patterns by Gregor Hohpe and Bobby Woolf
+
+*** Microservices Architecture
+Resources:
+- Building Microservices by Sam Newman
+
+*** Books
+- Understanding Distributed Systems by Roberto Vitillo
+- Software Architecture: The Hard Parts by Neal Ford, Mark Richards, Pramod Sadalage, Zhamak Dehghani
+- Growing Object-Oriented Software, Guided by Tests by Steve Freeman and Nat Pryce
+
+*** Projects
+- Implement a distributed key-value store with replication and fault tolerance.
+- Build a message queue system to facilitate communication between services.
+- Develop a set of microservices in Go that communicate over gRPC or REST.
+
+*** Capstone Project
+*Scalable Distributed Application*
+
+Build a distributed application using microservices architecture, messaging systems, and distributed databases.
+
+Goals:
+- Integrate distributed systems principles.
+- Ensure data consistency and system reliability.
+- Optimize for scalability and performance.
+- Apply advanced software architecture concepts.
+
+** Security and Authentication
+*** Security
+Resources:
+- Web Application Security by Bryan Sullivan and Vincent Liu
+- OWASP Top Ten documentation
+  
+*** Authentication and Authorization
+Resources:
+- OAuth 2 in Action by Justin Richer and Antonio Sanso
+
+*** Books
+- Software Engineering at Google
+- Fundamentals of Software Architecture by Mark Richards and Neal Ford
+
+*** Projects
+- Develop an API with proper input validation, authentication, and authorization.
+- Implement encryption and decryption functions using AES and RSA algorithms.
+
+*** Capstone Project
+*Secure Authentication System*
+
+Build a comprehensive authentication and authorization system, including user management, password policies, and multi-factor authentication.
+
+Goals:
+- Implement secure storage of user credentials.
+- Apply protocols like OAuth2 and JWT.
+- Ensure compliance with security standards.
+- Incorporate architectural principles from priority books.
+
+** Languages, Compilers, and Message Formats
+*** Languages and Compilers
+Resources:
+- Writing an Interpreter in Go
+- Writing a Compiler in Go
+- Compilers: Principles, Techniques, and Tools by Aho, Lam, Sethi, and Ullman
+  
+*** Message Formats
+Resources:
+- Protocol Buffers documentation
+- Data Serialization articles and tutorials
+
+*** Books
+- Domain-Driven Design Quickly by Abel Avram and Floyd Marinescu
+- Software Architecture: The Hard Parts
+
+*** Projects
+- Build an interpreter for a simple programming language in Go.
+- Design and implement a custom data serialization format.
+
+*** Capstone Project
+*Custom Programming Language*
+
+Design and implement a custom programming language, including its compiler and runtime environment.
+
+Goals:
+- Apply knowledge of language design and compiler construction.
+- Implement code optimization techniques.
+- Explore virtual machines and bytecode execution.
+- Incorporate domain-driven design principles.
+
+** Cloud Computing, DevOps, and CI/CD
+*** Cloud Computing
+Resources:
+- Designing Distributed Systems by Brendan Burns
+- Get AWS Solutions Architect, Developer Associate, and SysOps Administrator Certified
+  
+*** DevOps and CI/CD
+Resources:
+- The DevOps Handbook
+- Continuous Delivery by Jez Humble and David Farley
+- Accelerate by Nicole Forsgren, Jez Humble, and Gene Kim
+
+*** Projects
+- Cloud Resume Challenge
+- Deploy an application to a cloud platform using IaC tools like Terraform.
+- Implement a CI/CD pipeline for automated testing and deployment.
+
+*** Capstone Project
+*Cloud-Native Application with Automated Deployment*
+
+Develop a cloud-native application that leverages cloud services, and set up a full CI/CD pipeline for it.
+
+Goals:
+- Integrate cloud computing knowledge with application development.
+- Automate end-to-end deployment and scaling.
+- Ensure high availability and reliability.
