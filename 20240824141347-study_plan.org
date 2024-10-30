@@ -399,7 +399,7 @@ Goals:
 - Explore virtual machines and bytecode execution.
 - Incorporate domain-driven design principles.
 
-** Cloud Computing, DevOps, and CI/CD
+** Cloud Computing, DevOps, and CI/CDo
 *** Cloud Computing
 Resources:
 - Designing Distributed Systems by Brendan Burns
@@ -425,3 +425,76 @@ Goals:
 - Integrate cloud computing knowledge with application development.
 - Automate end-to-end deployment and scaling.
 - Ensure high availability and reliability.
+* Canonical - Junior Linux Kernel Engineer
+** C Programming and OS System Fundamentals
+Resources:
+- C Programming: A Modern Approach
+- Operating Systems: Three Easy Pieces
+
+Topics:
+- Pointers, structs, dynamic memory management, bitwise operations, etc.
+- Systems programming (files, processes, threads, memory management)
+- Scheduling, I/O, memory, processes
+- Linux architecture Overview
+
+Projects:
+- Build a basic Unix-like shell that handles basic commands, forking, process control, and simple I/O redirection.
+  
+** Linux Kernel Fundamentals
+Resources:
+- Linux Kernel Development by Robert Love
+- Understanding the Linux Kernel
+- [[https://kernelnewbies.org][Linux Kernel Newbies]]
+
+Topics:
+- Kernel modules and how to write them
+- Kernel subsystems (memory management, process scheduling, etc.)
+- Kernel debugging techniques (gdb, dmesg, strace)
+- Kernel configuration and building your own kernel from source
+
+Projects:
+- Write and load kernel modules: Start by wrting simple loadable kernel modules (e.g., a "Hello World" module)
+- Customize your kernel: Configure, build, and run your own version of the Linux kernel. Add modules and experiment with kernel parameters.
+
+** Device Driver Development
+Resources:
+- Linux Device Drivers by Jonathan Corbet
+
+Topics:
+- Types of Linux device drivers (character, block, network)
+- How drivers interact with hardware
+- Writing and testing simple device drivers.
+- Kernel debugging techniques specifically to drivers
+
+Projects:
+- Develop simple device drivers: Start by writing a character device driver and practice reading/writing to it from user space.
+- Extend the driver: Experiment with interrupt handling and DMA
+
+** Contribute to the Linux Kernel
+Project:
+- Submit your first patch: start by fixing small bugs or contributing to documentation to get comfortable with the process.
+
+** Kernel Security and Debugging
+Resources:
+- Hacking: The Art of Exploitation by Jon Erickson (for understanding low level exploits and mitigations)
+- The Art of Linux Kernel Design by Lixiang Yang
+- Linux Kernel Programming by Kaiwan Billimoria
+
+Topics:
+- Security hardening techniques (stack protections, SELinux, AppArmor)
+- Common vulnerabilities in kernel space and mitigation strategies
+- Applying patches to the kernel and understanding the patch review process
+
+Projects:
+- Patching and Hardening: Work on patching on vulnerabilities in a kernel you built and experiment with security hardening techniques.
+
+** Rust
+Resources:
+- The Rust Programming Language
+
+Topics:
+- Ownership, lifetimes, concurrency
+- Writing Rust modules for the Linux kernel
+
+Project:
+- Write a Kernel module in Rust: Use Linux Kernel's experimental support for Rust and write a simple module using the ~rust-for-linux~ initiative.

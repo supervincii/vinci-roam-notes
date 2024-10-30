@@ -67,6 +67,16 @@
   - [[#multidimensional-arrays][Multidimensional Arrays]]
   - [[#constant-arrays][Constant Arrays]]
   - [[#variable-length-arrays][Variable-Length Arrays]]
+- [[#functions][Functions]]
+  - [[#function-definition][Function Definition]]
+  - [[#function-declarations][Function Declarations]]
+  - [[#arguments][Arguments]]
+    - [[#argument-conversions][Argument Conversions]]
+    - [[#array-arguments][Array Arguments]]
+      - [[#vla-parameters][VLA Parameters]]
+    - [[#using-static-in-array-parameter-declarations][Using ~static~ in Array Parameter Declarations]]
+  - [[#program-termination][Program Termination]]
+  - [[#recursion][Recursion]]
 
 * Fundamentals
 ** Compiling and Linking
@@ -603,7 +613,6 @@ Allows a program to determint how much memory is required to store values of a p
   sizeof (type-name)
 #+end_src
 
-
 * Arrays
 
 ** One-Dimensional Arrays
@@ -663,3 +672,204 @@ In C99, it is possible to use an expression that is not constant to initialize a
 The length of a VLA (/variable-length array/) is computed when the program is executed, not when the program is compiled.
 
 Like other arrays, VLAs can be multidimensional.
+
+* Functions
+
+** Function Definition
+#+begin_src
+  return-type function-name (parameters) {
+      declarations
+      statements
+  }
+#+end_src
+
+~return-type~ is the type of value that the function returns. Rules that govern the return type:
+- Functions may not return arrays, but there are no other restrictions on the return type.
+- ~void~ return type indicates that the function doesn't return a value.
+
+** Function Declarations
+We can declare a function before calling it.
+
+#+begin_src c
+  #include <stdio.h>
+
+  double average(double a, double b); // DECLARATION
+
+  int main(void) {
+    double x, y, z;
+
+    printf("Enter three numbers: ");
+    scanf("%lf%lf%lf", &x, &y, &z);
+    // *insert code to show the average by calling average(x, y), average(y, z), and average(x, z)*
+
+    return 0;
+  }
+
+  double average(double a, double b) { // DEFINITION
+    return (a + b) / 2;
+  }
+#+end_src
+
+** Arguments
+*Parameters*: appear in *function definitions*. Dummy names.
+*Arguments*: expressions that appear in function calls.
+
+*** Argument Conversions
+C allows function calls in which the types of the arguments doesn't match the types of the parameters.
+
+Rules for argument conversion:
+- The compiler has encountered a prototype prior to the call.
+  - Argument value is implicitly converted to the type of the parameter.
+- The compiler has not encountered a prototype prior to the call. The compiler then performs the default argument promotions.
+
+*** Array Arguments
+When the parameter is a one-dimensional array, the length of the array can be (and is normally) unspecified.
+
+#+begin_src c
+  int f(int a[]) /* no length specified */
+  {
+    return 0;
+  }
+#+end_src
+
+The function ~f~ however will not know how long the array is. To do that, we supply it with a *second argument*.
+
+#+begin_src c
+  // PROTOTYPE
+  int sum_array(int [], int);
+
+  // FUNCTION DEFINITION
+  int sum_array(int a[], int n) {
+      int i, sum = 0;
+
+      for(i = 0; i < n; i++)
+        sum += a[i];
+
+      return sum;
+    }
+#+end_src
+
+If the parameter is a /multidimensional array/, only the length of the first dimensioen may be omitted when the parameter is declared.
+
+#+begin_src c
+  #define LEN 10
+
+  int sum_two_dimensional_array(int a[][LEN], int n) {
+    int i, j. sum = 0;
+
+    for(i = 0; i < n; i++)
+      for(j = 0; j < LEN; j++)
+        sum += a[i][j];
+
+    return sum;
+  }
+#+end_src
+
+**** VLA Parameters
+Consider the ~sum_array~ function.
+
+#+begin_src c
+  // before
+  int sum_array(int a[], int n) {
+    // ...
+  }
+
+  // with variable-length arrays
+  int sum_array(int n, int a[n]) {
+    // ...
+  }
+#+end_src
+
+The value of the first parameter specifies the length of the second parameter. Notice that the order of the parameters has been switched. The order is important when variable-length array parameters are used.
+
+To write the prototype of ~sum_array~ with VLAs:
+
+#+begin_src c
+  // make it look exactly like a function definition
+  int sum_array(int n, int a[n]);
+
+  // replace the array length with an asterisk
+  int sum_array(int n, int a[*]);
+  int sum_array(int, int [*]);
+
+  // it is also legal to leave the brackets empty
+  int sum_array(int n, int a[]);
+  int sum_array(int, int []);
+#+end_src
+
+Although it is not a good choice to leave the brackets empty as it does not expose the relationship between ~n~ and ~a~.
+
+Using VLA parameter for multidimensional arrays:
+
+#+begin_src c
+  int num_two_dimensional_array(int n, int m, int a[n][m]) {
+    int i, j, num = 0;
+
+    for(i = 0; i < n; i++)
+      for(j = 0; j < m; j++)
+        sum += a[i][j];
+
+    return sum;
+  }
+
+  // prototypes include the ff:
+  int num_two_dimensional_array(int, int m, int a[n][m]);
+  int num_two_dimensional_array(int, int m, int a[*][*]);
+  int num_two_dimensional_array(int, int m, int a[][m]);
+  int num_two_dimensional_array(int, int m, int a[][*]);
+#+end_src
+
+*** Using ~static~ in Array Parameter Declarations
+#+begin_src c
+  int sum_array(int a[static 3], int n) {
+    // ...
+  }
+#+end_src
+
+~static 3~ in this context indicates that the length of ~a~ is guaranteed to be at least 3.
+
+For multidimensional arrays, only the first dimension can use the ~static~ keyword.
+
+** Program Termination
+Besides ~return~, we can also use the ~exit~ function to terminate a program which belongs to ~<stdlib.h>~.
+
+#+begin_src c
+  exit(0) // normal termination
+  exit(EXIT_SUCCESS) // normal termination
+  exit(EXIT_FAILURE) // abnormal termination
+  #+end_src
+
+~return expression~ in main is equivalent to ~exit(expression)~.
+
+The difference between ~return~ and ~exit~ is that ~exit~ causes program termination regardless of which function calls it. ~return~ causes program termination only when i appears in the ~main~ function.
+
+** Recursion
+A function is /recursive/ if it /calls itself/.
+
+#+begin_src c
+  // function that computes n!
+  // using the formula n! = n * (n - 1)!
+  int fact(int n) {
+    if (n <= 1)
+      return 1;
+    else
+      return n * fact(n - 1);
+  }
+
+  // ---
+
+  // computes x^n
+  // using formula x^n = x * x^(n - 1)
+  int power(int x, int n) {
+    if (n == 0)
+      return 1;
+    else
+      return x * power(x, n - 1);
+  }
+
+  // condensed version
+  int power_condensed(int x, int n) {
+    return n == 0 ? 1 : x * power(x, n - 1);
+  }
+#+end_src
+
