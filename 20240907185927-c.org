@@ -77,6 +77,11 @@
     - [[#using-static-in-array-parameter-declarations][Using ~static~ in Array Parameter Declarations]]
   - [[#program-termination][Program Termination]]
   - [[#recursion][Recursion]]
+- [[#program-organization][Program Organization]]
+  - [[#local-variables][Local Variables]]
+    - [[#static-local-variables][Static Local Variables]]
+    - [[#parameters][Parameters]]
+  - [[#external-variables][External Variables]]
 
 * Fundamentals
 ** Compiling and Linking
@@ -870,6 +875,101 @@ A function is /recursive/ if it /calls itself/.
   // condensed version
   int power_condensed(int x, int n) {
     return n == 0 ? 1 : x * power(x, n - 1);
+  }
+#+end_src
+
+* Program Organization
+
+** Local Variables
+Variable declared *in the body* of a function is said to be /local./
+
+#+begin_src c
+  int sum_digits(int n) {
+    int sum = 0;
+    // sum in this case is a local variable
+
+    while (n > 0) {
+      sum += n % 10;
+      n /= 10;
+    }
+    return sum;
+  }
+#+end_src
+
+Local variables have the ff properties:
+- *Automatic storage duration*
+  - Storage for variable is allocated when enclosing function is called and deallocated when the function returns.
+- *Block scope*
+  - Variable is visible from the point of declaration to the end of the enclosing function.
+
+*** Static Local Variables
+~static~ in front of the declaration of a local variable causes is to have /static storage duration/ instead of /automatic storage duration./
+
+Basically *permanent* storage location and retains its value throughout the execution of the program.
+
+#+begin_src c
+  void f(void) {
+    static int i; // static local variable
+  }
+#+end_src
+
+When ~f~ returns, ~i~ won't lose its value.
+
+~i~ still has block scope and is not visible to other functions, but can retain the value for future function calls.
+
+*** Parameters
+Same properties as local variables:
+- automatic storage duration
+- block scope
+
+The only difference is that each parameter is initialized automatically when the function is called.
+
+** External Variables
+
+Variables declared outside the body of any function.
+
+Also called /global variables/.
+
+Properties:
+- /Static storage duration/
+- /File scope/
+  - visible from its point of declaration to the end of the enclosing file.
+
+Example using external variables to implement a ~stack~:
+
+#+begin_src c
+  #include <stdbool.h>
+
+  #define STACK_SIZE 100
+
+  // external variables
+  int contents[STACK_SIZE];
+  int top = 0;
+
+  void make_empty(void) {
+    top = 0;
+  }
+
+  bool is_empty(void) {
+    return top == 0;
+  }
+
+  bool is_full(void) {
+    return top == STACK_SIZE;
+  }
+
+  void push(int i) {
+    if (is_full())
+      stack_overflow();
+    else
+      contents[top++] = i;
+  }
+
+  int pop(void) {
+    if (is_empty())
+      stack_underflow();
+    else
+      return contents[--top];
   }
 #+end_src
 
